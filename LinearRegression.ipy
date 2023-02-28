@@ -23,11 +23,11 @@ df.head()
 # %%
 # Stock price plot
 
-df['Adj Close'].plot(figsize=(10,7))
-plt.title("INVE-B Stock Price",fontsize=17)
-plt.xlabel("Time",fontsize=14)
-plt.ylabel("Price",fontsize=14)
-plt.grid(which="major", color='k',linestyle='-.',linewidth=0.5)
+df['Adj Close'].plot(figsize=(10, 7))
+plt.title("INVE-B Stock Price", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
 
 
 # %%
@@ -40,7 +40,7 @@ df.isna().any()
 
 data = df.reset_index()
 
-X = np.array(data.index).reshape(-1,1)
+X = np.array(data.index).reshape(-1, 1)
 y = df['Adj Close']
 
 # %% [markdown]
@@ -50,22 +50,22 @@ y = df['Adj Close']
 # $$ \Large y=\beta_0 + \beta_1x
 
 # %%
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1, train_size=0.75)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, random_state=1, train_size=0.75)
 
 linreg_model = LinearRegression()
 linreg_model.fit(X_train, y_train)
 
 predicted_price = linreg_model.predict(X_test)
-predicted_price = pd.DataFrame(predicted_price,index=y_test.index, columns= ['Price'])
-predicted_price.plot(figsize=(10,7))  
+predicted_price = pd.DataFrame(
+    predicted_price, index=y_test.index, columns=['Price'])
+predicted_price.plot(figsize=(10, 7))
 y_test.plot()
-plt.title("INVE-B Stock Price",fontsize=17)
-plt.xlabel("Time",fontsize=14)
-plt.ylabel("Price",fontsize=14)
-plt.grid(which="major", color='k',linestyle='-.',linewidth=0.5)
-plt.legend(['Predicted Price','Actual Price'])  
+plt.title("INVE-B Stock Price", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+plt.legend(['Predicted Price', 'Actual Price'])
 
 # %%
-print("R^2 Score: %.2f" % linreg_model.score(X_test,y_test))
-
-
+print("R^2 Score: %.2f" % linreg_model.score(X_test, y_test))

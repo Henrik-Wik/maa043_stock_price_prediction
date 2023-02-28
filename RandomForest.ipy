@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sb
 import yfinance as yf
-import datetime
+import datetime as dt
 import scipy.stats as stats
 
 from numpy.random import seed
@@ -22,7 +22,7 @@ from sklearn.metrics import r2_score
 start_date = '2010-01-01'
 end_date = '2020-01-01'
 ticker = 'INVE-B.ST'
-df = yf.download(ticker,start_date,end_date)
+df = yf.download(ticker, start_date, end_date)
 df.index = df.index.date
 df.index.name = "Date"
 
@@ -31,11 +31,11 @@ df.head()
 # %%
 # Stock price plot
 
-df['Adj Close'].plot(figsize=(10,7))
-plt.title("INVE-B Stock Price",fontsize=17)
-plt.xlabel("Time",fontsize=14)
-plt.ylabel("Price",fontsize=14)
-plt.grid(which="major", color='k',linestyle='-.',linewidth=0.5)
+df['Adj Close'].plot(figsize=(10, 7))
+plt.title("INVE-B Stock Price", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
 
 # %%
 # check for missing values
@@ -47,7 +47,7 @@ df.isna().any()
 df['S_3'] = df['Adj Close'].shift(1).rolling(window=3).mean()
 df['S_9'] = df['Adj Close'].shift(1).rolling(window=9).mean()
 df = df.dropna()
-X = df[['S_3','S_9']]
+X = df[['S_3', 'S_9']]
 X.head()
 
 # %% [markdown]
@@ -58,46 +58,52 @@ X.head()
 
 # %%
 data = df[['Adj Close']]
-data = data.rename(columns = {'Adj Close':'Actual Close'})
-data["Target"] = df.rolling(2).apply(lambda x: x.iloc[1] > x.iloc[0])["Adj Close"]
+data = data.rename(columns={'Adj Close': 'Actual Close'})
+data["Target"] = df.rolling(2).apply(
+    lambda x: x.iloc[1] > x.iloc[0])["Adj Close"]
 prev_price = df.copy()
 prev_price = df.shift(1)
 
-predictors = ["Close","Volume", "Open", "High", "Low","Adj Close"]
+predictors = ["Close", "Volume", "Open", "High", "Low", "Adj Close"]
 data = data.join(prev_price[predictors]).iloc[1:]
-model = RandomForestClassifier(n_estimators=100, min_samples_split=200, random_state=1)
+model = RandomForestClassifier(
+    n_estimators=100, min_samples_split=200, random_state=1)
 
-#train = data.iloc[:-100]
-#test = data.iloc[-100:]
+# train = data.iloc[:-100]
+# test = data.iloc[-100:]
 
-#model.fit(train[predictors], train["Target"])
-#preds = model.predict(test[predictors])
-#preds = pd.Series(preds, index=test.index)
-#precision_score(test["Target"], preds)
-#combined = pd.concat({"Target": test["Target"],"Predictions": preds}, axis=1)
+# model.fit(train[predictors], train["Target"])
+# preds = model.predict(test[predictors])
+# preds = pd.Series(preds, index=test.index)
+# precision_score(test["Target"], preds)
+# combined = pd.concat({"Target": test["Target"],"Predictions": preds}, axis=1)
 
 # %%
+
+
 def backtest(data, model, predictors, start=1000, step=750):
 
     predictions = []
 
     for i in range(start, data.shape[0], step):
-    
+
         train = data.iloc[0:i].copy()
         test = data.iloc[i:(i+step)].copy()
 
         model.fit(train[predictors], train["Target"])
 
-        preds = model.predict_proba(test[predictors])[:,1]
+        preds = model.predict_proba(test[predictors])[:, 1]
         preds = pd.Series(preds, index=test.index)
         preds[preds > .6] = 1
         preds[preds <= .6] = 0
 
-        combined = pd.concat({"Target": test["Target"],"Predictions": preds}, axis=1)
+        combined = pd.concat(
+            {"Target": test["Target"], "Predictions": preds}, axis=1)
 
         predictions.append(combined)
 
     return pd.concat(predictions)
+
 
 # %%
 predictions = backtest(data, model, predictors)
@@ -114,5 +120,3 @@ precision_score(predictions["Target"], predictions["Predictions"])
 
 # %%
 predictions.iloc[-100:].plot()
-
-
