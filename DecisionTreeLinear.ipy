@@ -18,9 +18,6 @@ ticker = '^OMX'
 df = yf.download(ticker,start_date,end_date)
 df.index = df.index.date
 df.index.name = "Date"
-
-df.head()
-
 # %%
 # Stock price plot
 
