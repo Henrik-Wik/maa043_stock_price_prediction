@@ -1,0 +1,179 @@
+# %% [markdown]
+# # Downloading and preparing stock data
+
+# %%
+import math
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import yfinance as yf
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+start_date = '2010-01-01'
+end_date = '2020-01-01'
+ticker = 'INVE-B.ST'
+df = yf.download(ticker, start_date, end_date)
+df.index = df.index.date
+df.index.name = "Date"
+
+df.head()
+
+# %%
+# check for missing values
+
+df.isna().any()
+
+# %%
+# Stock price plot
+
+df['Adj Close'].plot(figsize=(8, 5))
+plt.title("INVE-B Stock Price", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+
+# %%
+
+plt.figure(figsize=(8, 5))
+df['Adj Close'].pct_change().plot.hist(bins=50)
+
+# %%
+# Correlation coefficient
+
+df['5d_future_close'] = df['Adj Close'].shift(-5)
+df['5d_close_future_pct'] = df['5d_future_close'].pct_change(5)
+df['5d_close_pct'] = df['Adj Close'].pct_change(5)
+
+corr = df[['5d_close_pct', '5d_close_future_pct']].corr()
+corr
+
+# %%
+# Scatterplot adj close vs future close
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df['Adj Close'], df['5d_future_close'], s=3)
+plt.xlabel("Adj Close")
+plt.ylabel("5d_future_close")
+
+# %%
+# scatterplot, 5d close future pct vs 5d close pct
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df['5d_close_future_pct'], df['5d_close_pct'], s=3)
+plt.xlabel("Adj Close")
+plt.ylabel("5d_future_close")
+
+# %% [markdown]
+# # Targets and features
+
+# $$ RSI = 100 - \frac{100}{1+\frac{\text{average of upward price change}}{\text{average of downward price change}}}
+
+# %%
+from ta.trend import sma_indicator
+from ta.momentum import rsi
+
+feature_names = ['5d_close_pct']
+
+for n in [14,30,50,200]: # Create the moving average indicator and divide by Adj_Close
+
+    df['ma'+str(n)] = sma_indicator(df['Adj Close'],
+                       window = n, fillna=False) /df['Adj Close']
+    df['rsi'+str(n)] = rsi(df['Adj Close'],
+                       window = n, fillna=False)
+    feature_names = feature_names + ['ma' + str(n), 'rsi' + str(n)]
+
+#%%
+df = df.dropna()
+
+# Create features and targets
+# use feature_names for features; '5d_close_future_pct' for targets
+
+features=df[feature_names]
+targets=df['5d_close_future_pct']
+
+# Create DataFrame from target column and feature columns
+feature_and_target_cols=['5d_close_future_pct']+feature_names
+feat_targ_df=df[feature_and_target_cols]
+
+# Calculate correlation matrix
+corr=feat_targ_df.corr()
+print(corr)
+
+
+#%%
+# plot SMA and stock price together
+
+# df[['5d_close_pct','ma14','rsi14','ma30','rsi30','ma50','rsi50','ma200','rsi200']].plot(figsize=(8, 5))
+# plt.title("INVE-B Stock Price", fontsize=17)
+# plt.xlabel("Time", fontsize=14)
+# plt.ylabel("Price", fontsize=14)
+# plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+
+#%%
+
+import seaborn as sns
+
+plt.figure(figsize=(8,8),dpi=80)
+sns.heatmap(corr,annot=True,annot_kws={"size":10})
+plt.yticks(rotation=0,size=12);plt.xticks(rotation=90,size=12)# fix ticklab
+plt.tight_layout() # fits plot area to the plot, "tightly"
+plt.show() # show the plot
+
+plt.figure(figsize=(8,8),dpi=80)
+plt.scatter(df['5d_close_future_pct'],df['ma50'],s=3)
+plt.xlabel("5d_close_future_pct")
+plt.ylabel("ma50")
+plt.show()
+
+# %%
+# creating trendline from index
+data = df.reset_index()
+
+X = np.array(data.index).reshape(-1, 1)
+y = df['Adj Close'].values
+
+# %% [markdown]
+# # Linear Regression Model
+
+# %% [markdown]
+# $$ \Large y=\beta_0 + \beta_1x
+
+# %%
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, random_state=1, train_size=0.75)
+
+linreg_model = LinearRegression()
+linreg_model.fit(X_train, y_train)
+
+
+print('Coefficient: ', linreg_model.coef_)
+print('Intercept: ', linreg_model.intercept_)
+
+# %%
+predicted_price = linreg_model.predict(X_test)
+predicted_price.flatten
+actual_predicted = pd.DataFrame(
+    {'Actual': y_test.flatten(), 'Predicted': predicted_price.flatten()})
+actual_predicted.head()
+
+# %%
+
+actual_predicted.head(20).plot(kind='bar')
+plt.title("INVE-B Stock Price", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.legend(['Predicted Price', 'Actual Price'])
+
+# %%
+
+print('Mean Absolute Error (MAE): ',
+      metrics.mean_absolute_error(y_test, predicted_price))
+print('Mean Squared Error (MSE): ',
+      metrics.mean_squared_error(y_test, predicted_price))
+print('Root Mean Squared Error (RMSE): ', math.sqrt(
+    metrics.mean_squared_error(y_test, predicted_price)))
+
+# %%
