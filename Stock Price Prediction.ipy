@@ -2,6 +2,9 @@
 # # Downloading and preparing stock data
 
 # %%
+import seaborn as sns
+from ta.momentum import rsi
+from ta.trend import sma_indicator
 import math
 import numpy as np
 import pandas as pd
@@ -72,38 +75,36 @@ plt.ylabel("5d_future_close")
 # $$ RSI = 100 - \frac{100}{1+\frac{\text{average of upward price change}}{\text{average of downward price change}}}
 
 # %%
-from ta.trend import sma_indicator
-from ta.momentum import rsi
 
 feature_names = ['5d_close_pct']
 
-for n in [14,30,50,200]: # Create the moving average indicator and divide by Adj_Close
+for n in [14, 30, 50, 200]:  # Create the moving average indicator and divide by Adj_Close
 
     df['ma'+str(n)] = sma_indicator(df['Adj Close'],
-                       window = n, fillna=False) /df['Adj Close']
+                                    window=n, fillna=False) / df['Adj Close']
     df['rsi'+str(n)] = rsi(df['Adj Close'],
-                       window = n, fillna=False)
+                           window=n, fillna=False)
     feature_names = feature_names + ['ma' + str(n), 'rsi' + str(n)]
 
-#%%
+# %%
 df = df.dropna()
 
 # Create features and targets
 # use feature_names for features; '5d_close_future_pct' for targets
 
-features=df[feature_names]
-targets=df['5d_close_future_pct']
+features = df[feature_names]
+targets = df['5d_close_future_pct']
 
 # Create DataFrame from target column and feature columns
-feature_and_target_cols=['5d_close_future_pct']+feature_names
-feat_targ_df=df[feature_and_target_cols]
+feature_and_target_cols = ['5d_close_future_pct']+feature_names
+feat_targ_df = df[feature_and_target_cols]
 
 # Calculate correlation matrix
-corr=feat_targ_df.corr()
+corr = feat_targ_df.corr()
 print(corr)
 
 
-#%%
+# %%
 # plot SMA and stock price together
 
 # df[['5d_close_pct','ma14','rsi14','ma30','rsi30','ma50','rsi50','ma200','rsi200']].plot(figsize=(8, 5))
@@ -112,18 +113,18 @@ print(corr)
 # plt.ylabel("Price", fontsize=14)
 # plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
 
-#%%
+# %%
 
-import seaborn as sns
 
-plt.figure(figsize=(8,8),dpi=80)
-sns.heatmap(corr,annot=True,annot_kws={"size":10})
-plt.yticks(rotation=0,size=12);plt.xticks(rotation=90,size=12)# fix ticklab
-plt.tight_layout() # fits plot area to the plot, "tightly"
-plt.show() # show the plot
+plt.figure(figsize=(8, 8), dpi=80)
+sns.heatmap(corr, annot=True, annot_kws={"size": 10})
+plt.yticks(rotation=0, size=12)
+plt.xticks(rotation=90, size=12)  # fix ticklab
+plt.tight_layout()  # fits plot area to the plot, "tightly"
+plt.show()  # show the plot
 
-plt.figure(figsize=(8,8),dpi=80)
-plt.scatter(df['5d_close_future_pct'],df['ma50'],s=3)
+plt.figure(figsize=(8, 8), dpi=80)
+plt.scatter(df['5d_close_future_pct'], df['ma50'], s=3)
 plt.xlabel("5d_close_future_pct")
 plt.ylabel("ma50")
 plt.show()
