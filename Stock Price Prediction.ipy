@@ -2,18 +2,16 @@
 # # Downloading and preparing stock data
 
 # %%
-import seaborn as sns
-from ta.momentum import rsi
-from ta.trend import sma_indicator
-import math
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import yfinance as yf
+import numpy as np
+import statsmodels.api as sm
+import seaborn as sns
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
+from ta.trend import sma_indicator
+from ta.momentum import rsi
+
 
 start_date = '2010-01-01'
 end_date = '2020-01-01'
@@ -87,8 +85,16 @@ for n in [14, 30, 50, 200]:  # Create the moving average indicator and divide by
     feature_names = feature_names + ['ma' + str(n), 'rsi' + str(n)]
 
 # %%
+# New features based on volume
+new_features = ['Volume_1d_change', 'Volume_1d_change_SMA']
+feature_names.extend(new_features)
+df['Volume_1d_change'] = df['Volume'].pct_change()
+df['Volume_1d_change_SMA'] = sma_indicator(
+    df['Volume_1d_change'], window=5, fillna=False)
+
 df = df.dropna()
 
+# %%
 # Create features and targets
 # use feature_names for features; '5d_close_future_pct' for targets
 
@@ -105,16 +111,15 @@ print(corr)
 
 
 # %%
-# plot SMA and stock price together
+# plot SMAs together
 
-# df[['5d_close_pct','ma14','rsi14','ma30','rsi30','ma50','rsi50','ma200','rsi200']].plot(figsize=(8, 5))
-# plt.title("INVE-B Stock Price", fontsize=17)
-# plt.xlabel("Time", fontsize=14)
-# plt.ylabel("Price", fontsize=14)
-# plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+df[['ma14', 'ma30', 'ma50', 'ma200']].plot(figsize=(8, 5))
+plt.title("INVE-B Stock Price Normalized", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
 
 # %%
-
 
 plt.figure(figsize=(8, 8), dpi=80)
 sns.heatmap(corr, annot=True, annot_kws={"size": 10})
@@ -124,17 +129,10 @@ plt.tight_layout()  # fits plot area to the plot, "tightly"
 plt.show()  # show the plot
 
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(df['5d_close_future_pct'], df['ma50'], s=3)
+plt.scatter(df['5d_close_future_pct'], df['ma200'], s=3)
 plt.xlabel("5d_close_future_pct")
-plt.ylabel("ma50")
+plt.ylabel("Volume_1d_change_SMA")
 plt.show()
-
-# %%
-# creating trendline from index
-data = df.reset_index()
-
-X = np.array(data.index).reshape(-1, 1)
-y = df['Adj Close'].values
 
 # %% [markdown]
 # # Linear Regression Model
@@ -143,38 +141,42 @@ y = df['Adj Close'].values
 # $$ \Large y=\beta_0 + \beta_1x
 
 # %%
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, random_state=1, train_size=0.75)
 
-linreg_model = LinearRegression()
-linreg_model.fit(X_train, y_train)
+linear_features = sm.add_constant(features)
 
-
-print('Coefficient: ', linreg_model.coef_)
-print('Intercept: ', linreg_model.intercept_)
-
-# %%
-predicted_price = linreg_model.predict(X_test)
-predicted_price.flatten
-actual_predicted = pd.DataFrame(
-    {'Actual': y_test.flatten(), 'Predicted': predicted_price.flatten()})
-actual_predicted.head()
+train_size = int(0.85*targets.shape[0])
+train_features = linear_features[:train_size]
+train_targets = targets[:train_size]
+test_features = linear_features[train_size:]
+test_targets = targets[train_size:]
+print(linear_features.shape, train_features.shape, test_features.shape)
 
 # %%
 
-actual_predicted.head(20).plot(kind='bar')
-plt.title("INVE-B Stock Price", fontsize=17)
-plt.xlabel("Time", fontsize=14)
-plt.ylabel("Price", fontsize=14)
-plt.legend(['Predicted Price', 'Actual Price'])
+model = sm.OLS(train_targets, train_features)
+results = model.fit()
+print(results.summary())
+print(results.pvalues)
+
+train_predictions = results.predict(train_features)
+test_predictions = results.predict(test_features)
 
 # %%
 
-print('Mean Absolute Error (MAE): ',
-      metrics.mean_absolute_error(y_test, predicted_price))
-print('Mean Squared Error (MSE): ',
-      metrics.mean_squared_error(y_test, predicted_price))
-print('Root Mean Squared Error (RMSE): ', math.sqrt(
-    metrics.mean_squared_error(y_test, predicted_price)))
+plt.figure(figsize=(8, 8))
+plt.scatter(train_predictions, train_targets,
+            alpha=0.2, color='b', label='train', s=6)
+plt.scatter(test_predictions, test_targets,
+            alpha=0.2, color='r', label='test', s=6)
+
+xmin, xmax = plt.xlim()
+plt.plot(np.arange(xmin, xmax, 0.01), np.arange(xmin, xmax, 0.01), c='k')
+plt.xlabel('Predictions')
+plt.ylabel('Actual')
+plt.legend()
+# plt.xlim([-0.02,0.02])
+# plt.ylim([-0.15,0.15])
+
+# %%
 
 # %%
