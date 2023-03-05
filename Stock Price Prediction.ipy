@@ -1,20 +1,19 @@
 # %% [markdown]
 # # Downloading and preparing stock data
 
-# %%
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import statsmodels.api as sm
+import tensorflow as tf
+import yfinance as yf
 from keras.layers import Dense
 from keras.models import Sequential
-import tensorflow as tf
-import pandas as pd
-import matplotlib.pyplot as plt
-import yfinance as yf
-import numpy as np
-import statsmodels.api as sm
-import seaborn as sns
-
-from sklearn.preprocessing import scale
-from ta.trend import sma_indicator
+from sklearn.metrics import r2_score
+from sklearn.preprocessing import MinMaxScaler, scale
 from ta.momentum import rsi
+from ta.trend import sma_indicator
 
 start_date = '2010-01-01'
 end_date = '2020-01-01'
@@ -64,7 +63,7 @@ plt.ylabel("5d_future_close")
 
 # %% [markdown]
 # scatterplot, 5d close future pct vs 5d close pct
-#%%
+# %%
 plt.figure(figsize=(8, 5))
 plt.scatter(df['5d_close_future_pct'], df['5d_close_pct'], s=3)
 plt.xlabel("5d_close_future_pct")
@@ -183,7 +182,8 @@ plt.legend()
 # %% [markdown]
 # ## Standardizing the data
 
-#%%
+# %%
+
 scaled_train_features = scale(train_features)
 scaled_test_features = scale(test_features)
 
@@ -195,7 +195,7 @@ plt.show()
 # %% [markdown]
 # ## Neural Network Model
 
-#%%
+# %%
 model_1 = Sequential()
 
 model_1.add(
@@ -206,24 +206,22 @@ model_1.compile(optimizer='adam', loss='mse')
 history = model_1.fit(scaled_train_features, train_targets, epochs=25)
 # %%
 
-plt.figure(figsize=(8,8),dpi=80)
+plt.figure(figsize=(8, 8), dpi=80)
 plt.plot(history.history['loss'])
-plt.title('loss:'+str(round(history.history['loss'][-1],6)))
+plt.title('loss:'+str(round(history.history['loss'][-1], 6)))
 plt.show()
 
 # %%
 
-from sklearn.metrics import r2_score
-
-train_preds=model_1.predict(scaled_train_features)
-test_preds=model_1.predict(scaled_test_features)
-print(r2_score(train_targets,train_predictions))
-print(r2_score(test_targets,test_preds))
+train_preds = model_1.predict(scaled_train_features)
+test_preds = model_1.predict(scaled_test_features)
+print(r2_score(train_targets, train_predictions))
+print(r2_score(test_targets, test_preds))
 # %%
 
-plt.figure(figsize=(8,8),dpi=80)
-plt.scatter(train_preds,train_targets,label='train',s=5)
-plt.scatter(test_preds,test_targets,label='test',s=5)
+plt.figure(figsize=(8, 8), dpi=80)
+plt.scatter(train_preds, train_targets, label='train', s=5)
+plt.scatter(test_preds, test_targets, label='test', s=5)
 plt.legend()
 plt.show()
 
