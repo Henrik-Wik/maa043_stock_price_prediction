@@ -1,7 +1,5 @@
 # %% [markdown]
 # # LSTM Stock Price Prediction
-
-# %% [markdown]
 # ## Start with imports, downloading and preparing data.
 # %%
 import math

@@ -1,36 +1,16 @@
 # %% [markdown]
 # # Downloading and preparing stock data
 
-from sklearn.neighbors import KNeighborsRegressor
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import seaborn as sns
 import statsmodels.api as sm
-import tensorflow as tf
 import yfinance as yf
-from keras.layers import Dense
-from keras.models import Sequential
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import r2_score
-from sklearn.model_selection import ParameterGrid
-from sklearn.preprocessing import MinMaxScaler, scale
+from src.preprocessing import preprocess_data
 from ta.momentum import rsi
 from ta.trend import sma_indicator
 
-start_date = '2010-01-01'
-end_date = '2020-01-01'
-ticker = 'INVE-B.ST'
-df = yf.download(ticker, start_date, end_date)
-df.index = df.index.date
-df.index.name = "Date"
-
-df.head()
-
-# %%
-# check for missing values
-
-df.isna().any()
+df = preprocess_data("INVE-B.ST","2010-01-01","2020-01-01")
 
 # %%
 # Stock price plot
@@ -66,7 +46,7 @@ plt.ylabel("5d_future_close")
 
 # %% [markdown]
 # scatterplot, 5d close future pct vs 5d close pct
-# %%
+
 plt.figure(figsize=(8, 5))
 plt.scatter(df['5d_close_future_pct'], df['5d_close_pct'], s=3)
 plt.xlabel("5d_close_future_pct")
@@ -76,8 +56,6 @@ plt.ylabel("5d_close_pct")
 # # Targets and features
 
 # $$ RSI = 100 - \frac{100}{1+\frac{\text{average of upward price change}}{\text{average of downward price change}}}
-
-# %%
 
 feature_names = ['5d_close_pct']
 
@@ -141,11 +119,7 @@ plt.show()
 
 # %% [markdown]
 # # Linear Regression Model
-
-# %% [markdown]
 # $$ \Large y=\beta_0 + \beta_1x
-
-# %%
 
 linear_features = sm.add_constant(features)
 
@@ -181,146 +155,3 @@ plt.ylabel('Actual')
 plt.legend()
 # plt.xlim([-0.02,0.02])
 # plt.ylim([-0.15,0.15])
-
-# %%[markdown]
-# ## Random Forest
-
-# %%
-
-rfr = RandomForestRegressor(n_estimators=200)
-rfr.fit(train_features, train_targets)
-
-print(rfr.score(train_features, train_targets))
-print(rfr.score(test_features, test_targets))
-
-grid = {'n_estimators': [200], 'max_depth': [3],
-        'max_features': [4, 8], 'random_state': [42]}
-test_scores = []
-
-for g in ParameterGrid(grid):
-    rfr.set_params(**g)  # ** is "unpacking" the dictionary
-    rfr.fit(train_features, train_targets)
-    test_scores.append(rfr.score(test_features, test_targets))
-
-
-best_idx = np.argmax(test_scores)
-print(test_scores[best_idx], ParameterGrid(grid)[best_idx])
-# %%
-
-rfr = RandomForestRegressor(
-    n_estimators=200, max_depth=3, max_features=8, random_state=42)
-rfr.fit(train_features, train_targets)
-
-train_predictions = rfr.predict(train_features)
-test_predictions = rfr.predict(test_features)
-
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_targets, train_predictions, label='train', s=5)
-plt.scatter(test_targets, test_predictions, label='test', s=5)
-plt.legend()
-plt.show()
-
-
-# %%
-
-importances = rfr.feature_importances_
-
-# Get the index of importances from greatest importance to least
-
-sorted_index = np.argsort(importances)[::-1]
-x = range(len(importances))
-
-# Create tick labels
-
-
-plt.figure(figsize=(8, 8), dpi=80)
-plt.bar(x, importances[sorted_index])
-
-# %% [markdown]
-# ## Standardizing the data
-
-# %%
-
-scaled_train_features = scale(train_features)
-scaled_test_features = scale(test_features)
-
-f, ax = plt.subplots(nrows=2, ncols=1)
-train_features.iloc[:, 2].hist(ax=ax[0])
-ax[1].hist(scaled_train_features[:, 2])
-plt.show()
-
-# %%[markdown]
-# ## K-NN
-
-for n in range(2, 13, 1):
-    # Create and fit the KNN model
-    knn = KNeighborsRegressor(n_neighbors=n)
-
-    # Fit the model to the training data
-    knn.fit(scaled_train_features, train_targets)
-
-    # Print number of neighbors and the score to find the best value of n
-    print("n_neighbors =", n)
-    print('train, test scores')
-    print(knn.score(scaled_train_features, train_targets))
-    print(knn.score(scaled_test_features, test_targets))
-    print()  # prints a blank line
-
-# %% [markdown]
-# Evaluate model performance
-
-# Create the model with the best-performing n_neighbors of 12
-
-knn = KNeighborsRegressor(12)
-
-
-# Fit the model
-
-knn.fit(scaled_train_features, train_targets)
-
-
-# Get predictions for train and test sets
-
-train_predictions = knn.predict(scaled_train_features)
-test_predictions = knn.predict(scaled_test_features)
-
-
-# Plot the actual vs predicted values
-
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_predictions, train_targets, label='train', s=5)
-plt.scatter(test_predictions, test_targets, label='test', s=5)
-plt.legend()
-plt.show()
-# %% [markdown]
-# ## Neural Network Model
-
-model_1 = Sequential()
-
-model_1.add(
-    Dense(100, input_dim=scaled_train_features.shape[1], activation='relu'))
-model_1.add(Dense(20, activation='relu'))
-model_1.add(Dense(1, activation='linear'))
-model_1.compile(optimizer='adam', loss='mse')
-history = model_1.fit(scaled_train_features, train_targets, epochs=100)
-# %%
-
-plt.figure(figsize=(8, 8), dpi=80)
-plt.plot(history.history['loss'])
-plt.title('loss:'+str(round(history.history['loss'][-1], 6)))
-plt.show()
-
-# %%
-
-train_preds = model_1.predict(scaled_train_features)
-test_preds = model_1.predict(scaled_test_features)
-print(r2_score(train_targets, train_predictions))
-print(r2_score(test_targets, test_preds))
-# %%
-
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_preds, train_targets, label='train', s=5)
-plt.scatter(test_preds, test_targets, label='test', s=5)
-plt.legend()
-plt.show()
-# %%
