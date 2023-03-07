@@ -1,6 +1,7 @@
 # %% [markdown]
 # # Downloading and preparing stock data
 
+from sklearn.neighbors import KNeighborsRegressor
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -248,18 +249,16 @@ train_features.iloc[:, 2].hist(ax=ax[0])
 ax[1].hist(scaled_train_features[:, 2])
 plt.show()
 
-#%%[markdown]
+# %%[markdown]
 # ## K-NN
 
-from sklearn.neighbors import KNeighborsRegressor
-
-for n in range(2,13,1):
+for n in range(2, 13, 1):
     # Create and fit the KNN model
     knn = KNeighborsRegressor(n_neighbors=n)
-    
+
     # Fit the model to the training data
     knn.fit(scaled_train_features, train_targets)
-    
+
     # Print number of neighbors and the score to find the best value of n
     print("n_neighbors =", n)
     print('train, test scores')
@@ -267,7 +266,7 @@ for n in range(2,13,1):
     print(knn.score(scaled_test_features, test_targets))
     print()  # prints a blank line
 
-#%% [markdown]
+# %% [markdown]
 # Evaluate model performance
 
 # Create the model with the best-performing n_neighbors of 12
@@ -289,8 +288,8 @@ test_predictions = knn.predict(scaled_test_features)
 # Plot the actual vs predicted values
 
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_predictions, train_targets, label='train', s = 5)
-plt.scatter(test_predictions, test_targets, label='test', s = 5)
+plt.scatter(train_predictions, train_targets, label='train', s=5)
+plt.scatter(test_predictions, test_targets, label='test', s=5)
 plt.legend()
 plt.show()
 # %% [markdown]
