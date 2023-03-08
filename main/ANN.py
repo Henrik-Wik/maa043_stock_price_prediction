@@ -7,8 +7,7 @@ from keras.layers import Dense
 from keras.models import Sequential
 from sklearn.metrics import mean_squared_error, r2_score
 
-from src.preprocessing import (create_features, download_data, scale_data,
-                               time_split)
+from preprocessing import *
 
 # %%
 

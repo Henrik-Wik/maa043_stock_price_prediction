@@ -2,7 +2,7 @@
 # # Downloading and preparing stock data
 
 import matplotlib.pyplot as plt
-from src.preprocessing import download_data
+from preprocessing import download_data
 
 df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
 

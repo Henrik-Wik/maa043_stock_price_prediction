@@ -6,7 +6,7 @@ import numpy as np
 import seaborn as sns
 import statsmodels.api as sm
 import yfinance as yf
-from src.preprocessing import preprocess_data
+from preprocessing import preprocess_data
 from ta.momentum import rsi
 from ta.trend import sma_indicator
 
