@@ -70,3 +70,5 @@ def time_split(targets, features):
     test_targets = targets[train_size:]
 
     return train_features, train_targets, test_features, test_targets
+
+# %%
