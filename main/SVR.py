@@ -26,7 +26,7 @@ df.head()
 df = df.reset_index()
 df = df.drop(['Date', 'Open', 'Low', 'Close', 'High'], axis=1)
 
-# %% [markdown] m
+# %% [markdown]
 # Create features:
 
 df['5d_future_close'] = df['Adj Close'].shift(-5)
