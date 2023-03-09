@@ -5,93 +5,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import statsmodels.api as sm
-import yfinance as yf
-from preprocessing import preprocess_data
-from ta.momentum import rsi
-from ta.trend import sma_indicator
+from preprocessing import *
 
-df = preprocess_data("INVE-B.ST","2010-01-01","2020-01-01")
-
-# %%
-# Stock price plot
-
-df['Adj Close'].plot(figsize=(8, 5))
-plt.title("INVE-B Stock Price", fontsize=17)
-plt.xlabel("Time", fontsize=14)
-plt.ylabel("Price", fontsize=14)
-plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-
-# %%
-
-plt.figure(figsize=(8, 5))
-df['Adj Close'].pct_change().plot.hist(bins=50)
-
-# %%
-# Correlation coefficient
-
-df['5d_future_close'] = df['Adj Close'].shift(-5)
-df['5d_close_future_pct'] = df['5d_future_close'].pct_change(5)
-df['5d_close_pct'] = df['Adj Close'].pct_change(5)
-
-corr = df[['5d_close_pct', '5d_close_future_pct']].corr()
-corr
-
-# %%
-# Scatterplot adj close vs future close
-
-plt.figure(figsize=(8, 5))
-plt.scatter(df['Adj Close'], df['5d_future_close'], s=3)
-plt.xlabel("Adj Close")
-plt.ylabel("5d_future_close")
+df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
 
 # %% [markdown]
-# scatterplot, 5d close future pct vs 5d close pct
-
-plt.figure(figsize=(8, 5))
-plt.scatter(df['5d_close_future_pct'], df['5d_close_pct'], s=3)
-plt.xlabel("5d_close_future_pct")
-plt.ylabel("5d_close_pct")
-
-# %% [markdown]
-# # Targets and features
-
-# $$ RSI = 100 - \frac{100}{1+\frac{\text{average of upward price change}}{\text{average of downward price change}}}
-
-feature_names = ['5d_close_pct']
-
-for n in [14, 30, 50, 200]:  # Create the moving average indicator and divide by Adj_Close
-
-    df['ma'+str(n)] = sma_indicator(df['Adj Close'],
-                                    window=n, fillna=False) / df['Adj Close']
-    df['rsi'+str(n)] = rsi(df['Adj Close'],
-                           window=n, fillna=False)
-    feature_names = feature_names + ['ma' + str(n), 'rsi' + str(n)]
-
-# %%
-# New features based on volume
-new_features = ['Volume_1d_change', 'Volume_1d_change_SMA']
-feature_names.extend(new_features)
-df['Volume_1d_change'] = df['Volume'].pct_change()
-df['Volume_1d_change_SMA'] = sma_indicator(
-    df['Volume_1d_change'], window=5, fillna=False)
-
-df = df.dropna()
-
-# %%
-# Create features and targets
-# use feature_names for features; '5d_close_future_pct' for targets
-
-features = df[feature_names]
-targets = df['5d_close_future_pct']
-
-# Create DataFrame from target column and feature columns
-feature_and_target_cols = ['5d_close_future_pct']+feature_names
-feat_targ_df = df[feature_and_target_cols]
-
 # Calculate correlation matrix
+
+features, targets, feat_targ_df = create_features(df)
+
 corr = feat_targ_df.corr()
 print(corr)
-
 
 # %%
 # plot SMAs together
@@ -111,6 +35,7 @@ plt.xticks(rotation=90, size=12)  # fix ticklab
 plt.tight_layout()  # fits plot area to the plot, "tightly"
 plt.show()  # show the plot
 
+# %%
 plt.figure(figsize=(8, 8), dpi=80)
 plt.scatter(df['5d_close_future_pct'], df['ma200'], s=3)
 plt.xlabel("5d_close_future_pct")
@@ -123,29 +48,26 @@ plt.show()
 
 linear_features = sm.add_constant(features)
 
-train_size = int(0.85*targets.shape[0])
-train_features = linear_features[:train_size]
-train_targets = targets[:train_size]
-test_features = linear_features[train_size:]
-test_targets = targets[train_size:]
-print(linear_features.shape, train_features.shape, test_features.shape)
+X_train, X_test, y_train, y_test = time_split(targets, linear_features)
+
+print(linear_features.shape, X_train.shape, X_test.shape)
 
 # %%
 
-model = sm.OLS(train_targets, train_features)
+model = sm.OLS(y_train, X_train)
 results = model.fit()
 print(results.summary())
 print(results.pvalues)
 
-train_predictions = results.predict(train_features)
-test_predictions = results.predict(test_features)
+train_predictions = results.predict(X_train)
+test_predictions = results.predict(X_test)
 
 # %%
 
 plt.figure(figsize=(8, 8))
-plt.scatter(train_predictions, train_targets,
+plt.scatter(train_predictions, y_train,
             alpha=0.2, color='b', label='train', s=6)
-plt.scatter(test_predictions, test_targets,
+plt.scatter(test_predictions, y_test,
             alpha=0.2, color='r', label='test', s=6)
 
 xmin, xmax = plt.xlim()

@@ -2,6 +2,8 @@
 # # LSTM Stock Price Prediction
 # ## Start with imports, downloading and preparing data.
 # %%
+
+# [ ] Import preprocessing and remove unnecessary imports
 import math
 
 import matplotlib.pyplot as plt

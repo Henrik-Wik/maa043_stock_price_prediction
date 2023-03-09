@@ -25,7 +25,7 @@ def create_features(df):
 
     feature_names = ['5d_close_pct']
 
-    for n in [50, 200]:  # Create the moving average indicator and divide by Adj_Close
+    for n in [14, 30, 50, 200]:  # Create the moving average indicator and divide by Adj_Close
 
         df['ma'+str(n)] = sma_indicator(df['Adj Close'],
                                         window=n, fillna=False) / df['Adj Close']
@@ -70,6 +70,6 @@ def time_split(targets, features):
     test_features = features[train_size:]
     test_targets = targets[train_size:]
 
-    return train_features, train_targets, test_features, test_targets
+    return train_features, test_features, train_targets, test_targets
 
 # %%

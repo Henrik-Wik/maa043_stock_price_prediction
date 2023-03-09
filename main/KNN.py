@@ -1,6 +1,7 @@
 # %% [markdown]
 # # Downloading and preparing stock data
 
+# [ ] Import preprocessing and remove unnecessary imports
 from sklearn.neighbors import KNeighborsRegressor
 import matplotlib.pyplot as plt
 import numpy as np

@@ -2,11 +2,9 @@
 # # Downloading and preparing stock data
 
 import matplotlib.pyplot as plt
-import numpy as np
 from keras.layers import Dense
 from keras.models import Sequential
 from sklearn.metrics import mean_squared_error, r2_score
-
 from preprocessing import *
 
 # %%
@@ -33,8 +31,6 @@ df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
 model_1 = Sequential()
 model_1.add(
     Dense(80, input_dim=scaled_X_train.shape[1], activation='relu'))
-model_1.add(Dense(60, activation='relu'))
-model_1.add(Dense(40, activation='relu'))
 model_1.add(Dense(20, activation='relu'))
 model_1.add(Dense(1, activation='linear'))
 model_1.compile(optimizer='adam', loss='mse')

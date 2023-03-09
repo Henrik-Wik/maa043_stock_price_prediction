@@ -1,6 +1,9 @@
 # %% [markdown]
 # # SVR
 # ## Start with imports, downloading and preparing data.
+
+# [ ] Import preprocessing and remove unnecessary imports
+
 from sklearn.svm import SVR
 import math
 
