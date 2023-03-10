@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 from preprocessing import download_data
 
-df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
+df = download_data()
 
 # %%
 # Stock price plot

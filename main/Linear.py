@@ -7,7 +7,7 @@ import seaborn as sns
 import statsmodels.api as sm
 from preprocessing import *
 
-df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
+df = download_data()
 
 # %% [markdown]
 # Calculate correlation matrix
@@ -77,3 +77,5 @@ plt.ylabel('Actual')
 plt.legend()
 # plt.xlim([-0.02,0.02])
 # plt.ylim([-0.15,0.15])
+
+# %%

@@ -9,7 +9,7 @@ from preprocessing import *
 
 # %%
 
-df = download_data("INVE-B.ST", "2010-01-01", "2020-01-01")
+df = download_data()
 
 [features, targets, feat_targ_df] = create_features(df)
 
