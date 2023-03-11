@@ -2,7 +2,8 @@
 # # Downloading and preparing stock data
 
 import matplotlib.pyplot as plt
-from preprocessing import download_data
+import seaborn as sns
+from preprocessing import *
 
 df = download_data()
 
@@ -45,3 +46,38 @@ plt.figure(figsize=(8, 5))
 plt.scatter(df['5d_close_future_pct'], df['5d_close_pct'], s=3)
 plt.xlabel("5d_close_future_pct")
 plt.ylabel("5d_close_pct")
+
+# %% [markdown]
+# ## Feature Creation
+# ### Calculate correlation matrix
+
+features, targets, feat_targ_df = create_features(df)
+
+corr = feat_targ_df.corr()
+print(corr)
+
+# %%
+# plot SMAs together
+
+df[['ma14', 'ma30', 'ma50', 'ma200']].plot(figsize=(8, 5))
+plt.title("INVE-B Stock Price Normalized", fontsize=17)
+plt.xlabel("Time", fontsize=14)
+plt.ylabel("Price", fontsize=14)
+plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+
+# %%
+
+plt.figure(figsize=(8, 8), dpi=80)
+sns.heatmap(corr, annot=True, annot_kws={"size": 10})
+plt.yticks(rotation=0, size=12)
+plt.xticks(rotation=90, size=12)  # fix ticklab
+plt.tight_layout()  # fits plot area to the plot, "tightly"
+plt.show()  # show the plot
+
+# %%
+plt.figure(figsize=(8, 8), dpi=80)
+plt.scatter(df['5d_close_future_pct'], df['ma200'], s=3)
+plt.xlabel("5d_close_future_pct")
+plt.ylabel("Volume_1d_change_SMA")
+plt.show()
+# %%

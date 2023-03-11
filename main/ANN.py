@@ -7,11 +7,12 @@ from keras.models import Sequential
 from preprocessing import *
 from sklearn.metrics import mean_squared_error, r2_score
 
-# %%
+# %% [markdown]
+# Preprocessing
 
 df = download_data()
 
-[features, targets, feat_targ_df] = create_features(df)
+[features, targets, features_targets] = create_features(df)
 
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 

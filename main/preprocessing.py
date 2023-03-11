@@ -76,7 +76,7 @@ def scale_data(X_train, X_test):  # Standardization with dataframe as output
     return scaled_X_train, scaled_X_test
 
 
-def normalize_data(X_train, X_test): # normalization with dataframe as output
+def normalize_data(X_train, X_test):  # normalization with dataframe as output
 
     scaler = MinMaxScaler(feature_range=(-1, 1),
                           ).set_output(transform="pandas")
@@ -86,4 +86,3 @@ def normalize_data(X_train, X_test): # normalization with dataframe as output
     scaled_X_test = scaler.transform(X_test)
 
     return scaled_X_train, scaled_X_test
-# %%
