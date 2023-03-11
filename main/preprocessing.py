@@ -7,9 +7,9 @@ from ta.momentum import rsi
 from ta.trend import sma_indicator
 
 
-def download_data(ticker, start_date, end_date):
+def download_data():
 
-    df = yf.download(ticker, start_date, end_date)
+    df = yf.download("INVE-B.ST", "2010-01-01", "2020-01-01")
     df = df.reset_index()
     df = df.drop(['Date', 'Open', 'Low', 'Close', 'High'], axis=1)
 
@@ -65,7 +65,7 @@ def scale_data(X_train, X_test):  # Standardization with dataframe as output
     return scaled_X_train, scaled_X_test
 
 
-def time_split(targets, features):
+def time_split(features, targets):
 
     train_size = int(0.85*targets.shape[0])
     train_features = features[:train_size]
