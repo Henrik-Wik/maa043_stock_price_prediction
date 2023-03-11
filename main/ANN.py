@@ -6,7 +6,6 @@ from keras.layers import Dense
 from keras.models import Sequential
 from preprocessing import *
 from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.preprocessing import StandardScaler
 
 # %%
 
@@ -14,7 +13,7 @@ df = download_data()
 
 [features, targets, feat_targ_df] = create_features(df)
 
-[X_train, X_test, y_train, y_test] = time_split(targets, features)
+[X_train, X_test, y_train, y_test] = time_split(features, targets)
 
 # %% [markdown]
 # ## Standardizing the data

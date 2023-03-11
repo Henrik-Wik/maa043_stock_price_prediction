@@ -2,7 +2,7 @@
 
 import numpy as np
 import yfinance as yf
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from ta.momentum import rsi
 from ta.trend import sma_indicator
 
@@ -54,6 +54,17 @@ def create_features(df):
     return features, targets, feat_targ_df
 
 
+def time_split(features, targets):
+
+    train_size = int(0.85*targets.shape[0])
+    train_features = features[:train_size]
+    train_targets = targets[:train_size]
+    test_features = features[train_size:]
+    test_targets = targets[train_size:]
+
+    return train_features, test_features, train_targets, test_targets
+
+
 def scale_data(X_train, X_test):  # Standardization with dataframe as output
 
     scaler = StandardScaler().set_output(transform="pandas")
@@ -65,14 +76,14 @@ def scale_data(X_train, X_test):  # Standardization with dataframe as output
     return scaled_X_train, scaled_X_test
 
 
-def time_split(features, targets):
+def normalize_data(X_train, X_test): # normalization with dataframe as output
 
-    train_size = int(0.85*targets.shape[0])
-    train_features = features[:train_size]
-    train_targets = targets[:train_size]
-    test_features = features[train_size:]
-    test_targets = targets[train_size:]
+    scaler = MinMaxScaler(feature_range=(-1, 1),
+                          ).set_output(transform="pandas")
 
-    return train_features, test_features, train_targets, test_targets
+    scaler.fit(X_train)
+    scaled_X_train = scaler.transform(X_train)
+    scaled_X_test = scaler.transform(X_test)
 
+    return scaled_X_train, scaled_X_test
 # %%
