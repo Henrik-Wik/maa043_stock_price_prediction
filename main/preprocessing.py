@@ -2,7 +2,7 @@
 
 import numpy as np
 import yfinance as yf
-from sklearn.preprocessing import scale
+from sklearn.preprocessing import StandardScaler
 from ta.momentum import rsi
 from ta.trend import sma_indicator
 
@@ -54,10 +54,13 @@ def create_features(df):
     return features, targets, feat_targ_df
 
 
-def scale_data(X_train, X_test):
+def scale_data(X_train, X_test):  # Standardization with dataframe as output
 
-    scaled_X_train = scale(np.array(X_train).reshape(-1, X_train.shape[1]))
-    scaled_X_test = scale(np.array(X_test).reshape(-1, X_test.shape[1]))
+    scaler = StandardScaler().set_output(transform="pandas")
+
+    scaler.fit(X_train)
+    scaled_X_train = scaler.transform(X_train)
+    scaled_X_test = scaler.transform(X_test)
 
     return scaled_X_train, scaled_X_test
 
