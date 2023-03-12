@@ -27,7 +27,3 @@ Degree project in mathematics where i'm predicting stock price using machine lea
 * Measure precision and accuracy using mathematical measurements, such as MSE, RMSE, MAE, MAPE, and R^2.
   
 * Compare the models to eachother to inquire how they compare when predicting stock price.
-
-## License
-
-This project is licensed under the MIT License
