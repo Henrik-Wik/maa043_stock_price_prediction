@@ -51,7 +51,7 @@ def create_features(df):
     feature_and_target_cols = ['5d_close_future_pct']+feature_names
     feat_targ_df = df[feature_and_target_cols]
 
-    return features, targets, feat_targ_df
+    return features, targets, feat_targ_df, feature_names
 
 
 def time_split(features, targets):
@@ -65,15 +65,18 @@ def time_split(features, targets):
     return train_features, test_features, train_targets, test_targets
 
 
-def scale_data(X_train, X_test):  # Standardization with dataframe as output
+def scale_data(X_train, X_test, y_train, y_test):  # Standardization with dataframe as output
 
     scaler = StandardScaler().set_output(transform="pandas")
 
     scaler.fit(X_train)
     scaled_X_train = scaler.transform(X_train)
     scaled_X_test = scaler.transform(X_test)
+    scaler.fit(y_train)
+    scaled_y_train = scaler.transform(y_train)
+    scaled_y_test = scaler.transform(y_test)
 
-    return scaled_X_train, scaled_X_test, scaler
+    return scaled_X_train, scaled_X_test, scaled_y_train, scaled_y_test, scaler
 
 
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
