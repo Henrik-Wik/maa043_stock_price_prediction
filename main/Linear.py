@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import statsmodels.api as sm
+from statsmodels.tools.eval_measures import rmse, mse, meanabs
 from preprocessing import *
 
 df = download_data()
@@ -61,6 +62,9 @@ print(results.pvalues)
 
 train_predictions = results.predict(X_train)
 test_predictions = results.predict(X_test)
+
+print('RMSE: ', rmse(train_predictions, y_train))
+print('RMSE: ', rmse(test_predictions, y_test))
 
 # %%
 
