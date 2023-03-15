@@ -9,7 +9,7 @@ df = download_data()
 
 # %%
 # Feature creation
-X, y, X_y_df = create_features(df)
+X, y, X_y_df, feature_names = create_features(df)
 
 # %%
 # Train test splitting
@@ -21,7 +21,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # %% [markdown]
 # ## Standardizing the data
 
-scaled_X_train, scaled_X_test = scale_data(X_train, X_test)
+scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test)
 
 # %%[markdown]
 # ## K-NN

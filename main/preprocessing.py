@@ -65,18 +65,15 @@ def time_split(features, targets):
     return train_features, test_features, train_targets, test_targets
 
 
-def scale_data(X_train, X_test, y_train, y_test):  # Standardization with dataframe as output
+def scale_data(X_train, X_test):  # Standardization with dataframe as output
 
     scaler = StandardScaler().set_output(transform="pandas")
 
-    scaler.fit(X_train)
-    scaled_X_train = scaler.transform(X_train)
+    scaled_X_train = scaler.fit_transform(X_train)
+    # transform using fit from training data.
     scaled_X_test = scaler.transform(X_test)
-    scaler.fit(y_train)
-    scaled_y_train = scaler.transform(y_train)
-    scaled_y_test = scaler.transform(y_test)
 
-    return scaled_X_train, scaled_X_test, scaled_y_train, scaled_y_test, scaler
+    return scaled_X_train, scaled_X_test, scaler
 
 
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
@@ -84,8 +81,7 @@ def normalize_data(X_train, X_test):  # normalization with dataframe as output
     scaler = MinMaxScaler(feature_range=(-1, 1),
                           ).set_output(transform="pandas")
 
-    scaler.fit(X_train)
-    scaled_X_train = scaler.transform(X_train)
+    scaled_X_train = scaler.fit_transform(X_train)
     scaled_X_test = scaler.transform(X_test)
 
     return scaled_X_train, scaled_X_test, scaler

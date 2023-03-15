@@ -12,7 +12,7 @@ df = download_data()
 # %% [markdown]
 # Calculate correlation matrix
 
-features, targets, feat_targ_df = create_features(df)
+features, targets, feat_targ_df, feature_names = create_features(df)
 
 corr = feat_targ_df.corr()
 print(corr)
@@ -48,7 +48,7 @@ plt.show()
 
 linear_features = sm.add_constant(features)
 
-X_train, X_test, y_train, y_test = time_split(targets, linear_features)
+X_train, X_test, y_train, y_test = time_split(linear_features, targets)
 
 print(linear_features.shape, X_train.shape, X_test.shape)
 
