@@ -17,7 +17,9 @@ df = download_data()
 
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 
-scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test)
+scaled_X_train, scaled_X_test, pred_scaler = scale_data(
+    X_train, X_test, y_train.values.reshape(-1, 1))
+
 # %% [markdown]
 # ## plot standardization
 
@@ -53,6 +55,13 @@ plt.show()
 
 train_preds = model_1.predict(scaled_X_train)
 test_preds = model_1.predict(scaled_X_test)
+
+train_preds = train_preds.reshape(-1, 1)
+test_preds = test_preds.reshape(-1, 1)
+
+train_predict = pred_scaler.inverse_transform(train_preds)
+test_predict = pred_scaler.inverse_transform(test_preds)
+
 print(r2_score(y_train, train_preds))
 print(r2_score(y_test, test_preds))
 print(mean_squared_error(y_train, train_preds))

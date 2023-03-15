@@ -65,15 +65,18 @@ def time_split(features, targets):
     return train_features, test_features, train_targets, test_targets
 
 
-def scale_data(X_train, X_test):  # Standardization with dataframe as output
+def scale_data(train, test, pred):  # Standardization with dataframe as output
 
     scaler = StandardScaler().set_output(transform="pandas")
-
-    scaled_X_train = scaler.fit_transform(X_train)
     # transform using fit from training data.
-    scaled_X_test = scaler.transform(X_test)
+    scaled_train = scaler.fit_transform(train)
+    scaled_test = scaler.transform(test)
 
-    return scaled_X_train, scaled_X_test, scaler
+    # used to inverse transform predicted data
+    pred_scaler = StandardScaler().set_output(transform="pandas")
+    train = pred_scaler.fit(pred)
+
+    return scaled_train, scaled_test, pred_scaler
 
 
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
