@@ -17,7 +17,8 @@ df = download_data()
 
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 
-scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test)
+scaled_X_train, scaled_X_test, scaler = scale_data(
+    X_train, X_test, y_train.values.reshape(-1, 1))
 # %%
 
 y_train = y_train.values.reshape(-1, 1)
@@ -33,13 +34,9 @@ train_predict = svr_rbf.predict(scaled_X_train)
 test_predict = svr_rbf.predict(scaled_X_test)
 
 # %%
-train_predict = train_predict.reshape(-1, 1)
-test_predict = test_predict.reshape(-1, 1)
 
-# %%
-
-train_predict = scaler_pred.inverse_transform(train_predict)
-test_predict = scaler_pred.inverse_transform(test_predict)
+train_predict = scaler_pred.inverse_transform(train_predict.reshape(-1, 1))
+test_predict = scaler_pred.inverse_transform(test_predict.reshape(-1, 1))
 # %%
 
 print("Train data RMSE: ", mean_squared_error(
