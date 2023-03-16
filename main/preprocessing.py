@@ -19,7 +19,7 @@ def download_data():
 def create_features(df):
 
     # Create features:
-    df['5d_future_close'] = df['Adj Close'].shift(-5)
+    df['5d_future_close'] = df['Adj Close'].shift(-10)
     df['5d_close_future_pct'] = df['5d_future_close'].pct_change(5)
     df['5d_close_pct'] = df['Adj Close'].pct_change(5)
 

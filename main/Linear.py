@@ -22,7 +22,7 @@ print(corr)
 # plot SMAs together
 
 df[['ma14', 'ma30', 'ma50', 'ma200']].plot(figsize=(8, 5))
-plt.title("INVE-B Stock Price Normalized", fontsize=17)
+plt.title("INVE-B Stock Price Moving Averages", fontsize=17)
 plt.xlabel("Time", fontsize=14)
 plt.ylabel("Price", fontsize=14)
 plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)

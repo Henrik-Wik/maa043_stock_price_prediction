@@ -21,7 +21,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # %% [markdown]
 # ## Standardizing the data
 
-scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test)
+scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test, y_train.values.reshape(-1,1))
 
 # %%[markdown]
 # ## K-NN
