@@ -4,6 +4,7 @@
 
 # [x] Import preprocessing and remove unnecessary imports
 
+import matplotlib.pyplot as plt
 from preprocessing import *
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.preprocessing import StandardScaler
@@ -37,6 +38,14 @@ test_predict = svr_rbf.predict(scaled_X_test)
 
 train_predict = scaler_pred.inverse_transform(train_predict.reshape(-1, 1))
 test_predict = scaler_pred.inverse_transform(test_predict.reshape(-1, 1))
+
+# %%
+plt.figure(figsize=(8, 8), dpi=80)
+plt.scatter(train_predict, y_train, label='train', s=5)
+plt.scatter(test_predict, y_test, label='test', s=5)
+plt.legend()
+plt.show()
+
 # %%
 
 print("Train data RMSE: ", mean_squared_error(
