@@ -18,7 +18,7 @@ df = download_data()
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 
 scaled_X_train, scaled_X_test, pred_scaler = scale_data(
-    X_train, X_test, y_train.values.reshape(-1, 1))
+    X_train, X_test, y_train)
 
 # %% [markdown]
 # ## plot standardization

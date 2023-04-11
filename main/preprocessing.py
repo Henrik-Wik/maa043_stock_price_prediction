@@ -74,7 +74,7 @@ def scale_data(train, test, pred):  # Standardization with dataframe as output
 
     # used to inverse transform predicted data
     pred_scaler = StandardScaler().set_output(transform="pandas")
-    train = pred_scaler.fit(pred)
+    train = pred_scaler.fit(pred.values.reshape(-1, 1))
 
     return scaled_train, scaled_test, pred_scaler
 

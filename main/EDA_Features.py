@@ -51,7 +51,7 @@ plt.ylabel("5d_close_pct")
 # ## Feature Creation
 # ### Calculate correlation matrix
 
-features, targets, feat_targ_df = create_features(df)
+features, targets, feat_targ_df, feature_names = create_features(df)
 
 corr = feat_targ_df.corr()
 print(corr)
