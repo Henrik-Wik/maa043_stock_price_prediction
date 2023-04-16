@@ -17,7 +17,7 @@ linreg = md.linear_regression(scaled_train_features, train_targets)
 knn = md.knn_regression(scaled_train_features, train_targets)
 ann = md.neural_network_regression(scaled_train_features, train_targets)
 rf = md.random_forest_regression(scaled_train_features, train_targets)
-svr = md.support_vector_regression(scaled_train_features, train_targets)
+# svr = md.svr_optuna(scaled_train_features, train_targets)
 
 # %%
 # Results
@@ -30,8 +30,8 @@ ann_results = md.evaluation(
     ann, scaled_train_features, scaled_test_features, train_targets, test_targets)
 rf_results = md.evaluation(rf, scaled_train_features,
                            scaled_test_features, train_targets, test_targets)
-svr_results = md.evaluation(
-    svr, scaled_train_features, scaled_test_features, train_targets, test_targets)
+# svr_results = md.evaluation(
+    # svr, scaled_train_features, scaled_test_features, train_targets, test_targets)
 
 print("Linear Regression Results:")
 print(linreg_results)
@@ -42,4 +42,4 @@ print(ann_results)
 print("Random Forest Results:")
 print(rf_results)
 print("SVR Results:")
-print(svr_results)
+# print(svr_results)

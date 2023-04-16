@@ -4,9 +4,11 @@ from keras.models import Sequential
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, make_scorer
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
+from sklearn.model_selection import cross_val_score
+import optuna
 
 
 def linear_regression(X_train, y_train):
@@ -30,11 +32,27 @@ def knn_regression(X_train, y_train):
     return knn
 
 
-def support_vector_regression(X_train, y_train):
-    svr = SVR(kernel='rbf', C=1e2, gamma=0.1)
+def svr_optuna(trial, X_train, y_train):
+    # hyperparameters
+    C = trial.suggest_float("C", 1e-2, 1e2, log=True)
+    gamma = trial.suggest_float("gamma", 1e-2, 1e2, log=True)
+    kernel = trial.suggest_categorical(
+        "kernel", ["linear", "poly", "rbf", "sigmoid"])
+
+    svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
 
-    return svr
+    scores = cross_val_score(svr, X_train, y_train,
+                             cv=5, scoring="neg_mean_squared_error")
+    return np.mean(scores)
+
+
+def optimize_svr(X_train, y_train, n_trials=100):
+        study = optuna.create_study(direction='maximize')
+        study.optimize(lambda trial: svr_optuna(
+            trial, X_train, y_train), n_trials=n_trials)
+        
+        return study.best_params
 
 
 def neural_network_regression(X_train, y_train):

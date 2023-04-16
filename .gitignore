@@ -3,3 +3,4 @@ config.txt
 .vscode
 __pycache__
 TODO.md
+db.sqlite3

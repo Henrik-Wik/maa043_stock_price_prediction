@@ -19,13 +19,13 @@ def download_data():
 def create_features(df):
 
     # Create features:
-    df['5d_future_close'] = df['Adj Close'].shift(-10)
+    df['5d_future_close'] = df['Adj Close'].shift(-5)
     df['5d_close_future_pct'] = df['5d_future_close'].pct_change(5)
     df['5d_close_pct'] = df['Adj Close'].pct_change(5)
 
     feature_names = ['5d_close_pct']
 
-    for n in [14, 30, 50, 200]:  # Create the moving average indicator and divide by Adj_Close
+    for n in [14, 100]:  # Create the moving average indicator and divide by Adj_Close
 
         df['ma'+str(n)] = sma_indicator(df['Adj Close'],
                                         window=n, fillna=False) / df['Adj Close']
@@ -50,6 +50,10 @@ def create_features(df):
     # Create DataFrame from target column and feature columns
     feature_and_target_cols = ['5d_close_future_pct']+feature_names
     feat_targ_df = df[feature_and_target_cols]
+
+    # features = features.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
+    # feat_targ_df = feat_targ_df.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
+    # feature_names = feature_names[:-2]
 
     return features, targets, feat_targ_df, feature_names
 
