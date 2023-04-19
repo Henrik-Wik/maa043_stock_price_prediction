@@ -1,11 +1,10 @@
 # %%
-import preprocessing as pp
-import models as md
-from models import optimize_knn
-from sklearn.neighbors import KNeighborsRegressor
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import pandas as pd
+import preprocessing as pp
+from models import optimize_linear
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 Stock = "INVE-B.ST"
 
@@ -18,24 +17,23 @@ scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
     train_features, test_features, targets
 )
 
-best_params = optimize_knn(scaled_train_features, train_targets)
+best_params = optimize_linear(scaled_train_features, train_targets)
 print("Best hyperparameters:", best_params)
 
-# %%
 
-knn = KNeighborsRegressor(**best_params)
-knn.fit(scaled_train_features, train_targets)
+# %%[markdown]
+# ## Random Forest
 
-# %%
+linear = LinearRegression(**best_params)
+linear.fit(train_features, train_targets)
 
-train_predict = knn.predict(scaled_train_features)
-test_predict = knn.predict(scaled_test_features)
+train_predict = linear.predict(train_features)
+test_predict = linear.predict(test_features)
 
 # %%
 
 train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
 test_predict = pred_scaler.inverse_transform(test_predict.reshape(-1, 1))
-
 
 # %%
 
@@ -53,24 +51,24 @@ test_mae = mean_absolute_error(test_targets, test_predict)
 # Create a dictionary with the metric names and values
 results_dict = {
     "Stock": Stock,
-    'Model': 'KNN',
-    'Best Parameters': best_params,
-    'Train R2': train_r2,
-    'Train RMSE': train_rmse,
-    'Train MSE': train_mse,
-    'Train MAE': train_mae,
-    'Test R2': test_r2,
-    'Test RMSE': test_rmse,
-    'Test MSE': test_mse,
-    'Test MAE': test_mae,
+    "Model": "Random Forest",
+    "Best Parameters": best_params,
+    "Train R2": train_r2,
+    "Train RMSE": train_rmse,
+    "Train MSE": train_mse,
+    "Train MAE": train_mae,
+    "Test R2": test_r2,
+    "Test RMSE": test_rmse,
+    "Test MSE": test_mse,
+    "Test MAE": test_mae,
 }
 
 # Load the dictionary into a DataFrame
-results_df = pd.DataFrame.from_dict(results_dict, orient='index', columns=['Value'])
+results_df = pd.DataFrame.from_dict(results_dict, orient="index", columns=["Value"])
 
 # Save the DataFrame to a csv file
 
-filename = f"../Exports/{Stock}_Optimized_KNN_results.csv"
+filename = f"../Exports/{Stock}_Optimized_Linear_results.csv"
 
 results_df.to_csv(filename, index=False)
 

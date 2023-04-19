@@ -1,22 +1,16 @@
-import optuna
+import keras.backend as K
 from keras.layers import Dense
 from keras.models import Sequential
 from keras.optimizers import Adam
-import keras.backend as K
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import (
-    make_scorer,
-    mean_absolute_error,
-    mean_squared_error,
-    r2_score,
-)
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 
-import optkeras as ok
+import optuna
 
 # Linear Regression
 
@@ -31,12 +25,9 @@ def linear_regression(X_train, y_train):
 def linreg_optuna(trial, X_train, y_train):
     # hyperparameters
     fit_intercept = trial.suggest_categorical("fit_intercept", [True, False])
-    normalize = trial.suggest_categorical("normalize", [True, False])
     copy_X = trial.suggest_categorical("copy_X", [True, False])
 
-    linreg = LinearRegression(
-        fit_intercept=fit_intercept, normalize=normalize, copy_X=copy_X
-    )
+    linreg = LinearRegression(fit_intercept=fit_intercept, copy_X=copy_X)
     linreg.fit(X_train, y_train)
 
     scores = cross_val_score(linreg, X_train, y_train, cv=5, scoring="r2")
@@ -44,7 +35,7 @@ def linreg_optuna(trial, X_train, y_train):
     return np.mean(scores)
 
 
-def optimize_linreg(X_train, y_train, n_trials=100):
+def optimize_linear(X_train, y_train, n_trials=100):
     study = optuna.create_study(direction="maximize")
     study.optimize(
         lambda trial: linreg_optuna(trial, X_train, y_train), n_trials=n_trials
@@ -65,9 +56,9 @@ def random_forest_regression(X_train, y_train):
 
 def rfr_optuna(trial, X_train, y_train):
     # hyperparameters
-    n_estimators = trial.suggest_int("n_estimators", 1, 200)
-    max_depth = trial.suggest_int("max_depth", 1, 20)
-    max_features = trial.suggest_int("max_features", 1, 20)
+    n_estimators = trial.suggest_int("n_estimators", 1, 150)
+    max_depth = trial.suggest_int("max_depth", 1, 5)
+    max_features = trial.suggest_int("max_features", 1, 5)
 
     rfr = RandomForestRegressor(
         n_estimators=n_estimators, max_depth=max_depth, max_features=max_features

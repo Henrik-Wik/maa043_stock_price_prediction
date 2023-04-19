@@ -1,12 +1,11 @@
 # %%
 
-import preprocessing as pp
-import models as md
-from models import optimize_ann
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
+import models as md
+import preprocessing as pp
+from models import optimize_ann
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from tensorflow import keras
-
 
 data = pp.download_data()
 features, targets, feat_targ_df, feature_names = pp.create_features(data)
