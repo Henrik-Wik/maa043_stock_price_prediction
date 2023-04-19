@@ -130,9 +130,7 @@ def svr_optuna(trial, X_train, y_train):
     svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
 
-    scores = cross_val_score(
-        svr, X_train, y_train, cv=5, scoring="neg_mean_squared_error"
-    )
+    scores = cross_val_score(svr, X_train, y_train, cv=5, scoring="r2")
     return np.mean(scores)
 
 

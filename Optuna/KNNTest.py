@@ -1,5 +1,4 @@
 # %%
-import preprocessing as pp
 import models as md
 from models import optimize_knn
 from sklearn.neighbors import KNeighborsRegressor
@@ -7,16 +6,21 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import pandas as pd
 
-Stock = "INVE-B.ST"
+Stock = "^OMX"
 
-data = pp.download_data(Stock)
-features, targets, feat_targ_df, feature_names = pp.create_features(data)
-train_features, test_features, train_targets, test_targets = pp.time_split(
-    features, targets
-)
-scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
-    train_features, test_features, targets
-)
+if "^" in Stock:
+    import preprocessing_Index as pp
+else:
+    import preprocessing as pp
+
+    data = pp.download_data(Stock)
+    features, targets, feat_targ_df, feature_names = pp.create_features(data)
+    train_features, test_features, train_targets, test_targets = pp.time_split(
+        features, targets
+    )
+    scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
+        train_features, test_features, targets
+    )
 
 best_params = optimize_knn(scaled_train_features, train_targets)
 print("Best hyperparameters:", best_params)
@@ -70,9 +74,9 @@ results_df = pd.DataFrame.from_dict(results_dict, orient='index', columns=['Valu
 
 # Save the DataFrame to a csv file
 
-filename = f"../Exports/{Stock}_Optimized_KNN_results.csv"
+filename = f"../Exports/{Stock}_Optimized_KNN_results"
 
-results_df.to_csv(filename, index=False)
+results_df.to_csv(filename+".csv", index=False)
 
 print(results_df)
 # %%
@@ -82,6 +86,8 @@ plt.figure(figsize=(8, 8), dpi=80)
 plt.scatter(train_predict, train_targets, label="train", s=5)
 plt.scatter(test_predict, test_targets, label="test", s=5)
 plt.legend()
+plt.savefig(filename+".png")
 plt.show()
+
 
 # %%

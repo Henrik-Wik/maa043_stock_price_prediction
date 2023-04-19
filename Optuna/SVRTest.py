@@ -1,13 +1,16 @@
 # %%
-import preprocessing as pp
-import models as md
 from models import optimize_svr
 from sklearn.svm import SVR
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
 import pandas as pd
 
-Stock = "INVE-B.ST"
+Stock = "^OMXN40"
+
+if "^" in Stock:
+    import preprocessing_Index as pp
+else:
+    import preprocessing as pp
 
 data = pp.download_data(Stock)
 features, targets, feat_targ_df, feature_names = pp.create_features(data)
@@ -69,14 +72,15 @@ results_df = pd.DataFrame.from_dict(results_dict, orient='index', columns=['Valu
 
 filename = f"../Exports/{Stock}_Optimized_SVR_results.csv"
 
-results_df.to_csv(filename, index=False)
+results_df.to_csv(filename+".csv", index=False)
 
 print(results_df)
-
 # %%
+# plot the results
 
 plt.figure(figsize=(8, 8), dpi=80)
 plt.scatter(train_predict, train_targets, label="train", s=5)
 plt.scatter(test_predict, test_targets, label="test", s=5)
 plt.legend()
+plt.savefig(filename+".png")
 plt.show()

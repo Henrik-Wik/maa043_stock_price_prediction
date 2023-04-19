@@ -10,7 +10,7 @@ from ta.trend import sma_indicator
 def download_data(Stock):
     df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
     df = df.reset_index()
-    df = df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+    df = df.drop(["Date", "Open", "Low", "Close", "High", "Volume"], axis=1)
 
     return df
 
@@ -37,12 +37,12 @@ def create_features(df):
         feature_names = feature_names + ["ma" + str(n), "rsi" + str(n)]
 
     # features based on volume
-    new_features = ["Volume_1d_change", "Volume_1d_change_SMA"]
-    feature_names.extend(new_features)
-    df["Volume_1d_change"] = df["Volume"].pct_change()
-    df["Volume_1d_change_SMA"] = sma_indicator(
-        df["Volume_1d_change"], window=5, fillna=False
-    )
+    # new_features = ["Volume_1d_change", "Volume_1d_change_SMA"]
+    # feature_names.extend(new_features)
+    # df["Volume_1d_change"] = df["Volume"].pct_change()
+    # df["Volume_1d_change_SMA"] = sma_indicator(
+    #     df["Volume_1d_change"], window=5, fillna=False
+    # )
 
     df.dropna(inplace=True)
 
