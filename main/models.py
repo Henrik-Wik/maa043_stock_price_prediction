@@ -65,7 +65,12 @@ def optimize_knn(X_train, y_train, n_trials=100):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: knn_optuna(trial, X_train, y_train), n_trials=n_trials)
 
-    return study.best_params
+    best_params = optimize_knn(X_train, y_train)
+
+    knn = KNeighborsRegressor(**best_params)
+    knn.fit(X_train, y_train)
+
+    return study.best_params, knn
 
 
 def svr_optuna(trial, X_train, y_train):
@@ -88,6 +93,8 @@ def optimize_svr(X_train, y_train, n_trials=100):
     study.optimize(lambda trial: svr_optuna(trial, X_train, y_train), n_trials=n_trials)
 
     return study.best_params
+
+
 
 
 def neural_network_regression(X_train, y_train):

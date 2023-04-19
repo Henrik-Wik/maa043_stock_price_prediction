@@ -10,6 +10,10 @@ train_features, test_features, train_targets, test_targets = pp.time_split(
 scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
     train_features, test_features, targets)
 
+#%%
+# models with best parameters
+
+
 # %%
 # Training models
 
@@ -17,7 +21,7 @@ linreg = md.linear_regression(scaled_train_features, train_targets)
 knn = md.knn_regression(scaled_train_features, train_targets)
 ann = md.neural_network_regression(scaled_train_features, train_targets)
 rf = md.random_forest_regression(scaled_train_features, train_targets)
-# svr = md.svr_optuna(scaled_train_features, train_targets)
+svr = md.svr_optuna(scaled_train_features, train_targets)
 
 # %%
 # Results
