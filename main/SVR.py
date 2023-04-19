@@ -6,7 +6,7 @@
 
 import matplotlib.pyplot as plt
 from preprocessing import *
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVR
 
@@ -19,7 +19,7 @@ df = download_data()
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 
 scaled_X_train, scaled_X_test, scaler = scale_data(
-    X_train, X_test, y_train.values.reshape(-1, 1))
+    X_train, X_test, y_train)
 # %%
 
 y_train = y_train.values.reshape(-1, 1)
@@ -47,12 +47,16 @@ plt.legend()
 plt.show()
 
 # %%
+print("Train data R2: ", r2_score(
+    y_train, train_predict))
 
 print("Train data RMSE: ", mean_squared_error(
     y_train, train_predict, squared=False))
 print("Train data MSE: ", mean_squared_error(y_train, train_predict))
 print("Test data MAE: ", mean_absolute_error(y_train, train_predict))
 print("-------------------------------------------------------------------------------------")
+print("Test data R2: ", r2_score(
+    y_test, test_predict))
 print("Test data RMSE: ", mean_squared_error(
     y_test, test_predict, squared=False))
 print("Test data MSE: ", mean_squared_error(y_test, test_predict))

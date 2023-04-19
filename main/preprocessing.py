@@ -55,9 +55,9 @@ def create_features(df):
     feature_and_target_cols = ["5d_close_future_pct"] + feature_names
     feat_targ_df = df[feature_and_target_cols]
 
-    # features = features.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
-    # feat_targ_df = feat_targ_df.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
-    # feature_names = feature_names[:-2]
+    features = features.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
+    feat_targ_df = feat_targ_df.drop(['Volume_1d_change', 'Volume_1d_change_SMA'], axis=1)
+    feature_names = feature_names[:-2]
 
     return features, targets, feat_targ_df, feature_names
 
