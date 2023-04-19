@@ -8,7 +8,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "AZN.ST", "HM-B.ST"}
 
 for Stock in Stocks:
-
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -32,10 +31,8 @@ for Stock in Stocks:
     train_predict = linear.predict(train_features)
     test_predict = linear.predict(test_features)
 
-
     train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
     test_predict = pred_scaler.inverse_transform(test_predict.reshape(-1, 1))
-
 
     # Compute the metrics and store them in variables
     train_r2 = r2_score(train_targets, train_predict)
@@ -61,6 +58,7 @@ for Stock in Stocks:
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
+        "": f"& ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$",
     }
 
     # Load the dictionary into a DataFrame
@@ -68,9 +66,9 @@ for Stock in Stocks:
 
     # Save the DataFrame to a csv file
 
-    filename = f"../Exports/{Stock}_Optimized_Linear_results"
+    filename = f"{Stock}_Optimized_Linear_results"
 
-    results_df.to_csv(filename+".csv")
+    results_df.to_string("../Data/" + filename + ".txt")
 
     print(results_df)
     # plot the results
@@ -79,6 +77,5 @@ for Stock in Stocks:
     plt.scatter(train_predict, train_targets, label="train", s=5)
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.legend()
-    plt.savefig(filename+".png")
+    plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
-

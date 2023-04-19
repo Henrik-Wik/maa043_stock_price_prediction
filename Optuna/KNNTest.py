@@ -59,6 +59,8 @@ for Stock in Stocks:
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
+        "": f"& ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$",
+
     }
 
     # Load the dictionary into a DataFrame
@@ -66,9 +68,9 @@ for Stock in Stocks:
 
     # Save the DataFrame to a csv file
 
-    filename = f"../Exports/{Stock}_Optimized_KNN_results"
+    filename = f"{Stock}_Optimized_KNN_results"
 
-    results_df.to_csv(filename+".csv")
+    results_df.to_string("../Data/" +filename+".txt")
 
     print(results_df)
     # plot the results
@@ -77,6 +79,6 @@ for Stock in Stocks:
     plt.scatter(train_predict, train_targets, label="train", s=5)
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.legend()
-    plt.savefig(filename+".png")
+    plt.savefig("../Graphs/" +filename+".png")
     plt.show()
 
