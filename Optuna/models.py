@@ -1,7 +1,8 @@
 import optuna
-import tensorflow as tf
 from keras.layers import Dense
 from keras.models import Sequential
+from keras.optimizers import Adam
+import keras.backend as K
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
@@ -15,6 +16,10 @@ from sklearn.model_selection import cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 
+import optkeras as ok
+
+# Linear Regression
+
 
 def linear_regression(X_train, y_train):
     linreg = LinearRegression()
@@ -23,11 +28,65 @@ def linear_regression(X_train, y_train):
     return linreg
 
 
+def linreg_optuna(trial, X_train, y_train):
+    # hyperparameters
+    fit_intercept = trial.suggest_categorical("fit_intercept", [True, False])
+    normalize = trial.suggest_categorical("normalize", [True, False])
+    copy_X = trial.suggest_categorical("copy_X", [True, False])
+
+    linreg = LinearRegression(
+        fit_intercept=fit_intercept, normalize=normalize, copy_X=copy_X
+    )
+    linreg.fit(X_train, y_train)
+
+    scores = cross_val_score(linreg, X_train, y_train, cv=5, scoring="r2")
+
+    return np.mean(scores)
+
+
+def optimize_linreg(X_train, y_train, n_trials=100):
+    study = optuna.create_study(direction="maximize")
+    study.optimize(
+        lambda trial: linreg_optuna(trial, X_train, y_train), n_trials=n_trials
+    )
+
+    return study.best_params
+
+
+# Random Forest
+
+
 def random_forest_regression(X_train, y_train):
     rfr = RandomForestRegressor(n_estimators=100, max_depth=3, random_state=42)
     rfr.fit(X_train, y_train)
 
     return rfr
+
+
+def rfr_optuna(trial, X_train, y_train):
+    # hyperparameters
+    n_estimators = trial.suggest_int("n_estimators", 1, 200)
+    max_depth = trial.suggest_int("max_depth", 1, 20)
+    max_features = trial.suggest_int("max_features", 1, 20)
+
+    rfr = RandomForestRegressor(
+        n_estimators=n_estimators, max_depth=max_depth, max_features=max_features
+    )
+    rfr.fit(X_train, y_train)
+
+    scores = cross_val_score(rfr, X_train, y_train, cv=5, scoring="r2")
+
+    return np.mean(scores)
+
+
+def optimize_rfr(X_train, y_train, n_trials=100):
+    study = optuna.create_study(direction="maximize")
+    study.optimize(lambda trial: rfr_optuna(trial, X_train, y_train), n_trials=n_trials)
+
+    return study.best_params
+
+
+# K-Nearest Neighbors
 
 
 def knn_regression(X_train, y_train):
@@ -68,6 +127,9 @@ def optimize_knn(X_train, y_train, n_trials=100):
     return study.best_params
 
 
+# Support Vector Regression
+
+
 def svr_optuna(trial, X_train, y_train):
     # hyperparameters
     C = trial.suggest_float("C", 1e-2, 1e2, log=True)
@@ -90,6 +152,9 @@ def optimize_svr(X_train, y_train, n_trials=100):
     return study.best_params
 
 
+# Artificial Neural Network
+
+
 def neural_network_regression(X_train, y_train):
     model = Sequential()
     model.add(Dense(100, input_dim=X_train.shape[1], activation="relu"))
@@ -98,6 +163,35 @@ def neural_network_regression(X_train, y_train):
     model.compile(optimizer="adam", loss="mse")
 
     return model
+
+
+def ann_optuna(trial, X_train, y_train):
+    K.clear_session()
+
+    # hyperparameters
+    n_layers = trial.suggest_int("n_layers", 1, 4)
+    n_neurons = trial.suggest_int("n_neurons", 16, 256)
+    learning_rate = trial.suggest_uniform("learning_rate", 0.001, 0.1)
+    activation = trial.suggest_categorical("activation", ["relu", "sigmoid"])
+
+    # Define the architecture of the neural network
+    model = Sequential()
+    for i in range(n_layers):
+        model.add(Dense(n_neurons, activation=activation))
+    model.add(Dense(1, activation=activation))
+
+    # Train the neural network using the hyperparameters
+    optimizer = Adam(learning_rate=learning_rate)
+    model.compile(loss="mse", optimizer=optimizer)
+
+    return model
+
+
+def optimize_ann(X_train, y_train, n_trials=100):
+    study = optuna.create_study(direction="maximize")
+    study.optimize(lambda trial: ann_optuna(trial, X_train, y_train), n_trials=n_trials)
+
+    return study.best_params
 
 
 def evaluation(
