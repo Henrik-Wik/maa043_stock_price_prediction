@@ -5,9 +5,8 @@ from models import optimize_linear
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "AZN.ST", "HM-B.ST"}
 
-for Stock in Stocks:
+def LinearTest(Stock):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -58,7 +57,6 @@ for Stock in Stocks:
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
-        "": f"& ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$",
     }
 
     # Load the dictionary into a DataFrame
@@ -79,3 +77,7 @@ for Stock in Stocks:
     plt.legend()
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
+
+    Latex = f"Linear & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$"
+
+    return Latex

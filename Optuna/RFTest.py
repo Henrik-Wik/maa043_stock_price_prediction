@@ -1,14 +1,13 @@
-#%%
+# %%
 import matplotlib.pyplot as plt
-from models import optimize_rfr
+import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import pandas as pd
 
-Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "AZN.ST", "HM-B.ST"}
+from models import optimize_rfr
 
-for Stock in Stocks:
 
+def RFTest(Stock):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -32,8 +31,6 @@ for Stock in Stocks:
     train_predict = rfr.predict(train_features)
     test_predict = rfr.predict(test_features)
 
-    
-
     train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
     test_predict = pred_scaler.inverse_transform(test_predict.reshape(-1, 1))
 
@@ -51,8 +48,8 @@ for Stock in Stocks:
     # Create a dictionary with the metric names and values
     results_dict = {
         "Stock": Stock,
-        'Model': 'Random Forest',
-        'Best Parameters': best_params,
+        "Model": "Random Forest",
+        "Best Parameters": best_params,
         "Train R2": train_r2,
         "Test R2": test_r2,
         "Train RMSE": train_rmse,
@@ -61,27 +58,28 @@ for Stock in Stocks:
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
-        "": f"& ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$",
-
     }
 
     # Load the dictionary into a DataFrame
-    results_df = pd.DataFrame.from_dict(results_dict, orient='index', columns=['Value'])
+    results_df = pd.DataFrame.from_dict(results_dict, orient="index", columns=["Value"])
 
     # Save the DataFrame to a csv file
 
     filename = f"{Stock}_Optimized_RF_results"
 
-    results_df.to_string("../Data/" + filename +".txt")
+    results_df.to_string("../Data/" + filename + ".txt")
 
     print(results_df)
-    
+
     # plot the results
 
     plt.figure(figsize=(8, 8), dpi=80)
     plt.scatter(train_predict, train_targets, label="train", s=5)
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.legend()
-    plt.savefig("../Graphs/" +filename+".png")
+    plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
-    
+
+    Latex = f"RF & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$"
+
+    return Latex
