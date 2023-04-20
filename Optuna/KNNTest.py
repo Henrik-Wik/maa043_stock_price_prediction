@@ -5,17 +5,16 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 import pandas as pd
 
-Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "AZN.ST", "HM-B.ST"}
+Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 for Stock in Stocks:
-
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
         import preprocessing as pp
 
         data = pp.download_data(Stock)
-        features, targets, feat_targ_df, feature_names = pp.create_features(data)
+        features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
         train_features, test_features, train_targets, test_targets = pp.time_split(
             features, targets
         )
@@ -49,8 +48,8 @@ for Stock in Stocks:
     # Create a dictionary with the metric names and values
     results_dict = {
         "Stock": Stock,
-        'Model': 'KNN',
-        'Best Parameters': best_params,
+        "Model": "KNN",
+        "Best Parameters": best_params,
         "Train R2": train_r2,
         "Test R2": test_r2,
         "Train RMSE": train_rmse,
@@ -60,17 +59,16 @@ for Stock in Stocks:
         "Train MAE": train_mae,
         "Test MAE": test_mae,
         "": f"& ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$",
-
     }
 
     # Load the dictionary into a DataFrame
-    results_df = pd.DataFrame.from_dict(results_dict, orient='index', columns=['Value'])
+    results_df = pd.DataFrame.from_dict(results_dict, orient="index", columns=["Value"])
 
     # Save the DataFrame to a csv file
 
     filename = f"{Stock}_Optimized_KNN_results"
 
-    results_df.to_string("../Data/" +filename+".txt")
+    results_df.to_string("../Data/" + filename + ".txt")
 
     print(results_df)
     # plot the results
@@ -79,6 +77,5 @@ for Stock in Stocks:
     plt.scatter(train_predict, train_targets, label="train", s=5)
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.legend()
-    plt.savefig("../Graphs/" +filename+".png")
+    plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
-

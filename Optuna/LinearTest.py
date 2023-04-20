@@ -5,7 +5,7 @@ from models import optimize_linear
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "AZN.ST", "HM-B.ST"}
+Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 for Stock in Stocks:
     if "^" in Stock:
@@ -14,7 +14,7 @@ for Stock in Stocks:
         import preprocessing as pp
 
     data = pp.download_data(Stock)
-    features, targets, feat_targ_df, feature_names = pp.create_features(data)
+    features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )
