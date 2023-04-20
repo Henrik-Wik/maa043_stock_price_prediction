@@ -1,10 +1,9 @@
 # %%
 import matplotlib.pyplot as plt
 import pandas as pd
+from models import optimize_svr
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.svm import SVR
-
-from models import optimize_svr
 
 
 def SVRTest(Stock):
@@ -14,7 +13,7 @@ def SVRTest(Stock):
         import preprocessing as pp
 
     data = pp.download_data(Stock)
-    features, targets, feat_targ_df, feature_names = pp.create_features(data)
+    features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )
@@ -80,6 +79,6 @@ def SVRTest(Stock):
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
 
-    Latex = f"SVR & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$"
+    Latex = f"SVR & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\"
 
     return Latex

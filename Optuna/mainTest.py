@@ -9,9 +9,6 @@ from LinearTest import LinearTest
 from RFTest import RFTest
 from SVRTest import SVRTest
 
-# import SVRTest
-# from SVRTest import SVR_dict
-
 # Run the tests
 
 Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
@@ -27,13 +24,10 @@ Latex_df = pd.DataFrame.from_dict(
     Latex_dict, orient="index", columns=["Linear", "KNN", "SVR", "RF"]
 )
 
-
 # %%
 Transposed_df = Latex_df.transpose()
 
 # %%
-
-Transposed_df = Transposed_df.replace(to_replace="\(.*\)", value="", regex=True)
 
 OMXN40_df = Transposed_df["^OMXN40"]
 OMX_df = Transposed_df["^OMX"]
@@ -44,6 +38,7 @@ SOBI_df = Transposed_df["SOBI.ST"]
 HM_df = Transposed_df["HM-B.ST"]
 
 # %% export to txt
+pd.set_option("display.max_colwidth", 1000)
 
 OMXN40_df.to_string("../Data/Latex/OMXN40_df.txt", index=False)
 OMX_df.to_string("../Data/Latex/OMX_df.txt", index=False)

@@ -57,8 +57,7 @@ def random_forest_regression(X_train, y_train):
 def rfr_optuna(trial, X_train, y_train):
     # hyperparameters
     n_estimators = trial.suggest_int("n_estimators", 1, 150)
-    max_depth = trial.suggest_int("max_depth", 1, 5)
-    max_features = trial.suggest_int("max_features", 1, 5)
+    max_features = trial.suggest_int("max_features", 1, 10)
 
     rfr = RandomForestRegressor(
         n_estimators=n_estimators, max_depth=max_depth, max_features=max_features
@@ -125,7 +124,7 @@ def svr_optuna(trial, X_train, y_train):
     # hyperparameters
     C = trial.suggest_float("C", 1e-2, 1e2, log=True)
     gamma = trial.suggest_float("gamma", 1e-2, 1e2, log=True)
-    kernel = trial.suggest_categorical("kernel", ["linear", "poly", "rbf", "sigmoid"])
+    kernel = trial.suggest_categorical("kernel", ["poly", "rbf"])
 
     svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
