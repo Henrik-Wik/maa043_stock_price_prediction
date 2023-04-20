@@ -4,6 +4,7 @@
 import matplotlib.pyplot as plt
 from preprocessing import *
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import r2_score
 
 df = download_data()
 
@@ -21,7 +22,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # %% [markdown]
 # ## Standardizing the data
 
-scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test, y_train.values.reshape(-1,1))
+scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test, y_train)
 
 # %%[markdown]
 # ## K-NN
@@ -51,6 +52,13 @@ knn.fit(scaled_X_train, y_train)
 # Get predictions for train and test sets
 train_predictions = knn.predict(scaled_X_train)
 test_predictions = knn.predict(scaled_X_test)
+
+# Calculate the R2 score
+r2_score_train = r2_score(y_train, train_predictions)
+r2_score_test = r2_score(y_test, test_predictions)
+
+print("R2 score for train set:", r2_score_train)
+print("R2 score for test set:", r2_score_test)
 
 # Plot the actual vs predicted values
 plt.figure(figsize=(8, 8), dpi=80)
