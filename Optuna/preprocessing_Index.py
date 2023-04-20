@@ -1,5 +1,4 @@
 # %%
-
 import numpy as np
 import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
@@ -15,7 +14,7 @@ def download_data(Stock):
     return df
 
 
-def create_features(df):
+def create_features(df, Stock):
     # Create features:
     df["5d_future_close"] = df["Adj Close"].shift(-5)
     df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
@@ -65,7 +64,7 @@ def create_features(df):
 
 
 def time_split(features, targets):
-    train_size = int(0.85 * targets.shape[0])
+    train_size = int(0.80 * targets.shape[0])
     train_features = features[:train_size]
     train_targets = targets[:train_size]
     test_features = features[train_size:]

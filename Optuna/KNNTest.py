@@ -13,7 +13,7 @@ def KNNTest(Stock):
         import preprocessing as pp
 
     data = pp.download_data(Stock)
-    features, targets, feat_targ_df, feature_names = pp.create_features(data)
+    features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )

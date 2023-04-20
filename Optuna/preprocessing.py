@@ -1,6 +1,6 @@
 # %%
-
 import numpy as np
+import pandas as pd
 import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from ta.momentum import rsi
@@ -10,18 +10,43 @@ from ta.trend import sma_indicator
 def download_data(Stock):
     df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
     df = df.reset_index()
-    df = df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+
+    # add EV to EBITDA from excel sheet
+
+    if Stock == "TELIA.ST":
+        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="TELIA", index_col=0, header=0)
+
+    elif Stock == "HM-B.ST":
+        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="HM-B", index_col=0, header=0)
+
+    elif Stock == "INVE-B.ST":
+        df2 = pd.read_excel(
+            "EV Ebitda.xlsx", sheet_name="INVE-B", index_col=0, header=0
+        )
+
+    elif Stock == "VOLV-B.ST":
+        df2 = pd.read_excel(
+            "EV Ebitda.xlsx", sheet_name="VOLV-B", index_col=0, header=0
+        )
+
+    elif Stock == "SOBI.ST":
+        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="SOBI", index_col=0, header=0)
+
+    merged_df = pd.merge(df, df2, on="Date", how="outer")
+
+    df = merged_df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+    df.fillna(method="ffill", inplace=True)
 
     return df
 
 
-def create_features(df):
+def create_features(df, Stock):
     # Create features:
     df["5d_future_close"] = df["Adj Close"].shift(-5)
     df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
     df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
-    feature_names = ["5d_close_pct"]
+    feature_names = ["5d_close_pct", "EVEBITDA"]
 
     for n in [
         14,
@@ -55,6 +80,8 @@ def create_features(df):
     feature_and_target_cols = ["5d_close_future_pct"] + feature_names
     feat_targ_df = df[feature_and_target_cols]
 
+    # Uncomment to remove volume features
+
     # features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
     # feat_targ_df = feat_targ_df.drop(
     #     ["Volume_1d_change", "Volume_1d_change_SMA"], axis=1
@@ -65,7 +92,7 @@ def create_features(df):
 
 
 def time_split(features, targets):
-    train_size = int(0.85 * targets.shape[0])
+    train_size = int(0.80 * targets.shape[0])
     train_features = features[:train_size]
     train_targets = targets[:train_size]
     test_features = features[train_size:]
