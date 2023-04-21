@@ -83,4 +83,3 @@ r2_score_train = r2_score(y_train, train_predictions)
 r2_score_test = r2_score(y_test, test_predictions)
 
 print(r2_score_train, r2_score_test)
-# %%

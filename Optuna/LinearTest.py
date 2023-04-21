@@ -25,9 +25,9 @@ def LinearTest(Stock):
     print("Best hyperparameters:", best_params)
 
     linear = LinearRegression(**best_params)
-    linear.fit(train_features, train_targets)
+    linear.fit(scaled_train_features, train_targets)
 
-    train_predict = linear.predict(train_features)
+    train_predict = linear.predict(scaled_train_features)
     test_predict = linear.predict(test_features)
 
     train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
@@ -78,6 +78,6 @@ def LinearTest(Stock):
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
 
-    Latex = f"Linear & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\"
+    Latex = f"Linear & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\\\"
 
     return Latex

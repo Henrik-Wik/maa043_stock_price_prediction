@@ -1,80 +1,82 @@
 # %%
-import numpy as np
+import matplotlib.pyplot as plt
+import models as md
 import pandas as pd
-import yfinance as yf
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from ta.momentum import rsi
-from ta.trend import sma_indicator
+import preprocessing as pp
+from models import optimize_linear
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVR
 
+import optuna
 
-Stock = "TELIA.ST"
+Stock = "INVE-B.ST"
 
-df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
-df = df.reset_index()
-
-# add EV to EBITDA from excel sheet
-
-if Stock == "TELIA.ST":
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="TELIA", index_col=0, header=0)
-
-elif Stock == "HM-B.ST":
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="HM-B", index_col=0, header=0)
-
-elif Stock == "INVE-B.ST":
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="INVE-B", index_col=0, header=0)
-
-elif Stock == "VOLV-B.ST":
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="VOLV-B", index_col=0, header=0)
-
-elif Stock == "SOBI.ST":
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="SOBI", index_col=0, header=0)
-
-merged_df = pd.merge(df, df2, on="Date", how="outer")
-
-df = merged_df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
-df.fillna(method="ffill", inplace=True)
-
-# Create features:
-df["5d_future_close"] = df["Adj Close"].shift(-5)
-df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
-df["5d_close_pct"] = df["Adj Close"].pct_change(5)
-
-feature_names = ["5d_close_pct", "EVEBITDA"]
-
-for n in [
-    14,
-    30,
-    50,
-    100,
-    200,
-]:  # Create the moving average indicator and divide by Adj_Close
-    df["ma" + str(n)] = (
-        sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
-    )
-    df["rsi" + str(n)] = rsi(df["Adj Close"], window=n, fillna=False)
-    feature_names = feature_names + ["ma" + str(n), "rsi" + str(n)]
-
-# features based on volume
-new_features = ["Volume_1d_change", "Volume_1d_change_SMA"]
-feature_names.extend(new_features)
-df["Volume_1d_change"] = df["Volume"].pct_change()
-df["Volume_1d_change_SMA"] = sma_indicator(
-    df["Volume_1d_change"], window=5, fillna=False
+data = pp.download_data(Stock)
+features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
+train_features, test_features, train_targets, test_targets = pp.time_split(
+    features, targets
+)
+scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
+    train_features, test_features, targets
 )
 
-df.dropna(inplace=True)
 
-# Create features and targets
-# use feature_names for features; '5d_close_future_pct' for targets
-features = df[feature_names]
-targets = df["5d_close_future_pct"]
+def objective(trial, X, y):
+    name = trial.suggest_categorical(
+        "Regressor", ["SVR", "RandomForest", "LinearRegression", "KNN"]
+    )
+    if name == "SVR":
+        C = trial.suggest_float("C", 1e-2, 1e2, log=True)
+        gamma = trial.suggest_float("gamma", 1e-2, 1e2, log=True)
+        kernel = trial.suggest_categorical("kernel", ["poly", "rbf"])
 
-# Create DataFrame from target column and feature columns
-feature_and_target_cols = ["5d_close_future_pct"] + feature_names
-feat_targ_df = df[feature_and_target_cols]
+        regressor = SVR(C=C, gamma=gamma, kernel=kernel)
 
-# features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
-# feat_targ_df = feat_targ_df.drop(
-#     ["Volume_1d_change", "Volume_1d_change_SMA"], axis=1
-# )
-# feature_names = feature_names[:-2]
+    elif name == "RandomForest":
+        n_estimators = trial.suggest_int("n_estimators", 1, 150)
+        max_features = trial.suggest_int("max_features", 1, 5)
+        max_depth = trial.suggest_int("max_depth", 1, 3)
+
+        regressor = RandomForestRegressor(
+            n_estimators=n_estimators, max_depth=max_depth, max_features=max_features
+        )
+    elif name == "LinearRegression":
+        fit_intercept = trial.suggest_categorical("fit_intercept", [True, False])
+        copy_X = trial.suggest_categorical("copy_X", [True, False])
+
+        regressor = LinearRegression(fit_intercept=fit_intercept, copy_X=copy_X)
+
+    elif name == "KNN":
+        n_neighbors = trial.suggest_int("n_neighbors", 1, 20)
+        weights = trial.suggest_categorical("weights", ["uniform", "distance"])
+        algorithm = trial.suggest_categorical(
+            "algorithm", ["auto", "ball_tree", "kd_tree", "brute"]
+        )
+        leaf_size = trial.suggest_int("leaf_size", 1, 20)
+        p = trial.suggest_int("p", 1, 2)
+
+        regressor = KNeighborsRegressor(
+            n_neighbors=n_neighbors,
+            weights=weights,
+            algorithm=algorithm,
+            leaf_size=leaf_size,
+            p=p,
+        )
+    score = cross_val_score(regressor, X, y, n_jobs=-1, cv=3)
+    accuracy = score.mean()
+
+    return accuracy
+
+
+if __name__ == "__main__":
+    n_trials = 100
+    study = optuna.create_study(direction="minimize")
+    study.optimize(
+        lambda trial: objective(trial, scaled_train_features, train_targets),
+        n_trials=n_trials,
+    )
+    print(study.best_params)

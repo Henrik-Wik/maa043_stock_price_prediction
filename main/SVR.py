@@ -12,7 +12,6 @@ from sklearn.svm import SVR
 
 Stock = "INVE-B.ST"
 
-
 df = download_data(Stock)
 
 # %%

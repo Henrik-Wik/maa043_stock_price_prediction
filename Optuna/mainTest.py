@@ -7,7 +7,9 @@ from SVRTest import SVRTest
 
 # Run the tests
 
-Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
+# Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
+
+Stocks = {"INVE-B.ST"}
 
 Latex_dict = {}
 
@@ -25,13 +27,17 @@ Transposed_df = Latex_df.transpose()
 
 # %%
 
-OMXN40_df = Transposed_df["^OMXN40"]
-OMX_df = Transposed_df["^OMX"]
-INVE_df = Transposed_df["INVE-B.ST"]
-VOLV_df = Transposed_df["VOLV-B.ST"]
-TELIA_df = Transposed_df["TELIA.ST"]
-SOBI_df = Transposed_df["SOBI.ST"]
-HM_df = Transposed_df["HM-B.ST"]
+dfs = {}
+for Stock in Stocks:
+    dfs[Stock] = Transposed_df[Stock]
+
+# OMXN40_df = Transposed_df["^OMXN40"]
+# OMX_df = Transposed_df["^OMX"]
+# INVE_df = Transposed_df["INVE-B.ST"]
+# VOLV_df = Transposed_df["VOLV-B.ST"]
+# TELIA_df = Transposed_df["TELIA.ST"]
+# SOBI_df = Transposed_df["SOBI.ST"]
+# HM_df = Transposed_df["HM-B.ST"]
 
 # %% export to txt
 pd.set_option("display.max_colwidth", 1000)
