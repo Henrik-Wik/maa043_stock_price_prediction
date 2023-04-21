@@ -28,7 +28,7 @@ def LinearTest(Stock):
     linear.fit(scaled_train_features, train_targets)
 
     train_predict = linear.predict(scaled_train_features)
-    test_predict = linear.predict(test_features)
+    test_predict = linear.predict(scaled_test_features)
 
     train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
     test_predict = pred_scaler.inverse_transform(test_predict.reshape(-1, 1))

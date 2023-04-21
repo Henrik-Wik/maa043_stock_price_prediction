@@ -13,24 +13,16 @@ def download_data(Stock):
 
     # add EV to EBITDA from excel sheet
 
-    if Stock == "TELIA.ST":
-        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="TELIA", index_col=0, header=0)
+    sheet_map = {
+        "TELIA.ST": "TELIA",
+        "HM-B.ST": "HM-B",
+        "INVE-B.ST": "INVE-B",
+        "VOLV-B.ST": "VOLV-B",
+        "SOBI.ST": "SOBI",
+    }
 
-    elif Stock == "HM-B.ST":
-        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="HM-B", index_col=0, header=0)
-
-    elif Stock == "INVE-B.ST":
-        df2 = pd.read_excel(
-            "EV Ebitda.xlsx", sheet_name="INVE-B", index_col=0, header=0
-        )
-
-    elif Stock == "VOLV-B.ST":
-        df2 = pd.read_excel(
-            "EV Ebitda.xlsx", sheet_name="VOLV-B", index_col=0, header=0
-        )
-
-    elif Stock == "SOBI.ST":
-        df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name="SOBI", index_col=0, header=0)
+    sheet_name = sheet_map[Stock]
+    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header=0)
 
     merged_df = pd.merge(df, df2, on="Date", how="outer")
 
@@ -102,13 +94,13 @@ def time_split(features, targets):
 
 
 def scale_data(train, test, pred):  # Standardization with dataframe as output
-    scaler = StandardScaler().set_output(transform="pandas")
+    scaler = StandardScaler()
     # transform using fit from training data.
     scaled_train = scaler.fit_transform(train)
     scaled_test = scaler.transform(test)
 
     # used to inverse transform predicted data
-    pred_scaler = StandardScaler().set_output(transform="pandas")
+    pred_scaler = StandardScaler()
     train = pred_scaler.fit(pred.values.reshape(-1, 1))
 
     return scaled_train, scaled_test, pred_scaler
@@ -117,7 +109,7 @@ def scale_data(train, test, pred):  # Standardization with dataframe as output
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
     scaler = MinMaxScaler(
         feature_range=(-1, 1),
-    ).set_output(transform="pandas")
+    )
 
     scaled_X_train = scaler.fit_transform(X_train)
     scaled_X_test = scaler.transform(X_test)

@@ -9,11 +9,13 @@ from SVRTest import SVRTest
 
 # Stocks = {"^OMXN40", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
-Stocks = {"INVE-B.ST"}
+Stocks = {"INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 Latex_dict = {}
 
 for Stock in Stocks:
+    # Latex_dict[Stock] = LinearTest(Stock)
+
     Latex_dict[Stock] = LinearTest(Stock), KNNTest(Stock), SVRTest(Stock), RFTest(Stock)
 
 # %%
@@ -27,20 +29,23 @@ Transposed_df = Latex_df.transpose()
 
 # %%
 
-dfs = {}
-for Stock in Stocks:
-    dfs[Stock] = Transposed_df[Stock]
+# dfs = {}
+# for Stock in Stocks:
+#     dfs[Stock] = Transposed_df[Stock]
 
-# OMXN40_df = Transposed_df["^OMXN40"]
-# OMX_df = Transposed_df["^OMX"]
-# INVE_df = Transposed_df["INVE-B.ST"]
-# VOLV_df = Transposed_df["VOLV-B.ST"]
-# TELIA_df = Transposed_df["TELIA.ST"]
-# SOBI_df = Transposed_df["SOBI.ST"]
-# HM_df = Transposed_df["HM-B.ST"]
+OMXN40_df = Transposed_df["^OMXN40"]
+OMX_df = Transposed_df["^OMX"]
+INVE_df = Transposed_df["INVE-B.ST"]
+VOLV_df = Transposed_df["VOLV-B.ST"]
+TELIA_df = Transposed_df["TELIA.ST"]
+SOBI_df = Transposed_df["SOBI.ST"]
+HM_df = Transposed_df["HM-B.ST"]
 
 # %% export to txt
 pd.set_option("display.max_colwidth", 1000)
+
+# for Stock in Stocks:
+#     dfs[Stock].to_string(f"../Data/Latex/{Stock}_df.txt", index=False)
 
 OMXN40_df.to_string("../Data/Latex/OMXN40_df.txt", index=False)
 OMX_df.to_string("../Data/Latex/OMX_df.txt", index=False)

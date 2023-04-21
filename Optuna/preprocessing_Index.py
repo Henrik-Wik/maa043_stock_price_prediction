@@ -10,7 +10,7 @@ def download_data(Stock):
     df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
     df = df.reset_index()
     df = df.drop(["Date", "Open", "Low", "Close", "High", "Volume"], axis=1)
-
+    df.fillna(method="ffill", inplace=True)
     return df
 
 
@@ -74,13 +74,13 @@ def time_split(features, targets):
 
 
 def scale_data(train, test, pred):  # Standardization with dataframe as output
-    scaler = StandardScaler().set_output(transform="pandas")
+    scaler = StandardScaler()
     # transform using fit from training data.
     scaled_train = scaler.fit_transform(train)
     scaled_test = scaler.transform(test)
 
     # used to inverse transform predicted data
-    pred_scaler = StandardScaler().set_output(transform="pandas")
+    pred_scaler = StandardScaler()
     train = pred_scaler.fit(pred.values.reshape(-1, 1))
 
     return scaled_train, scaled_test, pred_scaler
@@ -89,7 +89,7 @@ def scale_data(train, test, pred):  # Standardization with dataframe as output
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
     scaler = MinMaxScaler(
         feature_range=(-1, 1),
-    ).set_output(transform="pandas")
+    )
 
     scaled_X_train = scaler.fit_transform(X_train)
     scaled_X_test = scaler.transform(X_test)

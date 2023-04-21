@@ -39,11 +39,11 @@ plt.tight_layout()  # fits plot area to the plot, "tightly"
 plt.show()  # show the plot
 
 # %%
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(df["5d_close_future_pct"], df["ma200"], s=3)
-plt.xlabel("5d_close_future_pct")
-plt.ylabel("Volume_1d_change_SMA")
-plt.show()
+# plt.figure(figsize=(8, 8), dpi=80)
+# plt.scatter(df["5d_close_future_pct"], df["ma200"], s=3)
+# plt.xlabel("5d_close_future_pct")
+# plt.ylabel("Volume_1d_change_SMA")
+# plt.show()
 
 # %% [markdown]
 # # Linear Regression Model
