@@ -6,11 +6,13 @@ from preprocessing import *
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import r2_score
 
-df = download_data()
+Stock = "INVE-B.ST"
+
+df = download_data(Stock)
 
 # %%
 # Feature creation
-X, y, X_y_df, feature_names = create_features(df)
+X, y, X_y_df, feature_names = create_features(df, Stock)
 
 # %%
 # Train test splitting
@@ -36,7 +38,7 @@ for n in range(2, 13, 1):
 
     # Print number of neighbors and the score to find the best value of n
     print("n_neighbors =", n)
-    print('train, test scores')
+    print("train, test scores")
     print(knn.score(scaled_X_train, y_train))
     print(knn.score(scaled_X_test, y_test))
     print()  # prints a blank line
@@ -62,8 +64,8 @@ print("R2 score for test set:", r2_score_test)
 
 # Plot the actual vs predicted values
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_predictions, y_train, label='train', s=5)
-plt.scatter(test_predictions, y_test, label='test', s=5)
+plt.scatter(train_predictions, y_train, label="train", s=5)
+plt.scatter(test_predictions, y_test, label="test", s=5)
 plt.legend()
 plt.show()
 

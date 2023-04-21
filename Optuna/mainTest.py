@@ -1,9 +1,5 @@
 # %%
-import KNNTest
-import LinearTest
 import pandas as pd
-import RFTest
-import SVRTest
 from KNNTest import KNNTest
 from LinearTest import LinearTest
 from RFTest import RFTest

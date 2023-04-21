@@ -46,7 +46,7 @@ def create_features(df, Stock):
     df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
     df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
-    feature_names = ["5d_close_pct", "EVEBITDA"]
+    feature_names = ["5d_close_pct"]
 
     for n in [
         14,
