@@ -8,27 +8,28 @@ from preprocessing import *
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 
+Stock = "INVE-B.ST"
+
 # %% [markdown]
 # Preprocessing
 
-df = download_data()
+df = download_data(Stock)
 
-[features, targets, features_targets, feature_names] = create_features(df)
+[features, targets, features_targets, feature_names] = create_features(df, Stock)
 
 [X_train, X_test, y_train, y_test] = time_split(features, targets)
 
-scaled_X_train, scaled_X_test, pred_scaler = scale_data(
-    X_train, X_test, y_train)
+scaled_X_train, scaled_X_test, pred_scaler = scale_data(X_train, X_test, y_train)
 
 # %% [markdown]
 # ## plot standardization
 
 f, ax = plt.subplots(nrows=2, ncols=1)
-X_train['5d_close_pct'].hist(ax=ax[0])
-ax[0].set_title('Histogram of 5d_close_pct')
+X_train["5d_close_pct"].hist(ax=ax[0])
+ax[0].set_title("Histogram of 5d_close_pct")
 
-scaled_X_train['5d_close_pct'].hist(ax=ax[1])
-ax[1].set_title('Histogram of scaled 5d_close_pct')
+scaled_X_train["5d_close_pct"].hist(ax=ax[1])
+ax[1].set_title("Histogram of scaled 5d_close_pct")
 
 plt.subplots_adjust(top=0.9, bottom=0.1, hspace=0.5)
 
@@ -38,17 +39,16 @@ plt.show()
 # ## Neural Network Model
 
 model_1 = Sequential()
-model_1.add(
-    Dense(100, input_dim=scaled_X_train.shape[1], activation='relu'))
-model_1.add(Dense(20, activation='relu'))
-model_1.add(Dense(1, activation='linear'))
-model_1.compile(optimizer='adam', loss='mse')
+model_1.add(Dense(100, input_dim=scaled_X_train.shape[1], activation="relu"))
+model_1.add(Dense(20, activation="relu"))
+model_1.add(Dense(1, activation="linear"))
+model_1.compile(optimizer="adam", loss="mse")
 history = model_1.fit(scaled_X_train, y_train, epochs=25)
 # %%
 
 plt.figure(figsize=(8, 8), dpi=80)
-plt.plot(history.history['loss'])
-plt.title('loss:'+str(round(history.history['loss'][-1], 6)))
+plt.plot(history.history["loss"])
+plt.title("loss:" + str(round(history.history["loss"][-1], 6)))
 plt.show()
 
 # %%
@@ -69,8 +69,8 @@ print(mean_squared_error(y_test, test_preds))
 # %%
 
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_preds, y_train, label='train', s=5)
-plt.scatter(test_preds, y_test, label='test', s=5)
+plt.scatter(train_preds, y_train, label="train", s=5)
+plt.scatter(test_preds, y_test, label="test", s=5)
 plt.legend()
 plt.show()
 

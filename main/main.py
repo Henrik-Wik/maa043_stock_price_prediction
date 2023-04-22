@@ -2,13 +2,19 @@
 import models as md
 import preprocessing as pp
 
+Stock = "INVE-B.ST"
+
 # Preprocessing
-data = pp.download_data()
-features, targets, feat_targ_df, feature_names = pp.create_features(data)
+data = pp.download_data(Stock)
+features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
 train_features, test_features, train_targets, test_targets = pp.time_split(
     features, targets)
 scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
     train_features, test_features, targets)
+
+#%%
+# models with best parameters
+
 
 # %%
 # Training models
@@ -17,7 +23,7 @@ linreg = md.linear_regression(scaled_train_features, train_targets)
 knn = md.knn_regression(scaled_train_features, train_targets)
 ann = md.neural_network_regression(scaled_train_features, train_targets)
 rf = md.random_forest_regression(scaled_train_features, train_targets)
-svr = md.support_vector_regression(scaled_train_features, train_targets)
+# svr = md.svr_optuna(scaled_train_features, train_targets)
 
 # %%
 # Results
@@ -30,8 +36,8 @@ ann_results = md.evaluation(
     ann, scaled_train_features, scaled_test_features, train_targets, test_targets)
 rf_results = md.evaluation(rf, scaled_train_features,
                            scaled_test_features, train_targets, test_targets)
-svr_results = md.evaluation(
-    svr, scaled_train_features, scaled_test_features, train_targets, test_targets)
+# svr_results = md.evaluation(
+    # svr, scaled_train_features, scaled_test_features, train_targets, test_targets)
 
 print("Linear Regression Results:")
 print(linreg_results)
@@ -42,4 +48,4 @@ print(ann_results)
 print("Random Forest Results:")
 print(rf_results)
 print("SVR Results:")
-print(svr_results)
+# print(svr_results)

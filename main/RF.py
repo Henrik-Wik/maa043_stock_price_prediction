@@ -6,10 +6,14 @@ import numpy as np
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import ParameterGrid
+from sklearn.metrics import r2_score
 
-df = download_data()
+Stock = "INVE-B.ST"
 
-X, y, X_y, feature_names = create_features(df)
+
+df = download_data(Stock)
+
+X, y, X_y, feature_names = create_features(df, Stock)
 
 X_train, X_test, y_train, y_test = time_split(X, y)
 
@@ -24,8 +28,12 @@ rfr.fit(X_train, y_train)
 print(rfr.score(X_train, y_train))
 print(rfr.score(X_test, y_test))
 
-grid = {'n_estimators': [200], 'max_depth': [3],
-        'max_features': [4, 8], 'random_state': [42]}
+grid = {
+    "n_estimators": [200],
+    "max_depth": [3],
+    "max_features": [4, 8],
+    "random_state": [42],
+}
 test_scores = []
 
 for g in ParameterGrid(grid):
@@ -39,15 +47,16 @@ print(test_scores[best_idx], ParameterGrid(grid)[best_idx])
 # %%
 
 rfr = RandomForestRegressor(
-    n_estimators=200, max_depth=3, max_features=8, random_state=42)
+    n_estimators=200, max_depth=3, max_features=8, random_state=42
+)
 rfr.fit(X_train, y_train)
 
 train_predictions = rfr.predict(X_train)
 test_predictions = rfr.predict(X_test)
 
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(y_train, train_predictions, label='train', s=5)
-plt.scatter(y_test, test_predictions, label='test', s=5)
+plt.scatter(y_train, train_predictions, label="train", s=5)
+plt.scatter(y_test, test_predictions, label="test", s=5)
 plt.legend()
 plt.show()
 
@@ -65,5 +74,12 @@ x = range(len(importances))
 
 labels = np.array(feature_names)[sorted_index]
 plt.figure(figsize=(8, 8), dpi=80)
-plt.tick_params(axis='x', rotation=90)
+plt.tick_params(axis="x", rotation=90)
 plt.bar(x, importances[sorted_index], tick_label=labels)
+
+# %%
+
+r2_score_train = r2_score(y_train, train_predictions)
+r2_score_test = r2_score(y_test, test_predictions)
+
+print(r2_score_train, r2_score_test)

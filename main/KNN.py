@@ -4,12 +4,15 @@
 import matplotlib.pyplot as plt
 from preprocessing import *
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import r2_score
 
-df = download_data()
+Stock = "INVE-B.ST"
+
+df = download_data(Stock)
 
 # %%
 # Feature creation
-X, y, X_y_df, feature_names = create_features(df)
+X, y, X_y_df, feature_names = create_features(df, Stock)
 
 # %%
 # Train test splitting
@@ -21,7 +24,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 # %% [markdown]
 # ## Standardizing the data
 
-scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test, y_train.values.reshape(-1,1))
+scaled_X_train, scaled_X_test, scaler = scale_data(X_train, X_test, y_train)
 
 # %%[markdown]
 # ## K-NN
@@ -35,7 +38,7 @@ for n in range(2, 13, 1):
 
     # Print number of neighbors and the score to find the best value of n
     print("n_neighbors =", n)
-    print('train, test scores')
+    print("train, test scores")
     print(knn.score(scaled_X_train, y_train))
     print(knn.score(scaled_X_test, y_test))
     print()  # prints a blank line
@@ -52,10 +55,17 @@ knn.fit(scaled_X_train, y_train)
 train_predictions = knn.predict(scaled_X_train)
 test_predictions = knn.predict(scaled_X_test)
 
+# Calculate the R2 score
+r2_score_train = r2_score(y_train, train_predictions)
+r2_score_test = r2_score(y_test, test_predictions)
+
+print("R2 score for train set:", r2_score_train)
+print("R2 score for test set:", r2_score_test)
+
 # Plot the actual vs predicted values
 plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_predictions, y_train, label='train', s=5)
-plt.scatter(test_predictions, y_test, label='test', s=5)
+plt.scatter(train_predictions, y_train, label="train", s=5)
+plt.scatter(test_predictions, y_test, label="test", s=5)
 plt.legend()
 plt.show()
 

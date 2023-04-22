@@ -8,12 +8,14 @@ import statsmodels.api as sm
 from statsmodels.tools.eval_measures import rmse, mse, meanabs
 from preprocessing import *
 
-df = download_data()
+Stock = "INVE-B.ST"
+
+df = download_data(Stock)
 
 # %% [markdown]
 # Calculate correlation matrix
 
-features, targets, feat_targ_df, feature_names = create_features(df)
+features, targets, feat_targ_df, feature_names = create_features(df, Stock)
 
 corr = feat_targ_df.corr()
 print(corr)
@@ -21,11 +23,11 @@ print(corr)
 # %%
 # plot SMAs together
 
-df[['ma14', 'ma30', 'ma50', 'ma200']].plot(figsize=(8, 5))
+df[["ma14", "ma30", "ma50", "ma200"]].plot(figsize=(8, 5))
 plt.title("INVE-B Stock Price Moving Averages", fontsize=17)
 plt.xlabel("Time", fontsize=14)
 plt.ylabel("Price", fontsize=14)
-plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+plt.grid(which="major", color="k", linestyle="-.", linewidth=0.5)
 
 # %%
 
@@ -37,11 +39,11 @@ plt.tight_layout()  # fits plot area to the plot, "tightly"
 plt.show()  # show the plot
 
 # %%
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(df['5d_close_future_pct'], df['ma200'], s=3)
-plt.xlabel("5d_close_future_pct")
-plt.ylabel("Volume_1d_change_SMA")
-plt.show()
+# plt.figure(figsize=(8, 8), dpi=80)
+# plt.scatter(df["5d_close_future_pct"], df["ma200"], s=3)
+# plt.xlabel("5d_close_future_pct")
+# plt.ylabel("Volume_1d_change_SMA")
+# plt.show()
 
 # %% [markdown]
 # # Linear Regression Model
@@ -63,21 +65,19 @@ print(results.pvalues)
 train_predictions = results.predict(X_train)
 test_predictions = results.predict(X_test)
 
-print('RMSE: ', rmse(train_predictions, y_train))
-print('RMSE: ', rmse(test_predictions, y_test))
+print("RMSE: ", rmse(train_predictions, y_train))
+print("RMSE: ", rmse(test_predictions, y_test))
 
 # %%
 
 plt.figure(figsize=(8, 8))
-plt.scatter(train_predictions, y_train,
-            alpha=0.2, color='b', label='train', s=6)
-plt.scatter(test_predictions, y_test,
-            alpha=0.2, color='r', label='test', s=6)
+plt.scatter(train_predictions, y_train, alpha=0.2, color="b", label="train", s=6)
+plt.scatter(test_predictions, y_test, alpha=0.2, color="r", label="test", s=6)
 
 xmin, xmax = plt.xlim()
-plt.plot(np.arange(xmin, xmax, 0.01), np.arange(xmin, xmax, 0.01), c='k')
-plt.xlabel('Predictions')
-plt.ylabel('Actual')
+plt.plot(np.arange(xmin, xmax, 0.01), np.arange(xmin, xmax, 0.01), c="k")
+plt.xlabel("Predictions")
+plt.ylabel("Actual")
 plt.legend()
 # plt.xlim([-0.02,0.02])
 # plt.ylim([-0.15,0.15])
