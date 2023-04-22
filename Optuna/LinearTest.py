@@ -33,9 +33,6 @@ def LinearTest(Stock):
     train_r2 = r2_score(train_targets, train_predict)
     test_r2 = r2_score(test_targets, test_predict)
 
-    train_predict = target_scaler.inverse_transform(train_predict.reshape(-1, 1))
-    test_predict = target_scaler.inverse_transform(test_predict.reshape(-1, 1))
-
     # Compute the metrics and store them in variables
 
     train_rmse = mean_squared_error(train_targets, train_predict, squared=False)
@@ -76,6 +73,9 @@ def LinearTest(Stock):
     plt.figure(figsize=(8, 8), dpi=80)
     plt.scatter(train_predict, train_targets, label="train", s=5)
     plt.scatter(test_predict, test_targets, label="test", s=5)
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title(f"{Stock} Linear Regression")
     plt.legend()
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()

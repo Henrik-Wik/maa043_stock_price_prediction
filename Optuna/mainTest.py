@@ -14,7 +14,7 @@ Stocks = {"INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 Latex_dict = {}
 
 for Stock in Stocks:
-    # Latex_dict[Stock] = LinearTest(Stock)
+    # Latex_dict[Stock] = SVRTest(Stock)
 
     Latex_dict[Stock] = LinearTest(Stock), KNNTest(Stock), SVRTest(Stock), RFTest(Stock)
 
