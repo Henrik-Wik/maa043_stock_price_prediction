@@ -13,20 +13,20 @@ def download_data(Stock):
 
     # add EV to EBITDA from excel sheet
 
-    # sheet_map = {
-    #     "TELIA.ST": "TELIA",
-    #     "HM-B.ST": "HM-B",
-    #     "INVE-B.ST": "INVE-B",
-    #     "VOLV-B.ST": "VOLV-B",
-    #     "SOBI.ST": "SOBI",
-    # }
+    sheet_map = {
+        "TELIA.ST": "TELIA",
+        "HM-B.ST": "HM-B",
+        "INVE-B.ST": "INVE-B",
+        "VOLV-B.ST": "VOLV-B",
+        "SOBI.ST": "SOBI",
+    }
 
-    # sheet_name = sheet_map[Stock]
-    # df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header=0)
+    sheet_name = sheet_map[Stock]
+    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header=0)
 
-    # merged_df = pd.merge(df, df2, on="Date", how="outer")
+    merged_df = pd.merge(df, df2, on="Date", how="outer")
 
-    df = df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+    df = merged_df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
     df.fillna(method="ffill", inplace=True)
 
     return df
