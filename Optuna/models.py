@@ -96,20 +96,14 @@ def knn_regression(X_train, y_train):
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
     n_neighbors = trial.suggest_int("n_neighbors", 1, 20)
-    weights = trial.suggest_categorical("weights", ["uniform", "distance"])
+    # weights = trial.suggest_categorical("weights", ["uniform", "distance"])
     algorithm = trial.suggest_categorical(
         "algorithm", ["auto", "ball_tree", "kd_tree", "brute"]
     )
-    leaf_size = trial.suggest_int("leaf_size", 1, 20)
-    p = trial.suggest_int("p", 1, 2)
+    # leaf_size = trial.suggest_int("leaf_size", 1, 20)
+    # p = trial.suggest_int("p", 1, 2)
 
-    knn = KNeighborsRegressor(
-        n_neighbors=n_neighbors,
-        weights=weights,
-        algorithm=algorithm,
-        leaf_size=leaf_size,
-        p=p,
-    )
+    knn = KNeighborsRegressor(n_neighbors=n_neighbors, algorithm=algorithm)
     knn.fit(X_train, y_train)
 
     scores = cross_val_score(knn, X_train, y_train, cv=tscv, scoring="r2")
@@ -136,7 +130,9 @@ def svr_optuna(trial, X_train, y_train):
     svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
 
-    scores = cross_val_score(svr, X_train, y_train, cv=tscv, scoring="neg_mean_absolute_error")
+    scores = cross_val_score(
+        svr, X_train, y_train, cv=tscv, scoring="neg_mean_absolute_error"
+    )
     return np.mean(scores)
 
 

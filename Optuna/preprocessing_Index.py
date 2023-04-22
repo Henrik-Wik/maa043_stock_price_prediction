@@ -16,17 +16,17 @@ def download_data(Stock):
 
 def create_features(df, Stock):
     # Create features:
-    df["5d_future_close"] = df["Adj Close"].shift(-5)
-    df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
-    df["5d_close_pct"] = df["Adj Close"].pct_change(5)
+    df["5d_close_future"] = df["Adj Close"].shift(-5)
+    # df["5d_close_future_pct"] = df["5d_close_future"].pct_change(5)
+    # df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
-    feature_names = ["5d_close_pct"]
+    feature_names = ["Adj Close"]
 
     for n in [
         14,
-        30,
-        50,
-        100,
+        # 30,
+        # 50,
+        # 100,
         200,
     ]:  # Create the moving average indicator and divide by Adj_Close
         df["ma" + str(n)] = (
@@ -48,11 +48,13 @@ def create_features(df, Stock):
     # Create features and targets
     # use feature_names for features; '5d_close_future_pct' for targets
     features = df[feature_names]
-    targets = df["5d_close_future_pct"]
+    targets = df["5d_close_future"]
 
     # Create DataFrame from target column and feature columns
-    feature_and_target_cols = ["5d_close_future_pct"] + feature_names
+    feature_and_target_cols = ["5d_close_future"] + feature_names
     feat_targ_df = df[feature_and_target_cols]
+
+    # Uncomment to remove volume features
 
     # features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
     # feat_targ_df = feat_targ_df.drop(

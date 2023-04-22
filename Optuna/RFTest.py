@@ -17,7 +17,7 @@ def RFTest(Stock):
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )
-    scaled_train_features, scaled_test_features, pred_scaler = pp.scale_data(
+    scaled_train_features, scaled_test_features, target_scaler = pp.scale_data(
         train_features, test_features, targets
     )
 
@@ -30,16 +30,17 @@ def RFTest(Stock):
     train_predict = rfr.predict(scaled_train_features)
     test_predict = rfr.predict(test_features)
 
-    train_predict = pred_scaler.inverse_transform(train_predict.reshape(-1, 1))
-    test_predict = pred_scaler.inverse_transform(test_predict.reshape(-1, 1))
+    train_r2 = r2_score(train_targets, train_predict)
+    test_r2 = r2_score(test_targets, test_predict)
+
+    train_predict = target_scaler.inverse_transform(train_predict.reshape(-1, 1))
+    test_predict = target_scaler.inverse_transform(test_predict.reshape(-1, 1))
 
     # Compute the metrics and store them in variables
-    train_r2 = r2_score(train_targets, train_predict)
     train_rmse = mean_squared_error(train_targets, train_predict, squared=False)
     train_mse = mean_squared_error(train_targets, train_predict)
     train_mae = mean_absolute_error(train_targets, train_predict)
 
-    test_r2 = r2_score(test_targets, test_predict)
     test_rmse = mean_squared_error(test_targets, test_predict, squared=False)
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
