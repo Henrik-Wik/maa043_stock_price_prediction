@@ -95,15 +95,21 @@ def knn_regression(X_train, y_train):
 
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
-    n_neighbors = trial.suggest_int("n_neighbors", 1, 20)
-    # weights = trial.suggest_categorical("weights", ["uniform", "distance"])
+    n_neighbors = trial.suggest_int("n_neighbors", 5, 20)
+    weights = trial.suggest_categorical("weights", ["uniform", "distance"])
     algorithm = trial.suggest_categorical(
         "algorithm", ["ball_tree", "kd_tree", "brute"]
     )
-    # leaf_size = trial.suggest_int("leaf_size", 1, 20)
-    # p = trial.suggest_int("p", 1, 2)
+    leaf_size = trial.suggest_int("leaf_size", 1, 20)
+    p = trial.suggest_int("p", 1, 2)
 
-    knn = KNeighborsRegressor(n_neighbors=n_neighbors, algorithm=algorithm)
+    knn = KNeighborsRegressor(
+        n_neighbors=n_neighbors,
+        algorithm=algorithm,
+        p=p,
+        weights=weights,
+        leaf_size=leaf_size,
+    )
     knn.fit(X_train, y_train)
 
     scores = cross_val_score(knn, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
