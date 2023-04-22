@@ -7,79 +7,81 @@ from sklearn.neighbors import KNeighborsRegressor
 
 Stock = "TELIA.ST"
 
-# def KNNTest(Stock):
-if "^" in Stock:
-    import preprocessing_Index as pp
-else:
-    import preprocessing as pp
 
-data = pp.download_data(Stock)
-features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
-train_features, test_features, train_targets, test_targets = pp.time_split(
-    features, targets
-)
-scaled_train_features, scaled_test_features, target_scaler = pp.scale_data(
-    train_features, test_features, targets
-)
+def KNNTest(Stock):
+    if "^" in Stock:
+        import preprocessing_Index as pp
+    else:
+        import preprocessing as pp
 
-best_params = optimize_knn(scaled_train_features, train_targets)
-print("Best hyperparameters:", best_params)
+    data = pp.download_data(Stock)
+    features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
+    train_features, test_features, train_targets, test_targets = pp.time_split(
+        features, targets
+    )
+    scaled_train_features, scaled_test_features, target_scaler = pp.scale_data(
+        train_features, test_features, targets
+    )
 
-knn = KNeighborsRegressor(**best_params)
-knn.fit(scaled_train_features, train_targets)
+    best_params = optimize_knn(scaled_train_features, train_targets)
+    print("Best hyperparameters:", best_params)
 
-train_predict = knn.predict(scaled_train_features)
-test_predict = knn.predict(scaled_test_features)
+    knn = KNeighborsRegressor(**best_params)
+    knn.fit(scaled_train_features, train_targets)
 
-train_r2 = r2_score(train_targets, train_predict)
-test_r2 = r2_score(test_targets, test_predict)
+    train_predict = knn.predict(scaled_train_features)
+    test_predict = knn.predict(scaled_test_features)
 
-train_predict = target_scaler.inverse_transform(train_predict.reshape(-1, 1))
-test_predict = target_scaler.inverse_transform(test_predict.reshape(-1, 1))
+    train_r2 = r2_score(train_targets, train_predict)
+    test_r2 = r2_score(test_targets, test_predict)
 
-# Compute the metrics and store them in variables
-train_rmse = mean_squared_error(train_targets, train_predict, squared=False)
-train_mse = mean_squared_error(train_targets, train_predict)
-train_mae = mean_absolute_error(train_targets, train_predict)
+    train_predict = target_scaler.inverse_transform(train_predict.reshape(-1, 1))
+    test_predict = target_scaler.inverse_transform(test_predict.reshape(-1, 1))
 
-test_rmse = mean_squared_error(test_targets, test_predict, squared=False)
-test_mse = mean_squared_error(test_targets, test_predict)
-test_mae = mean_absolute_error(test_targets, test_predict)
+    # Compute the metrics and store them in variables
+    train_rmse = mean_squared_error(train_targets, train_predict, squared=False)
+    train_mse = mean_squared_error(train_targets, train_predict)
+    train_mae = mean_absolute_error(train_targets, train_predict)
 
-# Create a dictionary with the metric names and values
-results_dict = {
-    "Stock": Stock,
-    "Model": "KNN",
-    "Best Parameters": best_params,
-    "Train R2": train_r2,
-    "Test R2": test_r2,
-    "Train RMSE": train_rmse,
-    "Test RMSE": test_rmse,
-    "Train MSE": train_mse,
-    "Test MSE": test_mse,
-    "Train MAE": train_mae,
-    "Test MAE": test_mae,
-}
+    test_rmse = mean_squared_error(test_targets, test_predict, squared=False)
+    test_mse = mean_squared_error(test_targets, test_predict)
+    test_mae = mean_absolute_error(test_targets, test_predict)
 
-# Load the dictionary into a DataFrame
-results_df = pd.DataFrame.from_dict(results_dict, orient="index", columns=["Value"])
+    # Create a dictionary with the metric names and values
+    results_dict = {
+        "Stock": Stock,
+        "Model": "KNN",
+        "Best Parameters": best_params,
+        "Train R2": train_r2,
+        "Test R2": test_r2,
+        "Train RMSE": train_rmse,
+        "Test RMSE": test_rmse,
+        "Train MSE": train_mse,
+        "Test MSE": test_mse,
+        "Train MAE": train_mae,
+        "Test MAE": test_mae,
+    }
 
-# Save the DataFrame to a csv file
+    # Load the dictionary into a DataFrame
+    results_df = pd.DataFrame.from_dict(results_dict, orient="index", columns=["Value"])
 
-filename = f"{Stock}_Optimized_KNN_results"
+    # Save the DataFrame to a csv file
 
-results_df.to_string("../Data/" + filename + ".txt")
+    filename = f"{Stock}_Optimized_KNN_results"
 
-print(results_df)
-# plot the results
+    results_df.to_string("../Data/" + filename + ".txt")
 
-plt.figure(figsize=(8, 8), dpi=80)
-plt.scatter(train_predict, train_targets, label="train", s=5)
-plt.scatter(test_predict, test_targets, label="test", s=5)
-plt.legend()
-plt.savefig("../Graphs/" + filename + ".png")
-plt.show()
+    print(results_df)
+    # plot the results
 
-Latex = f"KNN & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\\\"
+    plt.figure(figsize=(8, 8), dpi=80)
+    plt.scatter(train_predict, train_targets, label="train", s=5)
+    plt.scatter(test_predict, test_targets, label="test", s=5)
+    plt.legend()
+    plt.savefig("../Graphs/" + filename + ".png")
+    plt.show()
 
-# return Latex
+    Latex = f"KNN & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\\\"
+
+
+return Latex
