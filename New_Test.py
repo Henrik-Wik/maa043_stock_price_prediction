@@ -15,7 +15,7 @@ from ta.trend import sma_indicator
 
 # %%
 
-Stock = "TELIA.ST"
+Stock = "HM-B.ST"
 
 df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
 df = df.reset_index()

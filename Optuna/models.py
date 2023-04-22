@@ -41,7 +41,7 @@ def linreg_optuna(trial, X_train, y_train):
     return scores.mean()
 
 
-def optimize_linear(X_train, y_train, n_trials=100):
+def optimize_linear(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(
         lambda trial: linreg_optuna(trial, X_train, y_train), n_trials=n_trials
@@ -76,7 +76,7 @@ def rfr_optuna(trial, X_train, y_train):
     return scores.mean()
 
 
-def optimize_rfr(X_train, y_train, n_trials=100):
+def optimize_rfr(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: rfr_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -95,20 +95,15 @@ def knn_regression(X_train, y_train):
 
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
-    n_neighbors = trial.suggest_int("n_neighbors", 5, 20)
-    weights = trial.suggest_categorical("weights", ["uniform", "distance"])
-    algorithm = trial.suggest_categorical(
-        "algorithm", ["ball_tree", "kd_tree", "brute"]
-    )
-    leaf_size = trial.suggest_int("leaf_size", 1, 20)
-    p = trial.suggest_int("p", 1, 2)
+    n_neighbors = trial.suggest_int("n_neighbors", 3, 30)
+    leaf_size = trial.suggest_int("leaf_size", 1, 50)
 
     knn = KNeighborsRegressor(
         n_neighbors=n_neighbors,
-        algorithm=algorithm,
-        p=p,
-        weights=weights,
+        algorithm="auto",
         leaf_size=leaf_size,
+        weights="distance",
+        p=2,
     )
     knn.fit(X_train, y_train)
 
@@ -117,7 +112,7 @@ def knn_optuna(trial, X_train, y_train):
     return scores.mean()
 
 
-def optimize_knn(X_train, y_train, n_trials=100):
+def optimize_knn(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: knn_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -140,7 +135,7 @@ def svr_optuna(trial, X_train, y_train):
     return scores.mean()
 
 
-def optimize_svr(X_train, y_train, n_trials=100):
+def optimize_svr(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: svr_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -182,7 +177,7 @@ def ann_optuna(trial, X_train, y_train):
     return model
 
 
-def optimize_ann(X_train, y_train, n_trials=100):
+def optimize_ann(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: ann_optuna(trial, X_train, y_train), n_trials=n_trials)
 

@@ -13,20 +13,20 @@ def download_data(Stock):
 
     # add EV to EBITDA from excel sheet
 
-    sheet_map = {
-        "TELIA.ST": "TELIA",
-        "HM-B.ST": "HM-B",
-        "INVE-B.ST": "INVE-B",
-        "VOLV-B.ST": "VOLV-B",
-        "SOBI.ST": "SOBI",
-    }
+    # sheet_map = {
+    #     "TELIA.ST": "TELIA",
+    #     "HM-B.ST": "HM-B",
+    #     "INVE-B.ST": "INVE-B",
+    #     "VOLV-B.ST": "VOLV-B",
+    #     "SOBI.ST": "SOBI",
+    # }
 
-    sheet_name = sheet_map[Stock]
-    df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header=0)
+    # sheet_name = sheet_map[Stock]
+    # df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header=0)
 
-    merged_df = pd.merge(df, df2, on="Date", how="outer")
+    # merged_df = pd.merge(df, df2, on="Date", how="outer")
 
-    df = merged_df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+    df = df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
     df.fillna(method="ffill", inplace=True)
 
     return df
@@ -34,7 +34,7 @@ def download_data(Stock):
 
 def create_features(df, Stock):
     # Create features:
-    df["5d_close_future"] = df["Adj Close"].shift(-10)
+    df["5d_close_future"] = df["Adj Close"].shift(-5)
     # df["5d_close_future_pct"] = df["5d_close_future"].pct_change(5)
     # df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
@@ -44,8 +44,8 @@ def create_features(df, Stock):
         14,
         # 30,
         # 50,
-        # 100,
-        200,
+        100,
+        # 200,
     ]:  # Create the moving average indicator and divide by Adj_Close
         df["ma" + str(n)] = (
             sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
