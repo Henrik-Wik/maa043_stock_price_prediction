@@ -6,11 +6,14 @@ from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import TimeSeriesSplit, cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 
 import optuna
+
+tscv = TimeSeriesSplit(n_splits=5)
+
 
 # Linear Regression
 
@@ -22,26 +25,26 @@ def linear_regression(X_train, y_train):
     return linreg
 
 
-def linear_optuna(trial, X_train, y_train):
+# %%
+
+
+def linreg_optuna(trial, X_train, y_train):
     # hyperparameters
     fit_intercept = trial.suggest_categorical("fit_intercept", [True, False])
-    normalize = trial.suggest_categorical("normalize", [True, False])
     copy_X = trial.suggest_categorical("copy_X", [True, False])
 
-    linreg = LinearRegression(
-        fit_intercept=fit_intercept, normalize=normalize, copy_X=copy_X
-    )
+    linreg = LinearRegression(fit_intercept=fit_intercept, copy_X=copy_X)
     linreg.fit(X_train, y_train)
 
-    scores = cross_val_score(linreg, X_train, y_train, cv=5, scoring="r2")
+    scores = cross_val_score(linreg, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
 
-    return np.mean(scores)
+    return scores.mean()
 
 
-def optimize_linear(X_train, y_train, n_trials=100):
+def optimize_linear(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(
-        lambda trial: linear_optuna(trial, X_train, y_train), n_trials=n_trials
+        lambda trial: linreg_optuna(trial, X_train, y_train), n_trials=n_trials
     )
 
     return study.best_params
@@ -59,21 +62,21 @@ def random_forest_regression(X_train, y_train):
 
 def rfr_optuna(trial, X_train, y_train):
     # hyperparameters
-    n_estimators = trial.suggest_int("n_estimators", 1, 150)
-    max_depth = trial.suggest_int("max_depth", 1, 5)
+    n_estimators = trial.suggest_int("n_estimators", 10, 150)
     max_features = trial.suggest_int("max_features", 1, 5)
+    max_depth = trial.suggest_int("max_depth", 1, 5)
 
     rfr = RandomForestRegressor(
         n_estimators=n_estimators, max_depth=max_depth, max_features=max_features
     )
     rfr.fit(X_train, y_train)
 
-    scores = cross_val_score(rfr, X_train, y_train, cv=5, scoring="r2")
+    scores = cross_val_score(rfr, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
 
-    return np.mean(scores)
+    return scores.mean()
 
 
-def optimize_rfr(X_train, y_train, n_trials=100):
+def optimize_rfr(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: rfr_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -92,29 +95,24 @@ def knn_regression(X_train, y_train):
 
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
-    n_neighbors = trial.suggest_int("n_neighbors", 1, 20)
-    weights = trial.suggest_categorical("weights", ["uniform", "distance"])
-    algorithm = trial.suggest_categorical(
-        "algorithm", ["auto", "ball_tree", "kd_tree", "brute"]
-    )
+    n_neighbors = trial.suggest_int("n_neighbors", 3, 30)
     leaf_size = trial.suggest_int("leaf_size", 1, 50)
-    p = trial.suggest_int("p", 1, 2)
 
     knn = KNeighborsRegressor(
         n_neighbors=n_neighbors,
-        weights=weights,
-        algorithm=algorithm,
+        algorithm="auto",
         leaf_size=leaf_size,
-        p=p,
+        weights="distance",
+        p=2,
     )
     knn.fit(X_train, y_train)
 
-    scores = cross_val_score(knn, X_train, y_train, cv=5, scoring="r2")
+    scores = cross_val_score(knn, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
 
-    return np.mean(scores)
+    return scores.mean()
 
 
-def optimize_knn(X_train, y_train, n_trials=100):
+def optimize_knn(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: knn_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -126,20 +124,18 @@ def optimize_knn(X_train, y_train, n_trials=100):
 
 def svr_optuna(trial, X_train, y_train):
     # hyperparameters
-    C = trial.suggest_float("C", 1e-2, 1e2, log=True)
-    gamma = trial.suggest_float("gamma", 1e-2, 1e2, log=True)
-    kernel = trial.suggest_categorical("kernel", ["linear", "poly", "rbf", "sigmoid"])
+    C = trial.suggest_float("C", 1, 100, log=True)
+    gamma = trial.suggest_float("gamma", 1e-4, 1, log=True)
+    kernel = trial.suggest_categorical("kernel", ["rbf"])
 
     svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
 
-    scores = cross_val_score(
-        svr, X_train, y_train, cv=5, scoring="neg_mean_squared_error"
-    )
-    return np.mean(scores)
+    scores = cross_val_score(svr, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
+    return scores.mean()
 
 
-def optimize_svr(X_train, y_train, n_trials=100):
+def optimize_svr(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: svr_optuna(trial, X_train, y_train), n_trials=n_trials)
 
@@ -181,7 +177,7 @@ def ann_optuna(trial, X_train, y_train):
     return model
 
 
-def optimize_ann(X_train, y_train, n_trials=100):
+def optimize_ann(X_train, y_train, n_trials=50):
     study = optuna.create_study(direction="maximize")
     study.optimize(lambda trial: ann_optuna(trial, X_train, y_train), n_trials=n_trials)
 

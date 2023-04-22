@@ -34,20 +34,22 @@ def download_data(Stock):
 
 def create_features(df, Stock):
     # Create features:
-    df["5d_future_close"] = df["Adj Close"].shift(-5)
-    # df["5d_close_future_pct"] = df["5d_future_close"].pct_change(5)
+    df["5d_close_future"] = df["Adj Close"].shift(-5)
+    # df["5d_close_future_pct"] = df["5d_close_future"].pct_change(5)
     # df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
     feature_names = ["Adj Close"]
 
     for n in [
         14,
-        30,
-        50,
+        # 30,
+        # 50,
         100,
-        200,
+        # 200,
     ]:  # Create the moving average indicator and divide by Adj_Close
-        df["ma" + str(n)] = sma_indicator(df["Adj Close"], window=n, fillna=False)
+        df["ma" + str(n)] = (
+            sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
+        )
         df["rsi" + str(n)] = rsi(df["Adj Close"], window=n, fillna=False)
         feature_names = feature_names + ["ma" + str(n), "rsi" + str(n)]
 
@@ -64,10 +66,10 @@ def create_features(df, Stock):
     # Create features and targets
     # use feature_names for features; '5d_close_future_pct' for targets
     features = df[feature_names]
-    targets = df["5d_future_close"]
+    targets = df["5d_close_future"]
 
     # Create DataFrame from target column and feature columns
-    feature_and_target_cols = ["5d_future_close"] + feature_names
+    feature_and_target_cols = ["5d_close_future"] + feature_names
     feat_targ_df = df[feature_and_target_cols]
 
     # Uncomment to remove volume features
@@ -91,17 +93,17 @@ def time_split(features, targets):
     return train_features, test_features, train_targets, test_targets
 
 
-def scale_data(train, test, pred):  # Standardization with dataframe as output
+def scale_data(train, test, targets):  # Standardization with dataframe as output
     scaler = StandardScaler()
     # transform using fit from training data.
     scaled_train = scaler.fit_transform(train)
     scaled_test = scaler.transform(test)
 
     # used to inverse transform predicted data
-    pred_scaler = StandardScaler()
-    train = pred_scaler.fit(pred.values.reshape(-1, 1))
+    target_scaler = StandardScaler()
+    target_scaler.fit(targets.values.reshape(-1, 1))
 
-    return scaled_train, scaled_test, pred_scaler
+    return scaled_train, scaled_test, target_scaler
 
 
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
