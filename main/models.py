@@ -1,7 +1,9 @@
 import keras.backend as K
+import optuna
 from keras.layers import Dense
 from keras.models import Sequential
 from keras.optimizers import Adam
+from keras.wrappers.scikit_learn import KerasRegressor
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
@@ -9,8 +11,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import TimeSeriesSplit, cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
-
-import optuna
 
 tscv = TimeSeriesSplit(n_splits=5)
 
@@ -155,13 +155,11 @@ def neural_network_regression(X_train, y_train):
     return model
 
 
-def ann_optuna(trial, X_train, y_train):
-    K.clear_session()
-
+def ann_model(trial):
     # hyperparameters
     n_layers = trial.suggest_int("n_layers", 1, 4)
     n_neurons = trial.suggest_int("n_neurons", 16, 256)
-    learning_rate = trial.suggest_uniform("learning_rate", 0.001, 0.1)
+    learning_rate = trial.suggest_float("learning_rate", 0.001, 0.1, log=True)
     activation = trial.suggest_categorical("activation", ["relu", "sigmoid"])
 
     # Define the architecture of the neural network
@@ -170,11 +168,33 @@ def ann_optuna(trial, X_train, y_train):
         model.add(Dense(n_neurons, activation=activation))
     model.add(Dense(1, activation=activation))
 
-    # Train the neural network using the hyperparameters
+    # Compile the model
     optimizer = Adam(learning_rate=learning_rate)
     model.compile(loss="mse", optimizer=optimizer)
 
     return model
+
+
+def ann_optuna(trial, X_train, y_train):
+    K.clear_session()
+
+    # Create the KerasRegressor model
+    model = KerasRegressor(
+        build_fn=lambda: ann_model(trial), epochs=10, batch_size=32, verbose=0
+    )
+
+    # Calculate cross-validation scores
+    scores = []
+    for train_index, test_index in tscv.split(X_train):
+        X_train_fold, X_test_fold = X_train.iloc[train_index], X_train.iloc[test_index]
+        y_train_fold, y_test_fold = y_train.iloc[train_index], y_train.iloc[test_index]
+
+        model.fit(X_train_fold, y_train_fold)
+        y_pred = model.predict(X_test_fold)
+        score = r2_score(y_test_fold, y_pred)
+        scores.append(score)
+
+    return np.mean(scores)
 
 
 def optimize_ann(X_train, y_train, n_trials=50):

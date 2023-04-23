@@ -80,6 +80,17 @@ def SVRTest(Stock):
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()
 
-    Latex = f"SVR & ${train_r2:.4f}$ & ${test_r2:.4f}$ & ${train_mae:.4f}$ & ${test_mae:.4f}$ & ${train_mse:.4f}$ & ${test_mse:.4f}$ & ${train_rmse:.4f}$ & ${test_rmse:.4f}$ \\\\"
+    plt.figure(figsize=(8, 8), dpi=80)
+    plt.scatter(train_targets, train_predict - train_targets, label="train", s=5)
+    plt.scatter(test_targets, test_predict - test_targets, label="test", s=5)
+    plt.axhline(y=0, color="r", linestyle="--")
+    plt.title(f"{Stock} - SVR Residuals")
+    plt.xlabel("Actual Values")
+    plt.ylabel("Residuals")
+    plt.legend()
+    plt.savefig("../Graphs/" + filename + "_Residuals" + ".png")
+    plt.show()
+
+    Latex = f"SVR & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ \\\\"
 
     return Latex
