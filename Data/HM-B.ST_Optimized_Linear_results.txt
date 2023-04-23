@@ -1,0 +1,12 @@
+                                                    Value
+Stock                                             HM-B.ST
+Model                                   Linear Regression
+Best Parameters  {'fit_intercept': True, 'copy_X': False}
+Train R2                                         0.978478
+Test R2                                          0.928686
+Train RMSE                                       5.368858
+Test RMSE                                        6.157617
+Train MSE                                       28.824641
+Test MSE                                        37.916247
+Train MAE                                        4.106279
+Test MAE                                         4.535022

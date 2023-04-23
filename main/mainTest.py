@@ -15,19 +15,19 @@ Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "H
 Latex_dict = {}
 
 for Stock in Stocks:
-    Latex_dict[Stock] = ANNTest(Stock)
+    # Latex_dict[Stock] = ANNTest(Stock)
 
-    # Latex_dict[Stock] = LinearTest(Stock), KNNTest(Stock), SVRTest(Stock), RFTest(Stock), ANNTest(Stock)
+    Latex_dict[Stock] = LinearTest(Stock), KNNTest(Stock), SVRTest(Stock), RFTest(Stock), ANNTest(Stock)
 
 # %%
 
-# Latex_df = pd.DataFrame.from_dict(
-#     Latex_dict, orient="index", columns=["Linear", "KNN", "SVR", "RF"]
-# )
-
 Latex_df = pd.DataFrame.from_dict(
-    Latex_dict, orient="index", columns=["ANN"]
+    Latex_dict, orient="index", columns=["Linear", "KNN", "SVR", "RF", "ANN"]
 )
+
+# Latex_df = pd.DataFrame.from_dict(
+#     Latex_dict, orient="index", columns=["ANN"]
+# )
 
 # %%
 Transposed_df = Latex_df.transpose()

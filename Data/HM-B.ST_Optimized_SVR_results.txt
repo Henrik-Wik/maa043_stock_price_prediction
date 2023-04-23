@@ -1,0 +1,12 @@
+                                                                                    Value
+Stock                                                                             HM-B.ST
+Model                                                                                 SVR
+Best Parameters  {'C': 99.81890704919621, 'gamma': 0.014700215836391117, 'kernel': 'rbf'}
+Train R2                                                                         0.978845
+Test R2                                                                          0.926953
+Train RMSE                                                                       5.322891
+Test RMSE                                                                        6.231982
+Train MSE                                                                       28.333171
+Test MSE                                                                        38.837606
+Train MAE                                                                        4.002909
+Test MAE                                                                         4.619433

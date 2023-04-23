@@ -1,0 +1,12 @@
+                                                                                                           Value
+Stock                                                                                                    HM-B.ST
+Model                                                                                             Neural Network
+Best Parameters  {'n_layers': 4, 'n_neurons': 256, 'learning_rate': 0.0016595471343617322, 'activation': 'relu'}
+Train R2                                                                                                0.977817
+Test R2                                                                                                 0.291698
+Train RMSE                                                                                              5.450747
+Test RMSE                                                                                              19.405976
+Train MSE                                                                                              29.710642
+Test MSE                                                                                              376.591917
+Train MAE                                                                                               4.228673
+Test MAE                                                                                               14.473134

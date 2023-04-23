@@ -1,0 +1,12 @@
+                                                    Value
+Stock                                             SOBI.ST
+Model                                   Linear Regression
+Best Parameters  {'fit_intercept': True, 'copy_X': False}
+Train R2                                         0.990836
+Test R2                                          0.914816
+Train RMSE                                       3.808581
+Test RMSE                                       10.551861
+Train MSE                                       14.505287
+Test MSE                                       111.341772
+Train MAE                                        2.478851
+Test MAE                                         7.643025

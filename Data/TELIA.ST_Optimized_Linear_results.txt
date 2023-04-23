@@ -1,0 +1,12 @@
+                                                    Value
+Stock                                            TELIA.ST
+Model                                   Linear Regression
+Best Parameters  {'fit_intercept': True, 'copy_X': False}
+Train R2                                         0.951446
+Test R2                                           0.81911
+Train RMSE                                       0.630138
+Test RMSE                                        0.822445
+Train MSE                                        0.397074
+Test MSE                                         0.676415
+Train MAE                                        0.484836
+Test MAE                                         0.610297

@@ -1,0 +1,12 @@
+                                              Value
+Stock                                       SOBI.ST
+Model                                           KNN
+Best Parameters  {'n_neighbors': 3, 'leaf_size': 1}
+Train R2                                   0.995274
+Test R2                                   -2.995849
+Train RMSE                                 2.735017
+Test RMSE                                  72.26943
+Train MSE                                  7.480316
+Test MSE                                5222.870478
+Train MAE                                  1.568447
+Test MAE                                   63.57584

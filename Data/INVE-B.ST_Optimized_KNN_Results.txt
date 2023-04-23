@@ -1,0 +1,12 @@
+                                               Value
+Stock                                      INVE-B.ST
+Model                                            KNN
+Best Parameters  {'n_neighbors': 3, 'leaf_size': 11}
+Train R2                                    0.996724
+Test R2                                    -0.205685
+Train RMSE                                  1.233126
+Test RMSE                                   12.85758
+Train MSE                                     1.5206
+Test MSE                                  165.317352
+Train MAE                                   0.719883
+Test MAE                                     9.26351
