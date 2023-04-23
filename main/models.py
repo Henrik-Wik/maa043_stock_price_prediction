@@ -126,7 +126,7 @@ def svr_optuna(trial, X_train, y_train):
     # hyperparameters
     C = trial.suggest_float("C", 1, 100, log=True)
     gamma = trial.suggest_float("gamma", 1e-4, 1, log=True)
-    kernel = trial.suggest_categorical("kernel", ["rbf"])
+    kernel = trial.suggest_categorical("kernel", ["rbf", "sigmoid"])
 
     svr = SVR(kernel=kernel, C=C, gamma=gamma)
     svr.fit(X_train, y_train)
