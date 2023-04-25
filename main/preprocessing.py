@@ -32,7 +32,7 @@ def download_data(Stock):
     return df
 
 
-def create_features(df, Stock):
+def create_features(df):
     # Create features:
     df["5d_close_future"] = df["Adj Close"].shift(-5)
     # df["5d_close_future_pct"] = df["5d_close_future"].pct_change(5)
@@ -42,10 +42,7 @@ def create_features(df, Stock):
 
     for n in [
         14,
-        # 30,
-        # 50,
         100,
-        # 200,
     ]:  # Create the moving average indicator and divide by Adj_Close
         df["ma" + str(n)] = (
             sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
@@ -80,11 +77,11 @@ def create_features(df, Stock):
     # )
     # feature_names = feature_names[:-2]
 
-    return features, targets, feat_targ_df, feature_names
+    return features, targets
 
 
 def time_split(features, targets):
-    train_size = int(0.80 * targets.shape[0])
+    train_size = int(0.8 * targets.shape[0])
     train_features = features[:train_size]
     train_targets = targets[:train_size]
     test_features = features[train_size:]
@@ -93,17 +90,13 @@ def time_split(features, targets):
     return train_features, test_features, train_targets, test_targets
 
 
-def scale_data(train, test, targets):  # Standardization with dataframe as output
+def scale_data(train, test):  # Standardization with dataframe as output
     scaler = StandardScaler()
     # transform using fit from training data.
     scaled_train = scaler.fit_transform(train)
     scaled_test = scaler.transform(test)
 
-    # used to inverse transform predicted data
-    target_scaler = StandardScaler()
-    target_scaler.fit(targets.values.reshape(-1, 1))
-
-    return scaled_train, scaled_test, target_scaler
+    return scaled_train, scaled_test
 
 
 def normalize_data(X_train, X_test):  # normalization with dataframe as output
@@ -114,4 +107,4 @@ def normalize_data(X_train, X_test):  # normalization with dataframe as output
     scaled_X_train = scaler.fit_transform(X_train)
     scaled_X_test = scaler.transform(X_test)
 
-    return scaled_X_train, scaled_X_test, scaler
+    return scaled_X_train, scaled_X_test

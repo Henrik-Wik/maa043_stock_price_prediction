@@ -15,12 +15,16 @@ def KNNTest(Stock):
         import preprocessing as pp
 
     data = pp.download_data(Stock)
-    features, targets, feat_targ_df, feature_names = pp.create_features(data, Stock)
+    features, targets = pp.create_features(data)
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )
-    scaled_train_features, scaled_test_features, target_scaler = pp.scale_data(
-        train_features, test_features, targets
+    # scaled_train_features, scaled_test_features = pp.scale_data(
+    #     train_features, test_features
+    # )
+
+    scaled_train_features, scaled_test_features = pp.normalize_data(
+        train_features, test_features
     )
 
     best_params = optimize_knn(scaled_train_features, train_targets)
@@ -64,7 +68,7 @@ def KNNTest(Stock):
 
     # Save the DataFrame to a csv file
 
-    filename = f"{Stock}_Optimized_KNN_Results"
+    filename = f"{Stock}_Optimized_KNN_results"
 
     results_df.to_string("../Data/" + filename + ".txt")
 

@@ -1,12 +1,12 @@
-                                                                                                         Value
-Stock                                                                                                  ^OMXSPI
-Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 3, 'n_neurons': 82, 'learning_rate': 0.011188639560436133, 'activation': 'relu'}
-Train R2                                                                                              0.921837
-Test R2                                                                                               0.847003
-Train RMSE                                                                                           15.090743
-Test RMSE                                                                                            14.598515
-Train MSE                                                                                           227.730517
-Test MSE                                                                                            213.116632
-Train MAE                                                                                            13.202694
-Test MAE                                                                                             12.440053
+                                                                                                           Value
+Stock                                                                                                    ^OMXSPI
+Model                                                                                             Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 106, 'learning_rate': 0.0010118799511205426, 'activation': 'relu'}
+Train R2                                                                                                0.942269
+Test R2                                                                                                 0.668062
+Train RMSE                                                                                             14.339947
+Test RMSE                                                                                              20.894911
+Train MSE                                                                                             205.634066
+Test MSE                                                                                              436.597288
+Train MAE                                                                                              11.134416
+Test MAE                                                                                               17.387002

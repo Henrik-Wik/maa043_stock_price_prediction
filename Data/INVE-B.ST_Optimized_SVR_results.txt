@@ -1,12 +1,12 @@
-                                                                                  Value
-Stock                                                                         INVE-B.ST
-Model                                                                               SVR
-Best Parameters  {'C': 74.40804866932669, 'gamma': 0.0142150610998288, 'kernel': 'rbf'}
-Train R2                                                                       0.995735
-Test R2                                                                        0.911362
-Train RMSE                                                                     1.407087
-Test RMSE                                                                      3.486208
-Train MSE                                                                      1.979893
-Test MSE                                                                      12.153649
-Train MAE                                                                      0.986302
-Test MAE                                                                        2.74591
+                                                                                   Value
+Stock                                                                          INVE-B.ST
+Model                                                                                SVR
+Best Parameters  {'C': 90.20048555582882, 'gamma': 0.07017161636306374, 'kernel': 'rbf'}
+Train R2                                                                        0.995721
+Test R2                                                                         0.871505
+Train RMSE                                                                      1.409364
+Test RMSE                                                                       4.197447
+Train MSE                                                                       1.986308
+Test MSE                                                                       17.618558
+Train MAE                                                                       0.990203
+Test MAE                                                                        3.252867

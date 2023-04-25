@@ -1,12 +1,12 @@
-                                                                                                        Value
-Stock                                                                                                 SOBI.ST
-Model                                                                                          Neural Network
-Best Parameters  {'n_layers': 4, 'n_neurons': 54, 'learning_rate': 0.00418511679852442, 'activation': 'relu'}
-Train R2                                                                                            -3.219049
-Test R2                                                                                            -27.329163
-Train RMSE                                                                                          81.717859
-Test RMSE                                                                                          192.427421
-Train MSE                                                                                         6677.808416
-Test MSE                                                                                         37028.312243
-Train MAE                                                                                           71.379498
-Test MAE                                                                                            189.00063
+                                                                                                         Value
+Stock                                                                                                  SOBI.ST
+Model                                                                                           Neural Network
+Best Parameters  {'n_layers': 4, 'n_neurons': 60, 'learning_rate': 0.006408938538775917, 'activation': 'relu'}
+Train R2                                                                                              0.985466
+Test R2                                                                                               0.830535
+Train RMSE                                                                                            4.796269
+Test RMSE                                                                                            14.882972
+Train MSE                                                                                              23.0042
+Test MSE                                                                                            221.502861
+Train MAE                                                                                              3.54876
+Test MAE                                                                                             11.797013

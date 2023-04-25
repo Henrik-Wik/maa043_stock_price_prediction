@@ -1,12 +1,12 @@
                                                 Value
 Stock                                            ^OMX
 Model                                             KNN
-Best Parameters  {'n_neighbors': 10, 'leaf_size': 32}
-Train R2                                     0.985142
-Test R2                                      0.265225
-Train RMSE                                  26.493342
-Test RMSE                                    67.32381
-Train MSE                                  701.897195
-Test MSE                                  4532.495444
-Train MAE                                   19.546994
-Test MAE                                    53.408794
+Best Parameters  {'n_neighbors': 14, 'leaf_size': 16}
+Train R2                                       0.9873
+Test R2                                      0.590655
+Train RMSE                                  24.754856
+Test RMSE                                   49.598341
+Train MSE                                  612.802908
+Test MSE                                  2459.995385
+Train MAE                                   18.415026
+Test MAE                                    39.178933

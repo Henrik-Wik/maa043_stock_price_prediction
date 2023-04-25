@@ -1,12 +1,12 @@
-                                                                                     Value
-Stock                                                                             TELIA.ST
-Model                                                                                  SVR
-Best Parameters  {'C': 99.41621867496683, 'gamma': 0.0017796543538195603, 'kernel': 'rbf'}
-Train R2                                                                          0.953043
-Test R2                                                                           0.808322
-Train RMSE                                                                        0.619685
-Test RMSE                                                                         0.846614
-Train MSE                                                                         0.384009
-Test MSE                                                                          0.716755
-Train MAE                                                                         0.472831
-Test MAE                                                                          0.632463
+                                                                                    Value
+Stock                                                                            TELIA.ST
+Model                                                                                 SVR
+Best Parameters  {'C': 86.19722619941167, 'gamma': 0.011201275374522385, 'kernel': 'rbf'}
+Train R2                                                                         0.952657
+Test R2                                                                          0.815018
+Train RMSE                                                                       0.622229
+Test RMSE                                                                        0.831695
+Train MSE                                                                         0.38717
+Test MSE                                                                         0.691716
+Train MAE                                                                        0.476753
+Test MAE                                                                          0.61952

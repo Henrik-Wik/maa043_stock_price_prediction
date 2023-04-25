@@ -2,11 +2,11 @@
 Stock                                           VOLV-B.ST
 Model                                   Linear Regression
 Best Parameters  {'fit_intercept': True, 'copy_X': False}
-Train R2                                         0.976646
-Test R2                                          0.775344
-Train RMSE                                       2.705997
-Test RMSE                                        4.275544
-Train MSE                                        7.322417
-Test MSE                                        18.280275
-Train MAE                                        2.005426
-Test MAE                                         3.465148
+Train R2                                         0.976373
+Test R2                                          0.778883
+Train RMSE                                       2.721735
+Test RMSE                                         4.24173
+Train MSE                                        7.407839
+Test MSE                                        17.992274
+Train MAE                                        2.012123
+Test MAE                                         3.426771

@@ -2,11 +2,11 @@
 Stock                                                ^OMX
 Model                                   Linear Regression
 Best Parameters  {'fit_intercept': True, 'copy_X': False}
-Train R2                                         0.981261
-Test R2                                          0.808169
-Train RMSE                                      29.752492
-Test RMSE                                       34.399404
-Train MSE                                       885.21079
-Test MSE                                         1183.319
-Train MAE                                       22.487662
-Test MAE                                        28.258983
+Train R2                                         0.981744
+Test R2                                          0.802355
+Train RMSE                                      29.679726
+Test RMSE                                       34.463971
+Train MSE                                      880.886133
+Test MSE                                      1187.765307
+Train MAE                                       22.382294
+Test MAE                                        28.110162
