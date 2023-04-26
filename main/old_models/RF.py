@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from preprocessing import *
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import ParameterGrid
 from sklearn.metrics import r2_score
+from sklearn.model_selection import ParameterGrid
 
-Stock = "INVE-B.ST"
+Stock = "TELIA.ST"
 
 
 df = download_data(Stock)
 
-X, y, X_y, feature_names = create_features(df, Stock)
+X, y, feature_names = create_features(df)
 
 X_train, X_test, y_train, y_test = time_split(X, y)
 
@@ -29,10 +29,9 @@ print(rfr.score(X_train, y_train))
 print(rfr.score(X_test, y_test))
 
 grid = {
-    "n_estimators": [200],
-    "max_depth": [3],
-    "max_features": [4, 8],
-    "random_state": [42],
+    "n_estimators": [114],
+    "max_depth": [4],
+    "max_features": [5],
 }
 test_scores = []
 
@@ -83,3 +82,5 @@ r2_score_train = r2_score(y_train, train_predictions)
 r2_score_test = r2_score(y_test, test_predictions)
 
 print(r2_score_train, r2_score_test)
+
+# %%

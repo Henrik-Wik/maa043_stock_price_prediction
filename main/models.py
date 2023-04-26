@@ -50,7 +50,10 @@ def rfr_optuna(trial, X_train, y_train):
     max_depth = trial.suggest_int("max_depth", 1, 5)
 
     rfr = RandomForestRegressor(
-        n_estimators=n_estimators, max_depth=max_depth, max_features=max_features
+        n_estimators=n_estimators,
+        max_depth=max_depth,
+        max_features=max_features,
+        random_state=42,
     )
     rfr.fit(X_train, y_train)
 

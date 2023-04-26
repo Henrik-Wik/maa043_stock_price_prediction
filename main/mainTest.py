@@ -10,12 +10,12 @@ from SVRTest import SVRTest
 
 Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
-# Stocks = {"INVE-B.ST"}
+# Stocks = {"^OMXSPI"}
 
 Latex_dict = {}
 
 for Stock in Stocks:
-    Latex_dict[Stock] = ANNTest(Stock)
+    Latex_dict[Stock] = RFTest(Stock)
 
     # Latex_dict[Stock] = LinearTest(Stock), KNNTest(Stock), SVRTest(Stock), RFTest(Stock), ANNTest(Stock)
 
