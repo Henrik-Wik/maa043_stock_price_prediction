@@ -15,11 +15,11 @@ from ta.trend import sma_indicator
 
 # %%
 
-Stock = "HM-B.ST"
+Stock = "VOLV-B.ST"
 
 df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
 df = df.reset_index()
-
+#%%
 # add EV to EBITDA from excel sheet
 
 sheet_map = {
@@ -35,7 +35,7 @@ df2 = pd.read_excel("EV Ebitda.xlsx", sheet_name=sheet_name, index_col=0, header
 
 merged_df = pd.merge(df, df2, on="Date", how="outer")
 
-df = df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
+df = merged_df.drop(["Date", "Open", "Low", "Close", "High"], axis=1)
 df.fillna(method="ffill", inplace=True)
 
 # %%
