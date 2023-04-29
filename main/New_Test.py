@@ -120,7 +120,7 @@ test_dates = dates[train_size:]
 
 # %%
 
-linear = LinearRegression()
+linear = LinearRegression(copy_X=True)
 linear.fit(train_features, train_targets)
 
 # %%
@@ -130,7 +130,7 @@ svr.fit(train_features, train_targets)
 
 # %%
 
-rf = RandomForestRegressor(n_estimators=100, max_depth=10)
+rf = RandomForestRegressor(n_estimators=100, max_depth=10, max_features=4)
 rf.fit(train_features, train_targets)
 
 # %%
