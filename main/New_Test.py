@@ -48,14 +48,10 @@ df["5d_close_future"] = df["Adj Close"].shift(-5)
 # df["5d_close_future_pct"] = df["5d_close_future"].pct_change(5)
 # df["5d_close_pct"] = df["Adj Close"].pct_change(5)
 
-feature_names = ["Adj Close"]
+feature_names = ["Adj Close", "EVEBITDA"]
 
 for n in [
-    14,
-    30,
     50,
-    100,
-    200,
 ]:  # Create the moving average indicator and divide by Adj_Close
     df["ma" + str(n)] = (
         sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
@@ -84,9 +80,9 @@ feat_targ_df = df[feature_and_target_cols]
 
 # Uncomment to remove volume features
 
-features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
-feat_targ_df = feat_targ_df.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
-feature_names = feature_names[:-2]
+# features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
+# feat_targ_df = feat_targ_df.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
+# feature_names = feature_names[:-2]
 
 # %%
 
