@@ -1,0 +1,12 @@
+                                                                                    Value
+Stock                                                                                ^OMX
+Model                                                                                 SVR
+Best Parameters  {'C': 99.74907837152894, 'gamma': 0.030724251545762568, 'kernel': 'rbf'}
+Train R2                                                                         0.981369
+Test R2                                                                          0.783547
+Train RMSE                                                                      30.156533
+Test RMSE                                                                       35.788774
+Train MSE                                                                      909.416477
+Test MSE                                                                      1280.836331
+Train MAE                                                                       22.366651
+Test MAE                                                                        29.212078

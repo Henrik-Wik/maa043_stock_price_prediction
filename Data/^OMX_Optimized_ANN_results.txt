@@ -1,0 +1,12 @@
+                                                                                                         Value
+Stock                                                                                                     ^OMX
+Model                                                                                           Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 35, 'learning_rate': 0.008648814648903557, 'activation': 'relu'}
+Train R2                                                                                              0.981164
+Test R2                                                                                                0.77665
+Train RMSE                                                                                           30.322616
+Test RMSE                                                                                            36.354514
+Train MSE                                                                                           919.461011
+Test MSE                                                                                           1321.650702
+Train MAE                                                                                            23.143143
+Test MAE                                                                                             30.349416

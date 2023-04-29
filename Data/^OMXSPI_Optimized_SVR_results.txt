@@ -1,0 +1,12 @@
+                                                                                   Value
+Stock                                                                            ^OMXSPI
+Model                                                                                SVR
+Best Parameters  {'C': 98.56587548698363, 'gamma': 0.00915995495535946, 'kernel': 'rbf'}
+Train R2                                                                        0.975467
+Test R2                                                                         0.867144
+Train RMSE                                                                      9.917855
+Test RMSE                                                                      13.023592
+Train MSE                                                                      98.363852
+Test MSE                                                                      169.613958
+Train MAE                                                                       7.446085
+Test MAE                                                                       10.789335

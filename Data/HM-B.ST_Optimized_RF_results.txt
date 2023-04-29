@@ -1,0 +1,12 @@
+                                                                    Value
+Stock                                                             HM-B.ST
+Model                                                       Random Forest
+Best Parameters  {'n_estimators': 129, 'max_features': 5, 'max_depth': 4}
+Train R2                                                         0.980155
+Test R2                                                          0.733134
+Train RMSE                                                       5.153866
+Test RMSE                                                       11.792018
+Train MSE                                                       26.562339
+Test MSE                                                       139.051684
+Train MAE                                                        3.972637
+Test MAE                                                         9.252927
