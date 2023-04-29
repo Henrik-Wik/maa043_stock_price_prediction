@@ -19,7 +19,10 @@ Stock = "VOLV-B.ST"
 
 df = yf.download(Stock, "2010-01-01", "2020-01-01", period="1d")
 df = df.reset_index()
-#%%
+
+dates = df["Date"]
+
+# %%
 # add EV to EBITDA from excel sheet
 
 sheet_map = {
@@ -49,7 +52,10 @@ feature_names = ["Adj Close"]
 
 for n in [
     14,
+    30,
+    50,
     100,
+    200,
 ]:  # Create the moving average indicator and divide by Adj_Close
     df["ma" + str(n)] = (
         sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]
@@ -78,11 +84,9 @@ feat_targ_df = df[feature_and_target_cols]
 
 # Uncomment to remove volume features
 
-# features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
-# feat_targ_df = feat_targ_df.drop(
-#     ["Volume_1d_change", "Volume_1d_change_SMA"], axis=1
-# )
-# feature_names = feature_names[:-2]
+features = features.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
+feat_targ_df = feat_targ_df.drop(["Volume_1d_change", "Volume_1d_change_SMA"], axis=1)
+feature_names = feature_names[:-2]
 
 # %%
 
@@ -92,12 +96,22 @@ train_targets = targets[:train_size]
 test_features = features[train_size:]
 test_targets = targets[train_size:]
 
+
+# Store the index of the non-null rows in the DataFrame after dropping NaN values
+non_null_index = df.dropna().index
+
+# Filter the 'date_values' using the 'non_null_index'
+dates = dates.loc[non_null_index]
+
+train_dates = dates[:train_size]
+test_dates = dates[train_size:]
+
 # %%
 
-scaler = StandardScaler()
-# transform using fit from training data.
-train_features = scaler.fit_transform(train_features)
-test_features = scaler.transform(test_features)
+# scaler = StandardScaler()
+# # transform using fit from training data.
+# train_features = scaler.fit_transform(train_features)
+# test_features = scaler.transform(test_features)
 
 # # used to inverse transform predicted data
 # pred_scaler = StandardScaler()
@@ -183,4 +197,12 @@ for model in [linear, svr, rf, knn]:
     plt.legend()
     plt.show()
 
-# %%
+    plt.figure(figsize=(12, 6), dpi=80)
+    plt.plot(train_dates, train_targets, label="Train Actual Values", c="blue")
+    plt.plot(train_dates, train_predict, label="Train Predicted Values", c="cyan")
+    plt.plot(test_dates, test_targets, label="Test Actual Values", c="red")
+    plt.plot(test_dates, test_predict, label="Test Predicted Values", c="orange")
+    plt.xlabel("Date")
+    plt.ylabel("Price")
+    plt.legend()
+    plt.show()
