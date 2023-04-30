@@ -46,7 +46,7 @@ def optimize_linear(X_train, y_train, n_trials=50):
 def rfr_optuna(trial, X_train, y_train):
     # hyperparameters
     n_estimators = trial.suggest_int("n_estimators", 10, 150)
-    max_features = trial.suggest_int("max_features", 1, 5)
+    max_features = trial.suggest_int("max_features", 1, 2)
     max_depth = trial.suggest_int("max_depth", 1, 5)
 
     rfr = RandomForestRegressor(
@@ -75,13 +75,11 @@ def optimize_rfr(X_train, y_train, n_trials=50):
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
     n_neighbors = trial.suggest_int("n_neighbors", 3, 100)
-    leaf_size = trial.suggest_int("leaf_size", 1, 20)
     # algorithm = trial.suggest_categorical("algorithm", ["auto", "ball_tree", "kd_tree"])
 
     knn = KNeighborsRegressor(
         n_neighbors=n_neighbors,
         algorithm="auto",
-        leaf_size=leaf_size,
         weights="distance",
         p=2,
     )
