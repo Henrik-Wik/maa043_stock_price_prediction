@@ -8,9 +8,9 @@ from SVRTest import SVRTest
 
 # Run the tests
 
-Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
+# Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
-# Stocks = {"VOLV-B.ST"}
+Stocks = {"^OMXSPI"}
 
 Latex_dict = {}
 

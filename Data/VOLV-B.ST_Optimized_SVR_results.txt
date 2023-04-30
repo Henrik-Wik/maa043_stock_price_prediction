@@ -1,0 +1,12 @@
+                                                                                   Value
+Stock                                                                          VOLV-B.ST
+Model                                                                                SVR
+Best Parameters  {'C': 96.4924189298562, 'gamma': 0.004555844173806282, 'kernel': 'rbf'}
+Train R2                                                                        0.976324
+Test R2                                                                         0.759565
+Train RMSE                                                                      2.700684
+Test RMSE                                                                       4.421861
+Train MSE                                                                       7.293694
+Test MSE                                                                       19.552855
+Train MAE                                                                       1.978812
+Test MAE                                                                        3.590657

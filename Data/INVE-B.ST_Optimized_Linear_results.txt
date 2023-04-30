@@ -1,0 +1,12 @@
+                                                    Value
+Stock                                           INVE-B.ST
+Model                                   Linear Regression
+Best Parameters  {'fit_intercept': True, 'copy_X': False}
+Train R2                                         0.995783
+Test R2                                          0.962195
+Train RMSE                                       1.396418
+Test RMSE                                        2.265987
+Train MSE                                        1.949984
+Test MSE                                         5.134696
+Train MAE                                        0.999003
+Test MAE                                         1.795128

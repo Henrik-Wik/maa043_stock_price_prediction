@@ -5,38 +5,38 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import statsmodels.api as sm
-from statsmodels.tools.eval_measures import rmse, mse, meanabs
 from preprocessing import *
+from statsmodels.tools.eval_measures import meanabs, mse, rmse
 
-Stock = "INVE-B.ST"
+Stock = "VOLV-B.ST"
 
 df = download_data(Stock)
 
 # %% [markdown]
 # Calculate correlation matrix
 
-features, targets, feat_targ_df, feature_names = create_features(df, Stock)
+features, targets, feature_names = create_features(df)
 
-corr = feat_targ_df.corr()
-print(corr)
+# corr = feat_targ_df.corr()
+# print(corr)
 
 # %%
 # plot SMAs together
 
-df[["ma14", "ma30", "ma50", "ma200"]].plot(figsize=(8, 5))
-plt.title("INVE-B Stock Price Moving Averages", fontsize=17)
-plt.xlabel("Time", fontsize=14)
-plt.ylabel("Price", fontsize=14)
-plt.grid(which="major", color="k", linestyle="-.", linewidth=0.5)
+# df[["ma14", "ma30", "ma50", "ma200"]].plot(figsize=(8, 5))
+# plt.title("INVE-B Stock Price Moving Averages", fontsize=17)
+# plt.xlabel("Time", fontsize=14)
+# plt.ylabel("Price", fontsize=14)
+# plt.grid(which="major", color="k", linestyle="-.", linewidth=0.5)
 
-# %%
+# # %%
 
-plt.figure(figsize=(8, 8), dpi=80)
-sns.heatmap(corr, annot=True, annot_kws={"size": 10})
-plt.yticks(rotation=0, size=12)
-plt.xticks(rotation=90, size=12)  # fix ticklab
-plt.tight_layout()  # fits plot area to the plot, "tightly"
-plt.show()  # show the plot
+# plt.figure(figsize=(8, 8), dpi=80)
+# sns.heatmap(corr, annot=True, annot_kws={"size": 10})
+# plt.yticks(rotation=0, size=12)
+# plt.xticks(rotation=90, size=12)  # fix ticklab
+# plt.tight_layout()  # fits plot area to the plot, "tightly"
+# plt.show()  # show the plot
 
 # %%
 # plt.figure(figsize=(8, 8), dpi=80)

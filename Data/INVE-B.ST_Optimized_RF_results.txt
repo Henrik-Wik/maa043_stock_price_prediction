@@ -1,0 +1,12 @@
+                                                                    Value
+Stock                                                           INVE-B.ST
+Model                                                       Random Forest
+Best Parameters  {'n_estimators': 109, 'max_features': 5, 'max_depth': 4}
+Train R2                                                         0.995385
+Test R2                                                         -0.158478
+Train RMSE                                                       1.460913
+Test RMSE                                                        12.54379
+Train MSE                                                        2.134268
+Test MSE                                                        157.34666
+Train MAE                                                        1.087296
+Test MAE                                                         8.631467

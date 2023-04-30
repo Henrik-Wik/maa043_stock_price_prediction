@@ -1,0 +1,12 @@
+                                                                   Value
+Stock                                                            SOBI.ST
+Model                                                      Random Forest
+Best Parameters  {'n_estimators': 16, 'max_features': 4, 'max_depth': 5}
+Train R2                                                         0.99194
+Test R2                                                        -2.495098
+Train RMSE                                                      3.555254
+Test RMSE                                                      69.468401
+Train MSE                                                      12.639829
+Test MSE                                                     4825.858682
+Train MAE                                                       2.487134
+Test MAE                                                       59.657026

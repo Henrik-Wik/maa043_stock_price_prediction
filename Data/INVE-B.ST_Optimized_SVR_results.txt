@@ -1,0 +1,12 @@
+                                                                                    Value
+Stock                                                                           INVE-B.ST
+Model                                                                                 SVR
+Best Parameters  {'C': 97.69867429167083, 'gamma': 0.013964471142613137, 'kernel': 'rbf'}
+Train R2                                                                         0.995798
+Test R2                                                                          0.914728
+Train RMSE                                                                       1.393908
+Test RMSE                                                                        3.403199
+Train MSE                                                                         1.94298
+Test MSE                                                                        11.581764
+Train MAE                                                                        0.982128
+Test MAE                                                                         2.677026
