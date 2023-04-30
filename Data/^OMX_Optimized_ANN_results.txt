@@ -1,12 +1,12 @@
-                                                                                                         Value
-Stock                                                                                                     ^OMX
-Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 35, 'learning_rate': 0.008648814648903557, 'activation': 'relu'}
-Train R2                                                                                              0.981164
-Test R2                                                                                                0.77665
-Train RMSE                                                                                           30.322616
-Test RMSE                                                                                            36.354514
-Train MSE                                                                                           919.461011
-Test MSE                                                                                           1321.650702
-Train MAE                                                                                            23.143143
-Test MAE                                                                                             30.349416
+                                                                                                          Value
+Stock                                                                                                      ^OMX
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 196, 'learning_rate': 0.026840549695834576, 'activation': 'relu'}
+Train R2                                                                                               0.971755
+Test R2                                                                                                0.743255
+Train RMSE                                                                                            37.130961
+Test RMSE                                                                                             38.977717
+Train MSE                                                                                           1378.708285
+Test MSE                                                                                            1519.262445
+Train MAE                                                                                             27.769862
+Test MAE                                                                                              31.870253

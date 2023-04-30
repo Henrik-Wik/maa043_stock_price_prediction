@@ -75,7 +75,7 @@ def RFTest(Stock):
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.xlabel("Predicted", fontsize=20)
     plt.ylabel("Actual", fontsize=20)
-    plt.title(f"{Stock} Random Forest", fontsize=26)
+    plt.title(f"{Stock} - Random Forest", fontsize=26)
     plt.legend()
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()

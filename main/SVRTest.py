@@ -75,7 +75,7 @@ def SVRTest(Stock):
     plt.scatter(test_predict, test_targets, label="test", s=5)
     plt.xlabel("Predicted", fontsize=20)
     plt.ylabel("Actual", fontsize=20)
-    plt.title(f"{Stock} SVR", fontsize=26)
+    plt.title(f"{Stock} - SVR", fontsize=26)
     plt.legend()
     plt.savefig("../Graphs/" + filename + ".png")
     plt.show()

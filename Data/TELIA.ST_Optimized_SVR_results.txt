@@ -1,12 +1,12 @@
                                                                                     Value
 Stock                                                                            TELIA.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 96.10468115721496, 'gamma': 0.004227613469627147, 'kernel': 'rbf'}
-Train R2                                                                         0.954153
-Test R2                                                                          0.812443
-Train RMSE                                                                       0.617504
-Test RMSE                                                                        0.872498
-Train MSE                                                                        0.381312
-Test MSE                                                                         0.761253
-Train MAE                                                                        0.468469
-Test MAE                                                                         0.647145
+Best Parameters  {'C': 99.42693204054693, 'gamma': 0.002704201550576116, 'kernel': 'rbf'}
+Train R2                                                                         0.953918
+Test R2                                                                           0.81564
+Train RMSE                                                                       0.619085
+Test RMSE                                                                        0.865031
+Train MSE                                                                        0.383266
+Test MSE                                                                         0.748279
+Train MAE                                                                        0.470757
+Test MAE                                                                         0.643323

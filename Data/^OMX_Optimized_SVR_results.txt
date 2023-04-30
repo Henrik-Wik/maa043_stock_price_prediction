@@ -1,12 +1,12 @@
-                                                                                    Value
-Stock                                                                                ^OMX
-Model                                                                                 SVR
-Best Parameters  {'C': 99.74907837152894, 'gamma': 0.030724251545762568, 'kernel': 'rbf'}
-Train R2                                                                         0.981369
-Test R2                                                                          0.783547
-Train RMSE                                                                      30.156533
-Test RMSE                                                                       35.788774
-Train MSE                                                                      909.416477
-Test MSE                                                                      1280.836331
-Train MAE                                                                       22.366651
-Test MAE                                                                        29.212078
+                                                                                   Value
+Stock                                                                               ^OMX
+Model                                                                                SVR
+Best Parameters  {'C': 85.5962958533344, 'gamma': 0.035518100495654265, 'kernel': 'rbf'}
+Train R2                                                                        0.981338
+Test R2                                                                         0.781692
+Train RMSE                                                                     30.181814
+Test RMSE                                                                      35.941822
+Train MSE                                                                     910.941901
+Test MSE                                                                     1291.814592
+Train MAE                                                                      22.393297
+Test MAE                                                                       29.360329
