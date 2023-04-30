@@ -1,0 +1,12 @@
+                                                                                                          Value
+Stock                                                                                                  TELIA.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 1, 'n_neurons': 193, 'learning_rate': 0.004074502328203161, 'activation': 'relu'}
+Train R2                                                                                               0.953359
+Test R2                                                                                                0.823857
+Train RMSE                                                                                             0.622826
+Test RMSE                                                                                              0.845534
+Train MSE                                                                                              0.387912
+Test MSE                                                                                               0.714928
+Train MAE                                                                                              0.474145
+Test MAE                                                                                               0.632612

@@ -1,0 +1,12 @@
+                                                                                                          Value
+Stock                                                                                                 INVE-B.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 1, 'n_neurons': 152, 'learning_rate': 0.023789502040911837, 'activation': 'relu'}
+Train R2                                                                                               0.991853
+Test R2                                                                                                0.939355
+Train RMSE                                                                                             1.940929
+Test RMSE                                                                                              2.870007
+Train MSE                                                                                              3.767206
+Test MSE                                                                                               8.236941
+Train MAE                                                                                              1.541306
+Test MAE                                                                                               2.220795

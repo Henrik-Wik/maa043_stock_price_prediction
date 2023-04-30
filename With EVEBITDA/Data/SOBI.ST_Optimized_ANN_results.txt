@@ -1,0 +1,12 @@
+                                                                                                           Value
+Stock                                                                                                    SOBI.ST
+Model                                                                                             Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 160, 'learning_rate': 0.0020079245196797414, 'activation': 'relu'}
+Train R2                                                                                                0.991232
+Test R2                                                                                                 0.900711
+Train RMSE                                                                                              3.708082
+Test RMSE                                                                                              11.708669
+Train MSE                                                                                              13.749868
+Test MSE                                                                                              137.092927
+Train MAE                                                                                               2.491886
+Test MAE                                                                                                8.912104

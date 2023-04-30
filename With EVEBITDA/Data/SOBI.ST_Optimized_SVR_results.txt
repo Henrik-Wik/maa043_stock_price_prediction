@@ -1,0 +1,12 @@
+                                                                                  Value
+Stock                                                                           SOBI.ST
+Model                                                                               SVR
+Best Parameters  {'C': 99.42097221452778, 'gamma': 0.0235929147686172, 'kernel': 'rbf'}
+Train R2                                                                       0.991213
+Test R2                                                                        0.072955
+Train RMSE                                                                     3.712137
+Test RMSE                                                                     35.777347
+Train MSE                                                                     13.779962
+Test MSE                                                                    1280.018534
+Train MAE                                                                      2.369032
+Test MAE                                                                      26.523588

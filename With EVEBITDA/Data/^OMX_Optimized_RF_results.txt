@@ -1,0 +1,12 @@
+                                                                   Value
+Stock                                                               ^OMX
+Model                                                      Random Forest
+Best Parameters  {'n_estimators': 93, 'max_features': 3, 'max_depth': 4}
+Train R2                                                        0.983699
+Test R2                                                         0.653286
+Train RMSE                                                     28.208511
+Test RMSE                                                      45.295084
+Train MSE                                                     795.720085
+Test MSE                                                     2051.644645
+Train MAE                                                      21.353406
+Test MAE                                                        34.20421

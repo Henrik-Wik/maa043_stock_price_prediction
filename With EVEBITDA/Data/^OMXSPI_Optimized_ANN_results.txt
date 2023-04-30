@@ -1,0 +1,12 @@
+                                                                                                         Value
+Stock                                                                                                  ^OMXSPI
+Model                                                                                           Neural Network
+Best Parameters  {'n_layers': 1, 'n_neurons': 181, 'learning_rate': 0.03687152618404774, 'activation': 'relu'}
+Train R2                                                                                               0.97702
+Test R2                                                                                               0.875928
+Train RMSE                                                                                            9.598842
+Test RMSE                                                                                            12.585685
+Train MSE                                                                                            92.137773
+Test MSE                                                                                             158.39947
+Train MAE                                                                                             7.352562
+Test MAE                                                                                             10.318753
