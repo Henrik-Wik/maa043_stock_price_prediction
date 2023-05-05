@@ -1,12 +1,12 @@
                                                                                                           Value
 Stock                                                                                                      ^OMX
 Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 196, 'learning_rate': 0.026840549695834576, 'activation': 'relu'}
-Train R2                                                                                               0.971755
-Test R2                                                                                                0.743255
-Train RMSE                                                                                            37.130961
-Test RMSE                                                                                             38.977717
-Train MSE                                                                                           1378.708285
-Test MSE                                                                                            1519.262445
-Train MAE                                                                                             27.769862
-Test MAE                                                                                              31.870253
+Best Parameters  {'n_layers': 1, 'n_neurons': 36, 'learning_rate': 0.0038254888215573327, 'activation': 'relu'}
+Train R2                                                                                               0.876499
+Test R2                                                                                                0.440137
+Train RMSE                                                                                            77.643022
+Test RMSE                                                                                             57.558087
+Train MSE                                                                                           6028.438901
+Test MSE                                                                                            3312.933352
+Train MAE                                                                                             55.787819
+Test MAE                                                                                              46.654275

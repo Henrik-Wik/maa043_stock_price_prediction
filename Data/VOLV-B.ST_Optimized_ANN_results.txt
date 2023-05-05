@@ -1,12 +1,12 @@
                                                                                                          Value
 Stock                                                                                                VOLV-B.ST
 Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 83, 'learning_rate': 0.004346964056203329, 'activation': 'relu'}
-Train R2                                                                                              0.970723
-Test R2                                                                                               0.761611
-Train RMSE                                                                                            3.003184
-Test RMSE                                                                                             4.403013
-Train MSE                                                                                             9.019114
-Test MSE                                                                                             19.386521
-Train MAE                                                                                              2.29953
-Test MAE                                                                                              3.542452
+Best Parameters  {'n_layers': 3, 'n_neurons': 104, 'learning_rate': 0.01919055740380538, 'activation': 'relu'}
+Train R2                                                                                               0.94629
+Test R2                                                                                               0.609599
+Train RMSE                                                                                            4.067665
+Test RMSE                                                                                             5.634586
+Train MSE                                                                                            16.545899
+Test MSE                                                                                             31.748563
+Train MAE                                                                                             3.327101
+Test MAE                                                                                              4.694005

@@ -1,12 +1,12 @@
-                                                                                                           Value
-Stock                                                                                                  INVE-B.ST
-Model                                                                                             Neural Network
-Best Parameters  {'n_layers': 3, 'n_neurons': 107, 'learning_rate': 0.0041122631563281255, 'activation': 'relu'}
-Train R2                                                                                                0.994493
-Test R2                                                                                                 0.947366
-Train RMSE                                                                                              1.595786
-Test RMSE                                                                                               2.673742
-Train MSE                                                                                               2.546533
-Test MSE                                                                                                7.148895
-Train MAE                                                                                               1.211475
-Test MAE                                                                                                2.195606
+                                                                                                         Value
+Stock                                                                                                INVE-B.ST
+Model                                                                                           Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 32, 'learning_rate': 0.009829090292183006, 'activation': 'relu'}
+Train R2                                                                                              0.995399
+Test R2                                                                                               0.960816
+Train RMSE                                                                                            1.436715
+Test RMSE                                                                                             2.272342
+Train MSE                                                                                             2.064151
+Test MSE                                                                                              5.163539
+Train MAE                                                                                             1.044814
+Test MAE                                                                                              1.792235

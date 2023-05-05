@@ -1,12 +1,12 @@
-                                               Value
-Stock                                           ^OMX
-Model                                            KNN
-Best Parameters  {'n_neighbors': 11, 'leaf_size': 7}
-Train R2                                    0.987162
-Test R2                                     0.622653
-Train RMSE                                 25.033132
-Test RMSE                                  47.253731
-Train MSE                                 626.657712
-Test MSE                                 2232.915061
-Train MAE                                  18.479368
-Test MAE                                   36.546667
+                                                Value
+Stock                                            ^OMX
+Model                                             KNN
+Best Parameters  {'n_neighbors': 11, 'leaf_size': 72}
+Train R2                                     0.987162
+Test R2                                      0.622653
+Train RMSE                                  25.033132
+Test RMSE                                   47.253731
+Train MSE                                  626.657712
+Test MSE                                  2232.915061
+Train MAE                                   18.479368
+Test MAE                                    36.546667

@@ -1,7 +1,7 @@
                                                Value
 Stock                                        SOBI.ST
 Model                                            KNN
-Best Parameters  {'n_neighbors': 3, 'leaf_size': 95}
+Best Parameters  {'n_neighbors': 3, 'leaf_size': 60}
 Train R2                                    0.997276
 Test R2                                    -2.197596
 Train RMSE                                  2.066788

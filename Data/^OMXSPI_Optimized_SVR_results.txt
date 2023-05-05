@@ -1,12 +1,12 @@
-                                                                                    Value
-Stock                                                                             ^OMXSPI
-Model                                                                                 SVR
-Best Parameters  {'C': 95.53445946285078, 'gamma': 0.014163831023638685, 'kernel': 'rbf'}
-Train R2                                                                         0.975323
-Test R2                                                                          0.851274
-Train RMSE                                                                       9.946978
-Test RMSE                                                                       13.779487
-Train MSE                                                                       98.942375
-Test MSE                                                                       189.874276
-Train MAE                                                                        7.459181
-Test MAE                                                                        11.438274
+                                                                                  Value
+Stock                                                                           ^OMXSPI
+Model                                                                               SVR
+Best Parameters  {'C': 99.174725879198, 'gamma': 0.012469455765469347, 'kernel': 'rbf'}
+Train R2                                                                       0.975336
+Test R2                                                                        0.856431
+Train RMSE                                                                     9.944309
+Test RMSE                                                                     13.538487
+Train MSE                                                                     98.889274
+Test MSE                                                                      183.29062
+Train MAE                                                                      7.455791
+Test MAE                                                                       11.24896

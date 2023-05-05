@@ -1,12 +1,12 @@
-                                                                                                           Value
-Stock                                                                                                   TELIA.ST
-Model                                                                                             Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 109, 'learning_rate': 0.0076769157684499194, 'activation': 'relu'}
-Train R2                                                                                                0.942527
-Test R2                                                                                                 0.654961
-Train RMSE                                                                                              0.691378
-Test RMSE                                                                                               1.183402
-Train MSE                                                                                               0.478003
-Test MSE                                                                                                1.400441
-Train MAE                                                                                               0.538378
-Test MAE                                                                                                0.956441
+                                                                                                          Value
+Stock                                                                                                  TELIA.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 1, 'n_neurons': 201, 'learning_rate': 0.022303627479874966, 'activation': 'relu'}
+Train R2                                                                                               0.943039
+Test R2                                                                                                0.782541
+Train RMSE                                                                                             0.688294
+Test RMSE                                                                                              0.939479
+Train MSE                                                                                              0.473749
+Test MSE                                                                                               0.882621
+Train MAE                                                                                              0.529179
+Test MAE                                                                                               0.733501

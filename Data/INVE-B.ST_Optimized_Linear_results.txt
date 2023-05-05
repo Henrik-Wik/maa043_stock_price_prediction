@@ -4,9 +4,9 @@ Model                                   Linear Regression
 Best Parameters  {'fit_intercept': True, 'copy_X': False}
 Train R2                                         0.995783
 Test R2                                          0.962195
-Train RMSE                                       1.396418
-Test RMSE                                        2.265987
-Train MSE                                        1.949984
-Test MSE                                         5.134695
-Train MAE                                        0.999003
-Test MAE                                         1.795128
+Train RMSE                                       1.375458
+Test RMSE                                        2.231973
+Train MSE                                        1.891884
+Test MSE                                         4.981704
+Train MAE                                        0.984008
+Test MAE                                         1.768182

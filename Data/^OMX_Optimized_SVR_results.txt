@@ -1,12 +1,12 @@
                                                                                    Value
 Stock                                                                               ^OMX
 Model                                                                                SVR
-Best Parameters  {'C': 85.5962958533344, 'gamma': 0.035518100495654265, 'kernel': 'rbf'}
-Train R2                                                                        0.981338
-Test R2                                                                         0.781692
-Train RMSE                                                                     30.181814
-Test RMSE                                                                      35.941822
-Train MSE                                                                     910.941901
-Test MSE                                                                     1291.814592
-Train MAE                                                                      22.393297
-Test MAE                                                                       29.360329
+Best Parameters  {'C': 98.88178119292277, 'gamma': 0.02389343100445478, 'kernel': 'rbf'}
+Train R2                                                                        0.981042
+Test R2                                                                         0.783399
+Train RMSE                                                                     30.420153
+Test RMSE                                                                      35.801058
+Train MSE                                                                     925.385695
+Test MSE                                                                     1281.715774
+Train MAE                                                                      22.501719
+Test MAE                                                                       29.119395

@@ -1,29 +1,25 @@
 # %%
 import pandas as pd
-from ANNTest import ANNTest
-from KNNTest import KNNTest
-from LinearTest import LinearTest
-from RFTest import RFTest
-from SVRTest import SVRTest
+from models import *
 
 # Run the tests
 
 Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
-
-# Stocks = {"INVE-B.ST"}
+models = [
+    ("Linear", LinearRegression, optimize_linear),
+    ("KNN", KNeighborsRegressor, optimize_knn),
+    ("RF", RandomForestRegressor, optimize_rfr),
+    ("SVR", SVR, optimize_svr),
+    ("ANN", KerasRegressor, optimize_ann)
+]
 
 Latex_dict = {}
 
 for Stock in Stocks:
-    # Latex_dict[Stock] = KNNTest(Stock)
 
-    Latex_dict[Stock] = (
-        LinearTest(Stock),
-        KNNTest(Stock),
-        SVRTest(Stock),
-        RFTest(Stock),
-        ANNTest(Stock),
-    )
+    for model in models:
+        Latex_dict[Stock] = model(Stock)
+
 
 # %%
 

@@ -1,12 +1,12 @@
                                                                    Value
 Stock                                                            ^OMXSPI
 Model                                                      Random Forest
-Best Parameters  {'n_estimators': 24, 'max_features': 4, 'max_depth': 5}
-Train R2                                                        0.982455
-Test R2                                                          0.48584
-Train RMSE                                                      8.387295
-Test RMSE                                                      25.620566
-Train MSE                                                      70.346717
-Test MSE                                                      656.413425
-Train MAE                                                        6.26506
-Test MAE                                                       18.805882
+Best Parameters  {'n_estimators': 37, 'max_features': 4, 'max_depth': 5}
+Train R2                                                        0.982424
+Test R2                                                         0.518974
+Train RMSE                                                      8.394659
+Test RMSE                                                      24.781297
+Train MSE                                                      70.470301
+Test MSE                                                      614.112675
+Train MAE                                                       6.262642
+Test MAE                                                       18.137672
