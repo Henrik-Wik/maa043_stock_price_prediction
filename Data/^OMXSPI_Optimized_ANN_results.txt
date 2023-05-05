@@ -1,12 +1,12 @@
                                                                                                            Value
 Stock                                                                                                    ^OMXSPI
 Model                                                                                             Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 104, 'learning_rate': 0.0010127095829449094, 'activation': 'relu'}
-Train R2                                                                                                 0.97409
-Test R2                                                                                                 0.834265
-Train RMSE                                                                                             10.192513
-Test RMSE                                                                                              14.546105
-Train MSE                                                                                             103.887323
-Test MSE                                                                                              211.589181
-Train MAE                                                                                               7.746519
-Test MAE                                                                                                11.74026
+Best Parameters  {'n_layers': 4, 'n_neurons': 231, 'learning_rate': 0.0011997966582888587, 'activation': 'relu'}
+Train R2                                                                                                0.975265
+Test R2                                                                                                 0.877804
+Train RMSE                                                                                              9.958714
+Test RMSE                                                                                              12.490172
+Train MSE                                                                                              99.175985
+Test MSE                                                                                              156.004386
+Train MAE                                                                                               7.724415
+Test MAE                                                                                               10.284323

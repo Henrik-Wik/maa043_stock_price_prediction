@@ -1,0 +1,12 @@
+                                               Value
+Stock                                      VOLV-B.ST
+Model                                            KNN
+Best Parameters  {'n_neighbors': 4, 'leaf_size': 17}
+Train R2                                    0.990603
+Test R2                                     0.373125
+Train RMSE                                  1.701458
+Test RMSE                                   7.139982
+Train MSE                                   2.894958
+Test MSE                                   50.979349
+Train MAE                                   1.192818
+Test MAE                                    5.389051

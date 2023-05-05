@@ -1,0 +1,12 @@
+                                                                                                           Value
+Stock                                                                                                  VOLV-B.ST
+Model                                                                                             Neural Network
+Best Parameters  {'n_layers': 3, 'n_neurons': 124, 'learning_rate': 0.0018993865379269635, 'activation': 'relu'}
+Train R2                                                                                                 0.97359
+Test R2                                                                                                  0.57856
+Train RMSE                                                                                              2.852338
+Test RMSE                                                                                               5.854289
+Train MSE                                                                                               8.135831
+Test MSE                                                                                               34.272698
+Train MAE                                                                                               2.130713
+Test MAE                                                                                                4.626255
