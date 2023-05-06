@@ -75,15 +75,13 @@ def optimize_rfr(X_train, y_train, n_trials=50):
 def knn_optuna(trial, X_train, y_train):
     # hyperparameters
     n_neighbors = trial.suggest_int("n_neighbors", 3, 100)
-    # algorithm = trial.suggest_categorical("algorithm", ["auto", "ball_tree", "kd_tree"])
-    leaf_size = trial.suggest_int("leaf_size", 1, 100)
 
     knn = KNeighborsRegressor(
         n_neighbors=n_neighbors,
         algorithm="auto",
         weights="distance",
         p=2,
-        leaf_size=leaf_size,
+        leaf_size=50,
     )
     knn.fit(X_train, y_train)
 
