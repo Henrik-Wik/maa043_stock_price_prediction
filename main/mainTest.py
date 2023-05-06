@@ -15,7 +15,7 @@ Stocks = {"VOLV-B.ST"}
 Latex_dict = {}
 
 for Stock in Stocks:
-    Latex_dict[Stock] = ANNTest(Stock)
+    Latex_dict[Stock] = LinearTest(Stock)
 
     # Latex_dict[Stock] = (
     #     LinearTest(Stock),

@@ -1,4 +1,5 @@
 import keras.backend as K
+import matplotlib.pyplot as plt
 import optuna
 from keras.layers import Dense
 from keras.models import Sequential
@@ -11,7 +12,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import TimeSeriesSplit, cross_val_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
-import matplotlib.pyplot as plt
 
 # Using timeseries split for cross validation
 tscv = TimeSeriesSplit(n_splits=5)
@@ -22,9 +22,8 @@ tscv = TimeSeriesSplit(n_splits=5)
 def linreg_optuna(trial, X_train, y_train):
     # hyperparameters
     fit_intercept = trial.suggest_categorical("fit_intercept", [True, False])
-    copy_X = trial.suggest_categorical("copy_X", [True, False])
 
-    linreg = LinearRegression(fit_intercept=fit_intercept, copy_X=copy_X)
+    linreg = LinearRegression(fit_intercept=fit_intercept, copy_X=True)
     linreg.fit(X_train, y_train)
 
     scores = cross_val_score(linreg, X_train, y_train, cv=tscv, n_jobs=-1, scoring="r2")
@@ -173,6 +172,7 @@ def optimize_ann(X_train, y_train, n_trials=50):
     study.optimize(lambda trial: ann_optuna(trial, X_train, y_train), n_trials=n_trials)
 
     return study.best_params
+
 
 def Model(Stock, model_info):
     model_name, model_constructor, model_optimizer = model_info
