@@ -1,0 +1,12 @@
+                                   Value
+Stock                          VOLV-B.ST
+Model                  Linear Regression
+Best Parameters  {'fit_intercept': True}
+Train R2                        0.975835
+Test R2                         0.780268
+Train RMSE                      2.728445
+Test RMSE                       4.227207
+Train MSE                       7.444411
+Test MSE                       17.869275
+Train MAE                       2.017894
+Test MAE                        3.409978

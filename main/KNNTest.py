@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsRegressor
 Stock = "TELIA.ST"
 
 
-def KNNTest(Stock):
+def KNNTest(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -70,7 +70,7 @@ def KNNTest(Stock):
 
     filename = f"{Stock}_Optimized_KNN_results"
 
-    results_df.to_string("../Data/" + filename + ".txt")
+    results_df.to_string(f"{folder}Data/{filename}.txt")
 
     print(results_df)
     # plot the results
@@ -84,7 +84,7 @@ def KNNTest(Stock):
     plt.legend(fontsize=18, markerscale=3)
     plt.xticks(fontsize=18)
     plt.yticks(fontsize=18)
-    plt.savefig("../Graphs/" + filename + ".png")
+    plt.savefig(f"{folder}Graphs/{filename}.png")
     plt.show()
 
     # plt.figure(figsize=(8, 8), dpi=80)

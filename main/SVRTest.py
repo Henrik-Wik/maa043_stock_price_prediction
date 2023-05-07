@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.svm import SVR
 
 
-def SVRTest(Stock):
+def SVRTest(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -64,7 +64,7 @@ def SVRTest(Stock):
 
     filename = f"{Stock}_Optimized_SVR_results"
 
-    results_df.to_string("../Data/" + filename + ".txt")
+    results_df.to_string(f"{folder}Data/{filename}.txt")
 
     print(results_df)
 
@@ -79,9 +79,8 @@ def SVRTest(Stock):
     plt.legend(fontsize=18, markerscale=3)
     plt.xticks(fontsize=18)
     plt.yticks(fontsize=18)
-    plt.savefig("../Graphs/" + filename + ".png")
+    plt.savefig(f"{folder}Graphs/{filename}.png")
     plt.show()
-
 
     # plt.figure(figsize=(8, 8), dpi=80)
     # plt.scatter(train_targets, train_predict - train_targets, label="train", s=5)

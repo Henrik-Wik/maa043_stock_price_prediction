@@ -12,7 +12,7 @@ from models import optimize_ann
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
-def ANNTest(Stock):
+def ANNTest(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -83,7 +83,7 @@ def ANNTest(Stock):
 
     filename = f"{Stock}_Optimized_ANN_results"
 
-    results_df.to_string("../Data/" + filename + ".txt")
+    results_df.to_string(f"{folder}Data/{filename}.txt")
 
     print(results_df)
     # plot the results
@@ -97,7 +97,7 @@ def ANNTest(Stock):
     plt.legend(fontsize=18, markerscale=3)
     plt.xticks(fontsize=18)
     plt.yticks(fontsize=18)
-    plt.savefig("../Graphs/" + filename + ".png")
+    plt.savefig(f"{folder}Graphs/{filename}.png")
     plt.show()
 
     # plt.figure(figsize=(8, 8), dpi=80)

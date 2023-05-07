@@ -8,6 +8,8 @@ from SVRTest import SVRTest
 
 # Run the tests
 
+folder = "../evebitda/"
+
 # Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 Stocks = {"VOLV-B.ST"}
@@ -15,15 +17,15 @@ Stocks = {"VOLV-B.ST"}
 Latex_dict = {}
 
 for Stock in Stocks:
-    Latex_dict[Stock] = KNNTest(Stock)
+    # Latex_dict[Stock] = LinearTest(Stock, folder)
 
-    # Latex_dict[Stock] = (
-    #     LinearTest(Stock),
-    #     KNNTest(Stock),
-    #     SVRTest(Stock),
-    #     RFTest(Stock),
-    #     ANNTest(Stock),
-    # )
+    Latex_dict[Stock] = (
+        LinearTest(Stock, folder),
+        KNNTest(Stock, folder),
+        SVRTest(Stock, folder),
+        RFTest(Stock, folder),
+        ANNTest(Stock, folder),
+    )
 
 # %%
 
@@ -46,6 +48,6 @@ for Stock in Stocks:
 pd.set_option("display.max_colwidth", 1000)
 
 for Stock in Stocks:
-    dfs[Stock].to_string(f"../Data/Latex/{Stock}_df.txt", index=False)
+    dfs[Stock].to_string(f"{folder}Data/Latex/{Stock}_df.txt", index=False)
 
 # %%
