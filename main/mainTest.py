@@ -8,7 +8,7 @@ from SVRTest import SVRTest
 
 # Run the tests
 
-folder = "../evebitda/"
+folder = "../"
 
 # Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
@@ -17,15 +17,15 @@ Stocks = {"VOLV-B.ST"}
 Latex_dict = {}
 
 for Stock in Stocks:
-    # Latex_dict[Stock] = LinearTest(Stock, folder)
+    Latex_dict[Stock] = LinearTest(Stock, folder)
 
-    Latex_dict[Stock] = (
-        LinearTest(Stock, folder),
-        KNNTest(Stock, folder),
-        SVRTest(Stock, folder),
-        RFTest(Stock, folder),
-        ANNTest(Stock, folder),
-    )
+    # Latex_dict[Stock] = (
+    #     LinearTest(Stock, folder),
+    #     KNNTest(Stock, folder),
+    #     SVRTest(Stock, folder),
+    #     RFTest(Stock, folder),
+    #     ANNTest(Stock, folder),
+    # )
 
 # %%
 

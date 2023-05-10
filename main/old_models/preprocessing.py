@@ -41,11 +41,7 @@ def create_features(df):
     feature_names = ["Adj Close"]
 
     for n in [
-        14,
-        30,
         50,
-        100,
-        200,
     ]:  # Create the moving average indicator and divide by Adj_Close
         df["ma" + str(n)] = (
             sma_indicator(df["Adj Close"], window=n, fillna=False) / df["Adj Close"]

@@ -49,11 +49,11 @@ features, targets, feature_names = create_features(df)
 # # Linear Regression Model
 # $$ \Large y=\beta_0 + \beta_1x
 
-linear_features = sm.add_constant(features)
+features = sm.add_constant(features)
 
-X_train, X_test, y_train, y_test = time_split(linear_features, targets)
+X_train, X_test, y_train, y_test = time_split(features, targets)
 
-print(linear_features.shape, X_train.shape, X_test.shape)
+print(features.shape, X_train.shape, X_test.shape)
 
 # %%
 
