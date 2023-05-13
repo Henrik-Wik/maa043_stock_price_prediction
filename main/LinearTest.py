@@ -21,24 +21,24 @@ def LinearTest(Stock, folder):
         features, targets
     )
 
-    scaled_train_features, scaled_test_features = pp.scale_data(
-        train_features, test_features
-    )
+    # scaled_train_features, scaled_test_features = pp.scale_data(
+    #     train_features, test_features
+    # )
 
-    scaled_train_features = sm.add_constant(scaled_train_features)
-    scaled_test_features = sm.add_constant(scaled_test_features)
+    train_features = sm.add_constant(train_features)
+    test_features = sm.add_constant(test_features)
 
     # best_params = optimize_linear(scaled_train_features, train_targets)
     # print("Best hyperparameters:", best_params)
 
-    model = sm.OLS(train_targets, scaled_train_features)
+    model = sm.OLS(train_targets, train_features)
     linear = model.fit()
 
     # linear = LinearRegression(**best_params)
     # linear.fit(scaled_train_features, train_targets)
 
-    train_predict = linear.predict(scaled_train_features)
-    test_predict = linear.predict(scaled_test_features)
+    train_predict = linear.predict(train_features)
+    test_predict = linear.predict(test_features)
 
     train_r2 = r2_score(train_targets, train_predict)
     test_r2 = r2_score(test_targets, test_predict)
