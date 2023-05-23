@@ -1,6 +1,7 @@
 # %%
 import matplotlib.pyplot as plt
 import pandas as pd
+import statsmodels.api as sm
 from models import optimize_linear
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -13,22 +14,31 @@ def LinearTest(Stock, folder):
         import preprocessing as pp
 
     data = pp.download_data(Stock)
+
     features, targets = pp.create_features(data)
+
     train_features, test_features, train_targets, test_targets = pp.time_split(
         features, targets
     )
-    scaled_train_features, scaled_test_features = pp.scale_data(
-        train_features, test_features
-    )
 
-    best_params = optimize_linear(scaled_train_features, train_targets)
-    print("Best hyperparameters:", best_params)
+    # scaled_train_features, scaled_test_features = pp.scale_data(
+    #     train_features, test_features
+    # )
 
-    linear = LinearRegression(**best_params)
-    linear.fit(scaled_train_features, train_targets)
+    train_features = sm.add_constant(train_features)
+    test_features = sm.add_constant(test_features)
 
-    train_predict = linear.predict(scaled_train_features)
-    test_predict = linear.predict(scaled_test_features)
+    # best_params = optimize_linear(scaled_train_features, train_targets)
+    # print("Best hyperparameters:", best_params)
+
+    model = sm.OLS(train_targets, train_features)
+    linear = model.fit()
+
+    # linear = LinearRegression(**best_params)
+    # linear.fit(scaled_train_features, train_targets)
+
+    train_predict = linear.predict(train_features)
+    test_predict = linear.predict(test_features)
 
     train_r2 = r2_score(train_targets, train_predict)
     test_r2 = r2_score(test_targets, test_predict)
@@ -47,7 +57,7 @@ def LinearTest(Stock, folder):
     results_dict = {
         "Stock": Stock,
         "Model": "Linear Regression",
-        "Best Parameters": best_params,
+        # "Best Parameters": best_params,
         "Train R2": train_r2,
         "Test R2": test_r2,
         "Train RMSE": train_rmse,
@@ -66,6 +76,9 @@ def LinearTest(Stock, folder):
     filename = f"{Stock}_Optimized_Linear_results"
 
     results_df.to_string(f"{folder}Data/{filename}.txt")
+
+    print(linear.summary())
+    print(linear.pvalues)
 
     print(results_df)
     # plot the results
