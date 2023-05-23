@@ -5,10 +5,8 @@ from models import optimize_knn
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.neighbors import KNeighborsRegressor
 
-Stock = "TELIA.ST"
 
-
-def KNNTest(Stock, folder):
+def KNN(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:

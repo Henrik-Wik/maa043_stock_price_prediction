@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
-def LinearTest(Stock, folder):
+def Linear(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:

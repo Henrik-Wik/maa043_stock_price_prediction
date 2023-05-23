@@ -1,10 +1,10 @@
 # %%
 import pandas as pd
-from ANNTest import ANNTest
-from KNNTest import KNNTest
-from LinearTest import LinearTest
-from RFTest import RFTest
-from SVRTest import SVRTest
+from ANN import ANN
+from KNN import KNN
+from Linear import Linear
+from RF import RF
+from SVR import SVR
 
 # Run the tests
 
@@ -17,11 +17,11 @@ Latex_dict = {}
 for Stock in Stocks:
 
     Latex_dict[Stock] = (
-        LinearTest(Stock, folder),
-        KNNTest(Stock, folder),
-        SVRTest(Stock, folder),
-        RFTest(Stock, folder),
-        ANNTest(Stock, folder),
+        Linear(Stock, folder),
+        KNN(Stock, folder),
+        SVR(Stock, folder),
+        RF(Stock, folder),
+        ANN(Stock, folder),
     )
 
 # %%
