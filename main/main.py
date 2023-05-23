@@ -10,30 +10,25 @@ from SVRTest import SVRTest
 
 folder = "../"
 
-# Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
-
-Stocks = {"VOLV-B.ST"}
+Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 Latex_dict = {}
 
 for Stock in Stocks:
-    Latex_dict[Stock] = LinearTest(Stock, folder)
 
-    # Latex_dict[Stock] = (
-    #     LinearTest(Stock, folder),
-    #     KNNTest(Stock, folder),
-    #     SVRTest(Stock, folder),
-    #     RFTest(Stock, folder),
-    #     ANNTest(Stock, folder),
-    # )
+    Latex_dict[Stock] = (
+        LinearTest(Stock, folder),
+        KNNTest(Stock, folder),
+        SVRTest(Stock, folder),
+        RFTest(Stock, folder),
+        ANNTest(Stock, folder),
+    )
 
 # %%
 
 Latex_df = pd.DataFrame.from_dict(
     Latex_dict, orient="index", columns=["Linear", "KNN", "SVR", "RF", "ANN"]
 )
-
-# Latex_df = pd.DataFrame.from_dict(Latex_dict, orient="index", columns=["ANN"])
 
 # %%
 Transposed_df = Latex_df.transpose()
