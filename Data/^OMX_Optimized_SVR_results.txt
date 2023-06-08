@@ -1,12 +1,14 @@
                                                                                    Value
 Stock                                                                               ^OMX
 Model                                                                                SVR
-Best Parameters  {'C': 98.88178119292277, 'gamma': 0.02389343100445478, 'kernel': 'rbf'}
-Train R2                                                                        0.981042
-Test R2                                                                         0.783399
-Train RMSE                                                                     30.420153
-Test RMSE                                                                      35.801058
-Train MSE                                                                     925.385695
-Test MSE                                                                     1281.715774
-Train MAE                                                                      22.501719
-Test MAE                                                                       29.119395
+Best Parameters  {'C': 99.39784740482227, 'gamma': 0.03005214710074169, 'kernel': 'rbf'}
+Train R2                                                                        0.981345
+Test R2                                                                          0.78341
+Train RMSE                                                                     30.176163
+Test RMSE                                                                      35.800163
+Train MSE                                                                     910.600798
+Test MSE                                                                     1281.651705
+Train MAE                                                                      22.374268
+Test MAE                                                                       29.217695
+Total Time                                                                     15.904392
+Time Per Trial                                                                  0.318088

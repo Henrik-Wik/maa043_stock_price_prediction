@@ -1,4 +1,6 @@
 # %%
+import time
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import statsmodels.api as sm
@@ -7,7 +9,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
-def Linear(Stock, folder):
+def main_linear(Stock, folder):
+    start_time = time.time()
+
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -25,12 +29,14 @@ def Linear(Stock, folder):
     #     train_features, test_features
     # )
 
+    # statsmodels
     train_features = sm.add_constant(train_features)
     test_features = sm.add_constant(test_features)
 
     # best_params = optimize_linear(scaled_train_features, train_targets)
     # print("Best hyperparameters:", best_params)
 
+    # statsmodels
     model = sm.OLS(train_targets, train_features)
     linear = model.fit()
 
@@ -53,6 +59,9 @@ def Linear(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+
     # Create a dictionary with the metric names and values
     results_dict = {
         "Stock": Stock,
@@ -66,6 +75,7 @@ def Linear(Stock, folder):
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
+        "Total Time": elapsed_time,
     }
 
     # Load the dictionary into a DataFrame
@@ -77,6 +87,7 @@ def Linear(Stock, folder):
 
     results_df.to_string(f"{folder}Data/{filename}.txt")
 
+    # stasmodels
     print(linear.summary())
     print(linear.pvalues)
 
@@ -106,6 +117,6 @@ def Linear(Stock, folder):
     # plt.savefig("../Graphs/" + filename + "_Residuals" + ".png")
     # plt.show()
 
-    Latex = f"Linear & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ \\\\"
+    Latex = f"Linear & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ & ${elapsed_time:.3f}$ \\\\"
 
     return Latex

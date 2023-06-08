@@ -1,12 +1,14 @@
                                                                    Value
 Stock                                                          VOLV-B.ST
 Model                                                      Random Forest
-Best Parameters  {'n_estimators': 41, 'max_features': 5, 'max_depth': 3}
-Train R2                                                         0.96707
-Test R2                                                         0.649084
-Train RMSE                                                      3.185057
-Test RMSE                                                       5.342052
-Train MSE                                                       10.14459
-Test MSE                                                       28.537521
-Train MAE                                                       2.472432
-Test MAE                                                        4.206928
+Best Parameters  {'n_estimators': 61, 'max_features': 5, 'max_depth': 3}
+Train R2                                                        0.966667
+Test R2                                                         0.651919
+Train RMSE                                                      3.204487
+Test RMSE                                                       5.320429
+Train MSE                                                      10.268736
+Test MSE                                                        28.30696
+Train MAE                                                       2.497938
+Test MAE                                                        4.191655
+Total Time                                                     25.903552
+Time Per Trial                                                  0.518071

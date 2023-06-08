@@ -1,12 +1,14 @@
                                                                                     Value
 Stock                                                                           VOLV-B.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 99.65125564683022, 'gamma': 0.003694603583125766, 'kernel': 'rbf'}
-Train R2                                                                         0.976279
-Test R2                                                                          0.763205
-Train RMSE                                                                       2.703248
-Test RMSE                                                                        4.388268
-Train MSE                                                                        7.307549
-Test MSE                                                                        19.256898
-Train MAE                                                                        1.980792
-Test MAE                                                                         3.562324
+Best Parameters  {'C': 83.21319385318992, 'gamma': 0.004814827437789569, 'kernel': 'rbf'}
+Train R2                                                                         0.976338
+Test R2                                                                          0.759525
+Train RMSE                                                                       2.699888
+Test RMSE                                                                        4.422232
+Train MSE                                                                        7.289395
+Test MSE                                                                        19.556137
+Train MAE                                                                        1.978817
+Test MAE                                                                         3.590627
+Total Time                                                                      15.918923
+Time Per Trial                                                                   0.318378

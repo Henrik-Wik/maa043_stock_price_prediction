@@ -1,12 +1,14 @@
                                                                                     Value
 Stock                                                                             SOBI.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 99.28671530424973, 'gamma': 0.029478689475622342, 'kernel': 'rbf'}
-Train R2                                                                         0.991052
-Test R2                                                                         -0.057417
-Train RMSE                                                                       3.746108
-Test RMSE                                                                       38.210339
-Train MSE                                                                       14.033325
-Test MSE                                                                      1460.029997
-Train MAE                                                                        2.393752
-Test MAE                                                                        28.625109
+Best Parameters  {'C': 99.62108970600514, 'gamma': 0.018341167785862915, 'kernel': 'rbf'}
+Train R2                                                                         0.990979
+Test R2                                                                          0.391011
+Train RMSE                                                                        3.76123
+Test RMSE                                                                       28.997619
+Train MSE                                                                       14.146848
+Test MSE                                                                        840.86188
+Train MAE                                                                         2.39945
+Test MAE                                                                        21.515765
+Total Time                                                                      18.268566
+Time Per Trial                                                                   0.365371

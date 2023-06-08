@@ -1,10 +1,10 @@
 # %%
 import pandas as pd
-from ANN import ANN
-from KNN import KNN
-from Linear import Linear
-from RF import RF
-from SVR import SVR
+from ANN import main_ann
+from KNN import main_knn
+from Linear import main_linear
+from RF import main_rf
+from SVR import main_svr
 
 # Run the tests
 
@@ -15,14 +15,14 @@ Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "H
 Latex_dict = {}
 
 for Stock in Stocks:
-
     Latex_dict[Stock] = (
-        Linear(Stock, folder),
-        KNN(Stock, folder),
-        SVR(Stock, folder),
-        RF(Stock, folder),
-        ANN(Stock, folder),
+        main_linear(Stock, folder),
+        main_knn(Stock, folder),
+        main_svr(Stock, folder),
+        main_rf(Stock, folder),
+        main_ann(Stock, folder),
     )
+
 
 # %%
 

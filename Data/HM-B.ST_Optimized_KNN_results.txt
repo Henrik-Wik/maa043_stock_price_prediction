@@ -1,12 +1,14 @@
-                                                Value
-Stock                                         HM-B.ST
-Model                                             KNN
-Best Parameters  {'n_neighbors': 15, 'leaf_size': 24}
-Train R2                                     0.982645
-Test R2                                      0.656549
-Train RMSE                                   4.712739
-Test RMSE                                   13.080541
-Train MSE                                   22.209911
-Test MSE                                   171.100558
-Train MAE                                    3.576586
-Test MAE                                    11.218942
+                               Value
+Stock                        HM-B.ST
+Model                            KNN
+Best Parameters  {'n_neighbors': 15}
+Train R2                    0.982645
+Test R2                     0.656549
+Train RMSE                  4.712741
+Test RMSE                  13.080541
+Train MSE                  22.209926
+Test MSE                  171.100543
+Train MAE                   3.576587
+Test MAE                   11.218941
+Total Time                  1.367986
+Time Per Trial               0.02736

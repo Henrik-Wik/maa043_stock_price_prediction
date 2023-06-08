@@ -1,12 +1,14 @@
-                                               Value
-Stock                                        ^OMXSPI
-Model                                            KNN
-Best Parameters  {'n_neighbors': 7, 'leaf_size': 97}
-Train R2                                    0.985455
-Test R2                                     0.324461
-Train RMSE                                  7.636733
-Test RMSE                                  29.367358
-Train MSE                                  58.319691
-Test MSE                                  862.441725
-Train MAE                                   5.626751
-Test MAE                                   22.185404
+                              Value
+Stock                       ^OMXSPI
+Model                           KNN
+Best Parameters  {'n_neighbors': 7}
+Train R2                   0.985455
+Test R2                    0.324461
+Train RMSE                 7.636733
+Test RMSE                 29.367358
+Train MSE                 58.319691
+Test MSE                 862.441725
+Train MAE                  5.626751
+Test MAE                  22.185404
+Total Time                 1.111516
+Time Per Trial              0.02223

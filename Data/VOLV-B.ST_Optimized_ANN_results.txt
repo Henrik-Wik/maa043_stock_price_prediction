@@ -1,12 +1,14 @@
-                                                                                                         Value
-Stock                                                                                                VOLV-B.ST
-Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 1, 'n_neurons': 130, 'learning_rate': 0.00788707709119355, 'activation': 'relu'}
-Train R2                                                                                              0.974023
-Test R2                                                                                               0.764359
-Train RMSE                                                                                            2.828884
-Test RMSE                                                                                             4.377554
-Train MSE                                                                                             8.002586
-Test MSE                                                                                             19.162979
-Train MAE                                                                                             2.079576
-Test MAE                                                                                              3.512054
+                                                                                                          Value
+Stock                                                                                                 VOLV-B.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 3, 'n_neurons': 187, 'learning_rate': 0.007001962360288199, 'activation': 'relu'}
+Train R2                                                                                               0.975177
+Test R2                                                                                                0.274843
+Train RMSE                                                                                             2.765295
+Test RMSE                                                                                              7.679317
+Train MSE                                                                                              7.646859
+Test MSE                                                                                              58.971902
+Train MAE                                                                                              2.056303
+Test MAE                                                                                               6.173485
+Total Time                                                                                           222.439324
+Time per Trial                                                                                         4.448786
