@@ -1,14 +1,13 @@
                                                                     Value
 Stock                                                             SOBI.ST
 Model                                                       Random Forest
-Best Parameters  {'n_estimators': 109, 'max_features': 4, 'max_depth': 5}
-Train R2                                                         0.992981
-Test R2                                                         -2.335023
-Train RMSE                                                       3.317875
-Test RMSE                                                       67.858943
-Train MSE                                                       11.008292
-Test MSE                                                      4604.836079
-Train MAE                                                        2.269575
-Test MAE                                                         57.77259
-Total Time                                                       0.460622
-Time Per Trial                                                   0.009212
+Best Parameters  {'n_estimators': 105, 'max_features': 4, 'max_depth': 5}
+Train R2                                                         0.993015
+Test R2                                                         -2.360942
+Train RMSE                                                       3.309808
+Test RMSE                                                       68.122124
+Train MSE                                                       10.954827
+Test MSE                                                      4640.623815
+Train MAE                                                        2.247725
+Test MAE                                                        58.063078
+Total Time                                                       0.004496

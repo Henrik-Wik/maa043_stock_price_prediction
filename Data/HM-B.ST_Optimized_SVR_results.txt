@@ -1,14 +1,13 @@
                                                                                     Value
 Stock                                                                             HM-B.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 99.82804876823295, 'gamma': 0.019382821334750645, 'kernel': 'rbf'}
-Train R2                                                                          0.97885
-Test R2                                                                           0.89464
-Train RMSE                                                                       5.202583
-Test RMSE                                                                        7.244892
-Train MSE                                                                       27.066873
-Test MSE                                                                        52.488462
-Train MAE                                                                        3.932481
-Test MAE                                                                         5.632136
-Total Time                                                                       0.152049
-Time Per Trial                                                                   0.003041
+Best Parameters  {'C': 80.74073805907796, 'gamma': 0.021739495884408024, 'kernel': 'rbf'}
+Train R2                                                                         0.978846
+Test R2                                                                          0.885728
+Train RMSE                                                                       5.203104
+Test RMSE                                                                        7.545084
+Train MSE                                                                       27.072289
+Test MSE                                                                        56.928285
+Train MAE                                                                        3.932632
+Test MAE                                                                         5.894984
+Total Time                                                                      14.303017

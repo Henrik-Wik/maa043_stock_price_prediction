@@ -10,15 +10,7 @@ from SVR import main_svr
 
 folder = "../"
 
-Stocks = {
-            # "^OMXSPI",
-            "^OMX",
-            # "INVE-B.ST",
-            # "VOLV-B.ST", 
-            # "TELIA.ST", 
-            # "SOBI.ST", 
-            # "HM-B.ST"
-            }
+Stocks = {"^OMXSPI", "^OMX", "INVE-B.ST", "VOLV-B.ST", "TELIA.ST", "SOBI.ST", "HM-B.ST"}
 
 Latex_dict = {}
 

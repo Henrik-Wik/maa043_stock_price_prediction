@@ -9,4 +9,4 @@ Train MSE            0.395016
 Test MSE             0.670649
 Train MAE            0.482686
 Test MAE             0.612502
-Total Time             0.0005
+Total Time           0.049996

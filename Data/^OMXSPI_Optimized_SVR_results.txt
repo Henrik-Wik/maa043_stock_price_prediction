@@ -1,14 +1,13 @@
                                                                                    Value
 Stock                                                                            ^OMXSPI
 Model                                                                                SVR
-Best Parameters  {'C': 98.84225985133527, 'gamma': 0.02079181326641574, 'kernel': 'rbf'}
-Train R2                                                                        0.975422
-Test R2                                                                         0.832836
-Train RMSE                                                                       9.92707
-Test RMSE                                                                      14.608687
-Train MSE                                                                      98.546713
-Test MSE                                                                      213.413742
-Train MAE                                                                       7.436502
-Test MAE                                                                       12.043483
-Total Time                                                                      0.064518
-Time Per Trial                                                                   0.00129
+Best Parameters  {'C': 98.95369548689948, 'gamma': 0.01282002148859487, 'kernel': 'rbf'}
+Train R2                                                                        0.975321
+Test R2                                                                         0.855381
+Train RMSE                                                                      9.947396
+Test RMSE                                                                      13.587904
+Train MSE                                                                      98.950694
+Test MSE                                                                      184.631148
+Train MAE                                                                       7.456821
+Test MAE                                                                       11.288983
+Total Time                                                                      8.402419

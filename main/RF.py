@@ -49,8 +49,8 @@ def main_rf(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    elapsed_time = end_time - start_time
-    time_per_trial = elapsed_time / 50
+    elapsed_time = (end_time - start_time) * 100
+    # time_per_trial = elapsed_time / 50
 
     # Create a dictionary with the metric names and values
     results_dict = {
@@ -66,7 +66,7 @@ def main_rf(Stock, folder):
         "Train MAE": train_mae,
         "Test MAE": test_mae,
         "Total Time": elapsed_time,
-        "Time Per Trial": time_per_trial
+        # "Time Per Trial": time_per_trial
     }
 
     # Load the dictionary into a DataFrame
@@ -105,6 +105,6 @@ def main_rf(Stock, folder):
     # plt.savefig("../Graphs/" + filename + "_Residuals" + ".png")
     # plt.show()
 
-    Latex = f"RF & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ & ${time_per_trial:.3f}$ \\\\"
+    Latex = f"RF & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ & ${elapsed_time:.3f}$ \\\\"
 
     return Latex
