@@ -1,14 +1,14 @@
                                Value
 Stock                      VOLV-B.ST
 Model                            KNN
-Best Parameters  {'n_neighbors': 27}
-Train R2                    0.977429
-Test R2                     0.547091
-Train RMSE                  2.636883
-Test RMSE                   6.068926
-Train MSE                   6.953154
-Test MSE                   36.831858
-Train MAE                   1.903208
-Test MAE                    4.543909
-Total Time                  1.321991
-Time Per Trial               0.02644
+Best Parameters  {'n_neighbors': 28}
+Train R2                    0.977169
+Test R2                     0.548125
+Train RMSE                   2.65207
+Test RMSE                   6.061999
+Train MSE                   7.033474
+Test MSE                   36.747833
+Train MAE                   1.914937
+Test MAE                    4.537227
+Total Time                  0.001502
+Time Per Trial               0.00003

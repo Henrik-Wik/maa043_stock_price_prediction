@@ -9,8 +9,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 def main_rf(Stock, folder):
-    start_time = time.time()
-
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -29,7 +27,12 @@ def main_rf(Stock, folder):
     print("Best hyperparameters:", best_params)
 
     rfr = RandomForestRegressor(**best_params)
+
+    start_time = time.time()
+
     rfr.fit(scaled_train_features, train_targets)
+
+    end_time = time.time()
 
     train_predict = rfr.predict(scaled_train_features)
     test_predict = rfr.predict(scaled_test_features)
@@ -46,7 +49,6 @@ def main_rf(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    end_time = time.time()
     elapsed_time = end_time - start_time
     time_per_trial = elapsed_time / 50
 

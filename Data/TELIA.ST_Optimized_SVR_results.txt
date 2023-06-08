@@ -1,14 +1,14 @@
-                                                                                   Value
-Stock                                                                           TELIA.ST
-Model                                                                                SVR
-Best Parameters  {'C': 66.783335095098, 'gamma': 0.0038723001654000474, 'kernel': 'rbf'}
-Train R2                                                                        0.954024
-Test R2                                                                         0.812946
-Train RMSE                                                                      0.618374
-Test RMSE                                                                       0.871328
-Train MSE                                                                       0.382387
-Test MSE                                                                        0.759213
-Train MAE                                                                       0.469612
-Test MAE                                                                        0.646584
-Total Time                                                                     21.745608
-Time Per Trial                                                                  0.434912
+                                                                                    Value
+Stock                                                                            TELIA.ST
+Model                                                                                 SVR
+Best Parameters  {'C': 97.66820256294679, 'gamma': 0.003027102493343302, 'kernel': 'rbf'}
+Train R2                                                                         0.953971
+Test R2                                                                          0.814207
+Train RMSE                                                                       0.618731
+Test RMSE                                                                        0.868386
+Train MSE                                                                        0.382829
+Test MSE                                                                         0.754095
+Train MAE                                                                        0.470196
+Test MAE                                                                         0.644773
+Total Time                                                                       0.155044
+Time Per Trial                                                                   0.003101

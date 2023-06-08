@@ -9,8 +9,6 @@ from sklearn.svm import SVR
 
 
 def main_svr(Stock, folder):
-    start_time = time.time()
-
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -29,7 +27,12 @@ def main_svr(Stock, folder):
     print("Best hyperparameters:", best_params)
 
     svr = SVR(**best_params)
+
+    start_time = time.time()
+
     svr.fit(scaled_train_features, train_targets)
+
+    end_time = time.time()
 
     train_predict = svr.predict(scaled_train_features)
     test_predict = svr.predict(scaled_test_features)
@@ -46,7 +49,6 @@ def main_svr(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    end_time = time.time()
     elapsed_time = end_time - start_time
     time_per_trial = elapsed_time / 50
 

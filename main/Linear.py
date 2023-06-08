@@ -10,8 +10,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 def main_linear(Stock, folder):
-    start_time = time.time()
-
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -37,8 +35,14 @@ def main_linear(Stock, folder):
     # print("Best hyperparameters:", best_params)
 
     # statsmodels
+
     model = sm.OLS(train_targets, train_features)
+
+    start_time = time.time()
+
     linear = model.fit()
+
+    end_time = time.time()
 
     # linear = LinearRegression(**best_params)
     # linear.fit(scaled_train_features, train_targets)
@@ -59,7 +63,6 @@ def main_linear(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    end_time = time.time()
     elapsed_time = end_time - start_time
 
     # Create a dictionary with the metric names and values

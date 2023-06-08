@@ -1,14 +1,14 @@
-                                                                                                          Value
-Stock                                                                                                   HM-B.ST
-Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 1, 'n_neurons': 212, 'learning_rate': 0.001944085593085643, 'activation': 'relu'}
-Train R2                                                                                                0.97479
-Test R2                                                                                                0.872393
-Train RMSE                                                                                             5.680002
-Test RMSE                                                                                              7.973161
-Train MSE                                                                                             32.262424
-Test MSE                                                                                              63.571304
-Train MAE                                                                                              4.050617
-Test MAE                                                                                               6.270586
-Total Time                                                                                           190.780532
-Time per Trial                                                                                         3.815611
+                                                                                                           Value
+Stock                                                                                                    HM-B.ST
+Model                                                                                             Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 180, 'learning_rate': 0.0020856777759173046, 'activation': 'relu'}
+Train R2                                                                                                0.975553
+Test R2                                                                                                 0.849553
+Train RMSE                                                                                              5.593439
+Test RMSE                                                                                               8.657342
+Train MSE                                                                                              31.286563
+Test MSE                                                                                               74.949578
+Train MAE                                                                                               4.287632
+Test MAE                                                                                                 7.17918
+Total Time                                                                                              4.313185
+Time per Trial                                                                                          0.086264

@@ -1,14 +1,14 @@
-                                                                   Value
-Stock                                                            SOBI.ST
-Model                                                      Random Forest
-Best Parameters  {'n_estimators': 16, 'max_features': 4, 'max_depth': 4}
-Train R2                                                        0.984928
-Test R2                                                        -2.976976
-Train RMSE                                                      4.861761
-Test RMSE                                                      74.102717
-Train MSE                                                      23.636721
-Test MSE                                                     5491.212602
-Train MAE                                                       3.679249
-Test MAE                                                       64.900618
-Total Time                                                     19.451343
-Time Per Trial                                                  0.389027
+                                                                    Value
+Stock                                                             SOBI.ST
+Model                                                       Random Forest
+Best Parameters  {'n_estimators': 109, 'max_features': 4, 'max_depth': 5}
+Train R2                                                         0.992981
+Test R2                                                         -2.335023
+Train RMSE                                                       3.317875
+Test RMSE                                                       67.858943
+Train MSE                                                       11.008292
+Test MSE                                                      4604.836079
+Train MAE                                                        2.269575
+Test MAE                                                         57.77259
+Total Time                                                       0.460622
+Time Per Trial                                                   0.009212

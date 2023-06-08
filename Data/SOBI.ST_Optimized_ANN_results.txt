@@ -1,14 +1,14 @@
-                                                                                                         Value
-Stock                                                                                                  SOBI.ST
-Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 18, 'learning_rate': 0.052683633308310954, 'activation': 'relu'}
-Train R2                                                                                              0.990193
-Test R2                                                                                               0.915017
-Train RMSE                                                                                            3.921743
-Test RMSE                                                                                            10.832358
-Train MSE                                                                                            15.380065
-Test MSE                                                                                            117.339982
-Train MAE                                                                                             2.607659
-Test MAE                                                                                              8.098176
-Total Time                                                                                          195.738756
-Time per Trial                                                                                        3.914775
+                                                                                                          Value
+Stock                                                                                                   SOBI.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 220, 'learning_rate': 0.011051497319405601, 'activation': 'relu'}
+Train R2                                                                                               0.990914
+Test R2                                                                                                0.831168
+Train RMSE                                                                                             3.774805
+Test RMSE                                                                                             15.268104
+Train MSE                                                                                             14.249151
+Test MSE                                                                                             233.114984
+Train MAE                                                                                              2.549325
+Test MAE                                                                                              11.825454
+Total Time                                                                                              5.58756
+Time per Trial                                                                                         0.111751

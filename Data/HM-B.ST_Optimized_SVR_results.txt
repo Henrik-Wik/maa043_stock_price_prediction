@@ -1,14 +1,14 @@
                                                                                     Value
 Stock                                                                             HM-B.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 99.01473351760353, 'gamma': 0.023489537736315298, 'kernel': 'rbf'}
-Train R2                                                                         0.978922
-Test R2                                                                          0.902348
-Train RMSE                                                                       5.193686
-Test RMSE                                                                        6.974848
-Train MSE                                                                       26.974371
-Test MSE                                                                        48.648512
-Train MAE                                                                        3.920991
-Test MAE                                                                         5.516722
-Total Time                                                                      16.647976
-Time Per Trial                                                                    0.33296
+Best Parameters  {'C': 99.82804876823295, 'gamma': 0.019382821334750645, 'kernel': 'rbf'}
+Train R2                                                                          0.97885
+Test R2                                                                           0.89464
+Train RMSE                                                                       5.202583
+Test RMSE                                                                        7.244892
+Train MSE                                                                       27.066873
+Test MSE                                                                        52.488462
+Train MAE                                                                        3.932481
+Test MAE                                                                         5.632136
+Total Time                                                                       0.152049
+Time Per Trial                                                                   0.003041

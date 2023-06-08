@@ -1,14 +1,14 @@
-                                                                                    Value
-Stock                                                                             SOBI.ST
-Model                                                                                 SVR
-Best Parameters  {'C': 99.62108970600514, 'gamma': 0.018341167785862915, 'kernel': 'rbf'}
-Train R2                                                                         0.990979
-Test R2                                                                          0.391011
-Train RMSE                                                                        3.76123
-Test RMSE                                                                       28.997619
-Train MSE                                                                       14.146848
-Test MSE                                                                        840.86188
-Train MAE                                                                         2.39945
-Test MAE                                                                        21.515765
-Total Time                                                                      18.268566
-Time Per Trial                                                                   0.365371
+                                                                                  Value
+Stock                                                                           SOBI.ST
+Model                                                                               SVR
+Best Parameters  {'C': 95.3966643842312, 'gamma': 0.03359873357964808, 'kernel': 'rbf'}
+Train R2                                                                       0.991068
+Test R2                                                                       -0.207286
+Train RMSE                                                                     3.742793
+Test RMSE                                                                     40.828438
+Train MSE                                                                     14.008502
+Test MSE                                                                    1666.961318
+Train MAE                                                                      2.392895
+Test MAE                                                                      30.626843
+Total Time                                                                     0.170542
+Time Per Trial                                                                 0.003411
