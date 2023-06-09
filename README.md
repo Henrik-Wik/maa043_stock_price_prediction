@@ -11,7 +11,7 @@ Requirements: ```pip install -r requirements.txt```
 
 ### Hardware
 
-Windows 11, AMD Ryzen 7 2700X @ 4GHz, NVIDIA RTX 3080 GPU, 32 GB DDR4 memory
+Windows 10 64-bit, Intel i7 4790K CPU @ 4GHz, NVIDIA GTX 660TI GPU, 16 GB DDR3 memory
 
 ## Overview
 
