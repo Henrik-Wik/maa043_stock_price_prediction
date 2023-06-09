@@ -49,9 +49,8 @@ def main_rf(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    elapsed_time = (end_time - start_time) * 100
-    # time_per_trial = elapsed_time / 50
-
+    elapsed_time = (end_time - start_time) * 1000
+    
     # Create a dictionary with the metric names and values
     results_dict = {
         "Stock": Stock,
@@ -66,7 +65,6 @@ def main_rf(Stock, folder):
         "Train MAE": train_mae,
         "Test MAE": test_mae,
         "Total Time": elapsed_time,
-        # "Time Per Trial": time_per_trial
     }
 
     # Load the dictionary into a DataFrame

@@ -1,13 +1,13 @@
-                                                                                                         Value
-Stock                                                                                                INVE-B.ST
-Model                                                                                           Neural Network
-Best Parameters  {'n_layers': 3, 'n_neurons': 53, 'learning_rate': 0.037784472288232306, 'activation': 'relu'}
-Train R2                                                                                              0.992435
-Test R2                                                                                               0.960419
-Train RMSE                                                                                            1.842276
-Test RMSE                                                                                             2.283806
-Train MSE                                                                                             3.393982
-Test MSE                                                                                              5.215771
-Train MAE                                                                                             1.514966
-Test MAE                                                                                              1.773317
-Total Time                                                                                           432.10628
+                                                                                                          Value
+Stock                                                                                                 INVE-B.ST
+Model                                                                                            Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 120, 'learning_rate': 0.010451891480253309, 'activation': 'relu'}
+Train R2                                                                                               0.995459
+Test R2                                                                                                0.960967
+Train RMSE                                                                                             1.427398
+Test RMSE                                                                                              2.267941
+Train MSE                                                                                              2.037465
+Test MSE                                                                                               5.143556
+Train MAE                                                                                              1.040093
+Test MAE                                                                                                1.79003
+Total Time                                                                                          4163.725853

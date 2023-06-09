@@ -1,13 +1,13 @@
                                                                    Value
 Stock                                                               ^OMX
 Model                                                      Random Forest
-Best Parameters  {'n_estimators': 94, 'max_features': 3, 'max_depth': 4}
-Train R2                                                        0.983575
-Test R2                                                          0.64383
-Train RMSE                                                     28.315385
-Test RMSE                                                      45.908607
-Train MSE                                                     801.761013
-Test MSE                                                     2107.600239
-Train MAE                                                      21.530391
-Test MAE                                                       34.347967
-Total Time                                                     28.250599
+Best Parameters  {'n_estimators': 96, 'max_features': 4, 'max_depth': 4}
+Train R2                                                        0.983691
+Test R2                                                         0.646813
+Train RMSE                                                     28.214761
+Test RMSE                                                      45.715964
+Train MSE                                                     796.072737
+Test MSE                                                     2089.949376
+Train MAE                                                      21.281206
+Test MAE                                                       34.279519
+Total Time                                                    274.717569

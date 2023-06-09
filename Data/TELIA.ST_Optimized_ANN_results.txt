@@ -1,13 +1,13 @@
                                                                                                           Value
 Stock                                                                                                  TELIA.ST
 Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 4, 'n_neurons': 197, 'learning_rate': 0.003099042452336821, 'activation': 'relu'}
-Train R2                                                                                                0.93425
-Test R2                                                                                                0.847487
-Train RMSE                                                                                             0.739492
-Test RMSE                                                                                              0.786777
-Train MSE                                                                                              0.546848
-Test MSE                                                                                               0.619018
-Train MAE                                                                                              0.580525
-Test MAE                                                                                               0.599035
-Total Time                                                                                             616.8993
+Best Parameters  {'n_layers': 1, 'n_neurons': 179, 'learning_rate': 0.004060732146817993, 'activation': 'relu'}
+Train R2                                                                                               0.952801
+Test R2                                                                                                0.828504
+Train RMSE                                                                                             0.626545
+Test RMSE                                                                                              0.834306
+Train MSE                                                                                              0.392559
+Test MSE                                                                                               0.696067
+Train MAE                                                                                              0.484201
+Test MAE                                                                                               0.622706
+Total Time                                                                                          3707.199097

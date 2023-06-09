@@ -1,13 +1,13 @@
                                                                                    Value
 Stock                                                                            SOBI.ST
 Model                                                                                SVR
-Best Parameters  {'C': 96.89690649161975, 'gamma': 0.02724934483525531, 'kernel': 'rbf'}
-Train R2                                                                        0.991041
-Test R2                                                                         0.029102
-Train RMSE                                                                      3.748315
-Test RMSE                                                                      36.613772
-Train MSE                                                                      14.049864
-Test MSE                                                                      1340.56828
-Train MAE                                                                       2.395241
-Test MAE                                                                       27.426834
-Total Time                                                                     17.502427
+Best Parameters  {'C': 93.51549350204644, 'gamma': 0.03247318165885912, 'kernel': 'rbf'}
+Train R2                                                                        0.991059
+Test R2                                                                        -0.168008
+Train RMSE                                                                      3.744651
+Test RMSE                                                                      40.158789
+Train MSE                                                                      14.022414
+Test MSE                                                                      1612.72831
+Train MAE                                                                       2.393922
+Test MAE                                                                       30.125901
+Total Time                                                                    183.810234

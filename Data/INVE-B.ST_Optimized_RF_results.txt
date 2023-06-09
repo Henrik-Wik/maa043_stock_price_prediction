@@ -1,13 +1,13 @@
                                                                    Value
 Stock                                                          INVE-B.ST
 Model                                                      Random Forest
-Best Parameters  {'n_estimators': 37, 'max_features': 5, 'max_depth': 5}
-Train R2                                                        0.996675
-Test R2                                                        -0.122164
-Train RMSE                                                      1.221466
-Test RMSE                                                      12.160312
-Train MSE                                                       1.491978
-Test MSE                                                      147.873193
-Train MAE                                                       0.863517
-Test MAE                                                        8.263443
-Total Time                                                     18.307757
+Best Parameters  {'n_estimators': 49, 'max_features': 5, 'max_depth': 5}
+Train R2                                                        0.996716
+Test R2                                                        -0.125557
+Train RMSE                                                      1.213773
+Test RMSE                                                      12.178683
+Train MSE                                                       1.473245
+Test MSE                                                      148.320308
+Train MAE                                                       0.862833
+Test MAE                                                        8.286594
+Total Time                                                    232.761383

@@ -1,13 +1,13 @@
-                                                                   Value
-Stock                                                            HM-B.ST
-Model                                                      Random Forest
-Best Parameters  {'n_estimators': 97, 'max_features': 5, 'max_depth': 4}
-Train R2                                                        0.980031
-Test R2                                                         0.735955
-Train RMSE                                                      5.055177
-Test RMSE                                                      11.469169
-Train MSE                                                      25.554819
-Test MSE                                                      131.541827
-Train MAE                                                       3.897766
-Test MAE                                                        8.996706
-Total Time                                                     40.819502
+                                                                    Value
+Stock                                                             HM-B.ST
+Model                                                       Random Forest
+Best Parameters  {'n_estimators': 145, 'max_features': 5, 'max_depth': 4}
+Train R2                                                         0.980137
+Test R2                                                          0.730116
+Train RMSE                                                       5.041844
+Test RMSE                                                       11.595305
+Train MSE                                                       25.420187
+Test MSE                                                       134.451106
+Train MAE                                                        3.894471
+Test MAE                                                         9.091181
+Total Time                                                     573.410988

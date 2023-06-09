@@ -9,4 +9,4 @@ Train MSE          884.429213
 Test MSE          1175.319143
 Train MAE           22.412056
 Test MAE            27.970488
-Total Time           0.099254
+Total Time           0.499487

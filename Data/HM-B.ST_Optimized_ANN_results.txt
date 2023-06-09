@@ -1,13 +1,13 @@
                                                                                                           Value
 Stock                                                                                                   HM-B.ST
 Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 1, 'n_neurons': 162, 'learning_rate': 0.014553630124094222, 'activation': 'relu'}
-Train R2                                                                                               0.978589
-Test R2                                                                                                0.923859
-Train RMSE                                                                                             5.234518
-Test RMSE                                                                                              6.158905
-Train MSE                                                                                             27.400184
-Test MSE                                                                                              37.932107
-Train MAE                                                                                               3.98367
-Test MAE                                                                                               4.681101
-Total Time                                                                                           317.475295
+Best Parameters  {'n_layers': 2, 'n_neurons': 40, 'learning_rate': 0.0015373560073062387, 'activation': 'relu'}
+Train R2                                                                                               0.977858
+Test R2                                                                                                0.896479
+Train RMSE                                                                                             5.323193
+Test RMSE                                                                                              7.181386
+Train MSE                                                                                             28.336385
+Test MSE                                                                                              51.572307
+Train MAE                                                                                              4.052355
+Test MAE                                                                                               5.770389
+Total Time                                                                                          4148.741484

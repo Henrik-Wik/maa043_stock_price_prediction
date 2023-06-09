@@ -1,13 +1,13 @@
                                                                                      Value
 Stock                                                                             TELIA.ST
 Model                                                                                  SVR
-Best Parameters  {'C': 99.70293244717499, 'gamma': 0.0026469361342661233, 'kernel': 'rbf'}
-Train R2                                                                          0.953907
-Test R2                                                                           0.816118
-Train RMSE                                                                        0.619158
-Test RMSE                                                                          0.86391
-Train MSE                                                                         0.383357
-Test MSE                                                                           0.74634
-Train MAE                                                                         0.470859
-Test MAE                                                                          0.642822
-Total Time                                                                       14.255762
+Best Parameters  {'C': 37.601716771932956, 'gamma': 0.006773063891271434, 'kernel': 'rbf'}
+Train R2                                                                          0.954194
+Test R2                                                                           0.807398
+Train RMSE                                                                        0.617228
+Test RMSE                                                                         0.884155
+Train MSE                                                                          0.38097
+Test MSE                                                                           0.78173
+Train MAE                                                                         0.467719
+Test MAE                                                                          0.653759
+Total Time                                                                      142.853975

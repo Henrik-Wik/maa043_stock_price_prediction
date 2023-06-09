@@ -63,7 +63,7 @@ def main_linear(Stock, folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
-    elapsed_time = (end_time - start_time) * 100
+    elapsed_time = (end_time - start_time) * 1000
 
     # Create a dictionary with the metric names and values
     results_dict = {

@@ -1,13 +1,13 @@
                                                                                     Value
 Stock                                                                             ^OMXSPI
 Model                                                                                 SVR
-Best Parameters  {'C': 90.57887300375178, 'gamma': 0.017063591623415947, 'kernel': 'rbf'}
-Train R2                                                                          0.97529
-Test R2                                                                          0.842633
-Train RMSE                                                                       9.953573
-Test RMSE                                                                       14.174134
-Train MSE                                                                        99.07362
-Test MSE                                                                       200.906089
-Train MAE                                                                        7.460355
-Test MAE                                                                        11.734145
-Total Time                                                                       6.201577
+Best Parameters  {'C': 99.87984177098281, 'gamma': 0.015138156776276567, 'kernel': 'rbf'}
+Train R2                                                                         0.975333
+Test R2                                                                          0.848509
+Train RMSE                                                                       9.945052
+Test RMSE                                                                       13.906977
+Train MSE                                                                       98.904055
+Test MSE                                                                       193.404023
+Train MAE                                                                        7.455916
+Test MAE                                                                        11.536419
+Total Time                                                                      60.437441
