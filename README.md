@@ -7,7 +7,7 @@ Python Version: 3.10
 
 Packages: pandas, numpy, matplotlib, statsmodels, keras, optuna, scikit-learn, yfinance, ta
 
-Requirements: pip install -r requirements.txt
+Requirements: ```pip install -r requirements.txt```
 
 ### Hardware
 
