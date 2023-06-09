@@ -1,4 +1,6 @@
 # %%
+import time
+
 import matplotlib.pyplot as plt
 import pandas as pd
 from models import optimize_rfr
@@ -6,7 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
-def RF(Stock,folder):
+def main_rf(Stock, folder):
     if "^" in Stock:
         import preprocessing_Index as pp
     else:
@@ -25,7 +27,12 @@ def RF(Stock,folder):
     print("Best hyperparameters:", best_params)
 
     rfr = RandomForestRegressor(**best_params)
+
+    start_time = time.time()
+
     rfr.fit(scaled_train_features, train_targets)
+
+    end_time = time.time()
 
     train_predict = rfr.predict(scaled_train_features)
     test_predict = rfr.predict(scaled_test_features)
@@ -42,6 +49,9 @@ def RF(Stock,folder):
     test_mse = mean_squared_error(test_targets, test_predict)
     test_mae = mean_absolute_error(test_targets, test_predict)
 
+    elapsed_time = (end_time - start_time) * 100
+    # time_per_trial = elapsed_time / 50
+
     # Create a dictionary with the metric names and values
     results_dict = {
         "Stock": Stock,
@@ -55,6 +65,8 @@ def RF(Stock,folder):
         "Test MSE": test_mse,
         "Train MAE": train_mae,
         "Test MAE": test_mae,
+        "Total Time": elapsed_time,
+        # "Time Per Trial": time_per_trial
     }
 
     # Load the dictionary into a DataFrame
@@ -93,6 +105,6 @@ def RF(Stock,folder):
     # plt.savefig("../Graphs/" + filename + "_Residuals" + ".png")
     # plt.show()
 
-    Latex = f"RF & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ \\\\"
+    Latex = f"RF & ${train_r2:.3f}$ & ${test_r2:.3f}$ & ${train_mae:.3f}$ & ${test_mae:.3f}$ & ${train_mse:.3f}$ & ${test_mse:.3f}$ & ${train_rmse:.3f}$ & ${test_rmse:.3f}$ & ${elapsed_time:.3f}$ \\\\"
 
     return Latex

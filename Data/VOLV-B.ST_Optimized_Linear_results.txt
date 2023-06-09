@@ -4,8 +4,9 @@ Model       Linear Regression
 Train R2             0.975833
 Test R2              0.780242
 Train RMSE           2.728561
-Test RMSE            4.227451
+Test RMSE            4.227452
 Train MSE            7.445045
-Test MSE            17.871345
+Test MSE            17.871348
 Train MAE            2.017699
-Test MAE             3.410125
+Test MAE             3.410124
+Total Time             0.0005

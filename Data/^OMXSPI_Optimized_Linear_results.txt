@@ -1,12 +1,12 @@
-                                                    Value
-Stock                                             ^OMXSPI
-Model                                   Linear Regression
-Best Parameters  {'fit_intercept': True, 'copy_X': False}
-Train R2                                         0.975717
-Test R2                                          0.878162
-Train RMSE                                       9.867377
-Test RMSE                                       12.471866
-Train MSE                                        97.36513
-Test MSE                                       155.547433
-Train MAE                                        7.505181
-Test MAE                                        10.297429
+                        Value
+Stock                 ^OMXSPI
+Model       Linear Regression
+Train R2             0.975717
+Test R2              0.878162
+Train RMSE           9.867377
+Test RMSE           12.471866
+Train MSE            97.36513
+Test MSE           155.547433
+Train MAE            7.505181
+Test MAE            10.297429
+Total Time                0.0

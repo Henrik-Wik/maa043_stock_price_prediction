@@ -1,12 +1,13 @@
-                                                Value
-Stock                                        TELIA.ST
-Model                                             KNN
-Best Parameters  {'n_neighbors': 19, 'leaf_size': 68}
-Train R2                                     0.957582
-Test R2                                      0.612778
-Train RMSE                                   0.593963
-Test RMSE                                    1.253656
-Train MSE                                    0.352792
-Test MSE                                     1.571653
-Train MAE                                    0.443461
-Test MAE                                     0.956869
+                               Value
+Stock                       TELIA.ST
+Model                            KNN
+Best Parameters  {'n_neighbors': 19}
+Train R2                    0.957582
+Test R2                     0.612778
+Train RMSE                  0.593963
+Test RMSE                   1.253656
+Train MSE                   0.352792
+Test MSE                    1.571654
+Train MAE                   0.443461
+Test MAE                    0.956869
+Total Time                  0.149989
