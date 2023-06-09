@@ -4,11 +4,10 @@ Model                            KNN
 Best Parameters  {'n_neighbors': 12}
 Train R2                    0.996678
 Test R2                     -0.11208
-Train RMSE                  1.220789
-Test RMSE                  12.105553
-Train MSE                   1.490326
-Test MSE                  146.544413
-Train MAE                   0.862568
-Test MAE                    8.526616
-Total Time                  0.002034
-Time Per Trial              0.000041
+Train RMSE                  1.220812
+Test RMSE                  12.105552
+Train MSE                   1.490381
+Test MSE                  146.544389
+Train MAE                    0.86258
+Test MAE                    8.526615
+Total Time                  0.200033

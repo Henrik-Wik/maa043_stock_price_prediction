@@ -1,14 +1,13 @@
-                                                                                                          Value
-Stock                                                                                                   ^OMXSPI
-Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 3, 'n_neurons': 141, 'learning_rate': 0.005351741266209385, 'activation': 'relu'}
-Train R2                                                                                               0.963469
-Test R2                                                                                                0.807265
-Train RMSE                                                                                             12.10261
-Test RMSE                                                                                             15.686299
-Train MSE                                                                                             146.47317
-Test MSE                                                                                             246.059984
-Train MAE                                                                                               9.86902
-Test MAE                                                                                              13.387082
-Total Time                                                                                             4.150235
-Time per Trial                                                                                         0.083005
+                                                                                                         Value
+Stock                                                                                                  ^OMXSPI
+Model                                                                                           Neural Network
+Best Parameters  {'n_layers': 2, 'n_neurons': 241, 'learning_rate': 0.03277089386551819, 'activation': 'relu'}
+Train R2                                                                                              0.856409
+Test R2                                                                                               0.360371
+Train RMSE                                                                                           23.994372
+Test RMSE                                                                                            28.576158
+Train MSE                                                                                           575.729879
+Test MSE                                                                                            816.596816
+Train MAE                                                                                            22.060549
+Test MAE                                                                                              26.06903
+Total Time                                                                                          328.480911

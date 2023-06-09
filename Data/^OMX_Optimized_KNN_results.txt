@@ -10,5 +10,4 @@ Train MSE                 626.657712
 Test MSE                 2232.915061
 Train MAE                  18.479368
 Test MAE                   36.546667
-Total Time                  0.001499
-Time Per Trial               0.00003
+Total Time                  0.100136

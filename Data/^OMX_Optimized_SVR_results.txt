@@ -1,14 +1,13 @@
-                                                                                    Value
-Stock                                                                                ^OMX
-Model                                                                                 SVR
-Best Parameters  {'C': 99.72111698754408, 'gamma': 0.030987938470389536, 'kernel': 'rbf'}
-Train R2                                                                         0.981373
-Test R2                                                                          0.783684
-Train RMSE                                                                      30.153251
-Test RMSE                                                                        35.77747
-Train MSE                                                                      909.218518
-Test MSE                                                                      1280.027355
-Train MAE                                                                       22.364728
-Test MAE                                                                        29.202064
-Total Time                                                                       0.163548
-Time Per Trial                                                                   0.003271
+                                                                                  Value
+Stock                                                                              ^OMX
+Model                                                                               SVR
+Best Parameters  {'C': 99.07619170708352, 'gamma': 0.0280780758999706, 'kernel': 'rbf'}
+Train R2                                                                       0.981251
+Test R2                                                                        0.782447
+Train RMSE                                                                    30.252496
+Test RMSE                                                                     35.879664
+Train MSE                                                                    915.213506
+Test MSE                                                                    1287.350259
+Train MAE                                                                     22.418197
+Test MAE                                                                      29.273332
+Total Time                                                                    13.656068

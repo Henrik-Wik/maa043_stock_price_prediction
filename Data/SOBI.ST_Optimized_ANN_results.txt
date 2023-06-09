@@ -1,14 +1,13 @@
                                                                                                           Value
 Stock                                                                                                   SOBI.ST
 Model                                                                                            Neural Network
-Best Parameters  {'n_layers': 2, 'n_neurons': 220, 'learning_rate': 0.011051497319405601, 'activation': 'relu'}
-Train R2                                                                                               0.990914
-Test R2                                                                                                0.831168
-Train RMSE                                                                                             3.774805
-Test RMSE                                                                                             15.268104
-Train MSE                                                                                             14.249151
-Test MSE                                                                                             233.114984
-Train MAE                                                                                              2.549325
-Test MAE                                                                                              11.825454
-Total Time                                                                                              5.58756
-Time per Trial                                                                                         0.111751
+Best Parameters  {'n_layers': 4, 'n_neurons': 185, 'learning_rate': 0.002091948549042045, 'activation': 'relu'}
+Train R2                                                                                                0.99052
+Test R2                                                                                                0.899761
+Train RMSE                                                                                             3.855756
+Test RMSE                                                                                             11.764543
+Train MSE                                                                                             14.866858
+Test MSE                                                                                             138.404465
+Train MAE                                                                                              2.629946
+Test MAE                                                                                               8.745042
+Total Time                                                                                           609.663057

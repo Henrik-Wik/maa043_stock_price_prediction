@@ -1,13 +1,13 @@
                                                                    Value
 Stock                                                           TELIA.ST
 Model                                                      Random Forest
-Best Parameters  {'n_estimators': 27, 'max_features': 5, 'max_depth': 3}
-Train R2                                                        0.950335
-Test R2                                                         0.703058
-Train RMSE                                                      0.642704
-Test RMSE                                                       1.097827
-Train MSE                                                       0.413068
-Test MSE                                                        1.205224
-Train MAE                                                       0.487201
-Test MAE                                                        0.835754
-Total Time                                                     10.252643
+Best Parameters  {'n_estimators': 61, 'max_features': 5, 'max_depth': 3}
+Train R2                                                         0.95048
+Test R2                                                         0.698445
+Train RMSE                                                      0.641763
+Test RMSE                                                       1.106322
+Train MSE                                                        0.41186
+Test MSE                                                        1.223948
+Train MAE                                                       0.485927
+Test MAE                                                        0.838418
+Total Time                                                     21.510196

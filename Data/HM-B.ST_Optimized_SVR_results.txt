@@ -1,13 +1,13 @@
                                                                                     Value
 Stock                                                                             HM-B.ST
 Model                                                                                 SVR
-Best Parameters  {'C': 80.74073805907796, 'gamma': 0.021739495884408024, 'kernel': 'rbf'}
-Train R2                                                                         0.978846
-Test R2                                                                          0.885728
-Train RMSE                                                                       5.203104
-Test RMSE                                                                        7.545084
-Train MSE                                                                       27.072289
-Test MSE                                                                        56.928285
-Train MAE                                                                        3.932632
-Test MAE                                                                         5.894984
-Total Time                                                                      14.303017
+Best Parameters  {'C': 84.29916826404549, 'gamma': 0.015475294408450049, 'kernel': 'rbf'}
+Train R2                                                                         0.978733
+Test R2                                                                          0.882171
+Train RMSE                                                                        5.21697
+Test RMSE                                                                        7.661603
+Train MSE                                                                       27.216779
+Test MSE                                                                        58.700154
+Train MAE                                                                        3.951395
+Test MAE                                                                         5.828601
+Total Time                                                                      14.878631

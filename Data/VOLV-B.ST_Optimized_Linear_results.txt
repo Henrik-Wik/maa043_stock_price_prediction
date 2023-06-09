@@ -5,8 +5,8 @@ Train R2             0.975833
 Test R2              0.780242
 Train RMSE           2.728561
 Test RMSE            4.227452
-Train MSE            7.445045
-Test MSE            17.871348
+Train MSE            7.445043
+Test MSE            17.871349
 Train MAE            2.017699
-Test MAE             3.410124
-Total Time             0.0005
+Test MAE             3.410125
+Total Time                0.0

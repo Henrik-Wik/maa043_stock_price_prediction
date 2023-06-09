@@ -3,11 +3,11 @@ Stock                       TELIA.ST
 Model                            KNN
 Best Parameters  {'n_neighbors': 19}
 Train R2                    0.957582
-Test R2                     0.612778
+Test R2                     0.612786
 Train RMSE                  0.593963
-Test RMSE                   1.253656
+Test RMSE                   1.253643
 Train MSE                   0.352792
-Test MSE                    1.571654
+Test MSE                     1.57162
 Train MAE                   0.443461
-Test MAE                    0.956869
-Total Time                  0.149989
+Test MAE                    0.956674
+Total Time                  0.199127

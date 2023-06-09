@@ -7,8 +7,7 @@ Test R2                     0.548125
 Train RMSE                   2.65207
 Test RMSE                   6.061999
 Train MSE                   7.033474
-Test MSE                   36.747833
+Test MSE                   36.747836
 Train MAE                   1.914937
 Test MAE                    4.537227
-Total Time                  0.001502
-Time Per Trial               0.00003
+Total Time                  0.200081
