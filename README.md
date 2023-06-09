@@ -2,6 +2,17 @@
 
 Degree project in mathematics where i'm predicting stock price using machine learning models and comparing the results between the models.
 
+## Code and Resources Used
+Python Version: 3.10
+
+Packages: pandas, numpy, matplotlib, statsmodels, keras, optuna, scikit-learn, yfinance, ta
+
+Requirements: pip install -r requirements.txt
+
+### Hardware
+
+Windows 11, AMD Ryzen 7 2700X @ 4GHz, NVIDIA RTX 3080 GPU, 32 GB DDR4 memory
+
 ## Overview
 
 * Using data from the Swedish stock market I create machine learning models to predict stock price.
